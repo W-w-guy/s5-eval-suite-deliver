@@ -1,0 +1,40 @@
+=== Ubuntu 24.04.5 LTS / kernel 7.0.0-38-generic / Python 3.12.3 (real VM, not a cloud runner) ===
+=== flow: scp zip -> unzip into a fresh mktemp -d dir -> run verify + pytest, no shared dir with Windows ===
+
+--- verify_*.py ---
+[ OK ] AC1 cases.jsonl 恰 30 条 | 30
+[ OK ] AC1 分布 提纲 12 / 摘要 18 | {'summary': 18, 'outline': 12}
+[ OK ] AC1 提纲用例含嘉宾资料与访谈主题 
+[ OK ] AC1 提纲用例声明不谈话题 
+[ OK ] AC1 摘要用例指向真实存在的转写稿文件 
+[ OK ] AC1 摘要用例带 3 条金标金句 
+[ OK ] AC1 每条都写明 forbidden_points 
+[ OK ] AC1 eval-pii-scan 通过（转写稿无手机号/邮箱） | ([], [])
+[ OK ] AC1 eval-lint 通过（结构与字段齐全） 
+[ OK ] AC2 金句：正夹具判通过 
+[ OK ] AC2 金句：反夹具（改一个字）判失败 
+[ OK ] AC2 时间戳：正夹具判通过 
+[ OK ] AC2 时间戳：反夹具（乱序）判失败 
+[ OK ] AC2 时间戳：反夹具（超总时长）判失败 
+[ OK ] AC2 有单元测试且正反夹具都覆盖 
+[ OK ] AC3 18 份转写稿字数全部在 3000–6000 | 3159..5577
+[ OK ] AC3 字数分布覆盖整个区间（max-min > 1500） | 2418
+[ OK ] AC3 统计输出与实际文件长度一致 
+[ OK ] AC4 echo mock 跑通 eval-run（rc=0） | rc=0
+[ OK ] AC4 生成 Markdown 报告 
+[ OK ] AC4 报告含三项检查列（金句/时间戳/数字） 
+[ OK ] AC4 报告含未通过明细小节 
+[ OK ] AC4 全部 30 条通过（提纲与摘要均 100%） | 1.0000
+[ OK ] 可证伪：金句改写 -> 有失败用例且原因指向「金句」 | 有 1 条金句在转写稿中查不到原文
+[ OK ] 可证伪：--break-quote 命令行退出码非 0 | 1
+[ OK ] 可证伪：时间戳乱序 -> 有失败用例且原因指向「时间戳」 | 时间戳非单调递增
+[ OK ] 可证伪：--break-timestamp 命令行退出码非 0 | 1
+[ OK ] 可证伪：摘要编数字 -> 有失败用例且原因指向「数字」 | 有 1 个数字不在转写稿中：['999999']
+[ OK ] 可证伪：--break-number 命令行退出码非 0 | 1
+[ OK ] pytest 全套通过 | ............................            
+
+TOTAL 30, PASS 30, FAIL 0
+
+--- pytest tests -q ---
+............................                                             [100%]
+
