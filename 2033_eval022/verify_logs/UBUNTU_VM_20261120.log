@@ -1,7 +1,13 @@
-=== Ubuntu 24.04.5 LTS / kernel 7.0.0-38-generic / Python 3.12.3 (real VM, not a cloud runner) ===
-=== flow: scp zip -> unzip into a fresh mktemp -d dir -> run verify + pytest, no shared dir with Windows ===
+=== Ubuntu 24.04.5 LTS / 7.0.0-38-generic / Python 3.12.3 (real VM) ===
+=== reviewer flow: zip kept in the SAME dir as unzip target ===
+=== zip sha256: 见仓库根 SHA256SUMS.txt（包内自记会自指，故不在此记录） ===
 
---- verify_*.py ---
+--- tools/eval_pii_scan.py ---
+skipped_binary=2 ['kqa2033_deliver.zip', 'data/kb.sqlite3']
+hits=0
+PII PASS
+
+--- verify_2033.py ---
 [ OK ] AC1 知识文档恰有 120 篇 | 120
 [ OK ] AC1 导入脚本在空实例上执行成功（rc=0） | rc=0
 [ OK ] AC1 命令输出显示导入前为空 | ['before: docs=0']
@@ -30,10 +36,14 @@
 [ OK ] AC4 三项指标均达标 | recall=0.9200 point=0.8228 cite=1.0000
 [ OK ] AC4 forbidden 两项均为 0 
 [ OK ] AC4 引用准确率可被证伪（--break-citation 时 <0.95 且触发 forbidden） | cite=0.4589 num=65
-[ OK ] AC4 pytest 全套通过 | ...................                     
+[ OK ] AC4 pytest 全套通过 | ....................                    
 
 TOTAL 29, PASS 29, FAIL 0
 
 --- pytest tests -q ---
-...................                                                      [100%]
+....................                                                     [100%]
+20 passed in 0.79s
 
+--- verify_2033.py --self-test ---
+
+TOTAL 29, PASS 29, FAIL 0

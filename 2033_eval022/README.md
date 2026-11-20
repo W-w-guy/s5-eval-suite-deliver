@@ -11,7 +11,7 @@ tools/gen_kb.py          文档生成器（与用例生成器共用 data/facts.j
 tools/gen_cases.py       50 条用例生成器（含分布与字段断言）
 tools/import_kb.py       一键导入 SQLite 测试实例（--expect-empty 断言空实例）
 tools/eval_lint.py       结构校验（50 条 / 分布 20-12-10-8 / gold 存在 / 要点是原句）
-tools/eval_pii_scan.py   PII 扫描（占位号码不算命中）
+tools/eval_pii_scan.py   PII 扫描（占位号码不算命中；二进制/压缩包按内容嗅探跳过）
 tools/eval_run.py        评测 runner（BM25 检索 -> 作答带引用 -> 三项指标 + forbidden）
 data/cases.jsonl         50 条用例
 data/facts.json          文档事实表（生成器与用例共用的唯一真相源）
@@ -67,6 +67,19 @@ python verify_2033.py                               # 4 条 AC 断言
 问题里常直接点名文档标题（"A 区 3 层 静音舱 使用规则 的…"），
 标题不加权就顶不上来。这是 BM25F 的标准做法，**不读任何金标字段**。
 recall@5 = 0.92 意味着有 4 条用例的金标文档没进前 5，报告逐条列出了。
+
+
+## 一个验收时容易踩的坑（已在代码里修掉）
+
+**把交付包 zip 放在同目录下再解压，会让 PII 扫描出现假命中。**
+
+压缩流里是随机字节，宽松邮箱正则会把其中一段拼成一个根本不存在的邮箱地址，
+于是 `eval-pii-scan` 报 FAIL、AC2 被判不通过。这不是数据有问题，是扫描器没跳二进制。
+
+修法：`eval_pii_scan.py` 改成**内容嗅探**（前 8KB 含 NUL 即视为二进制跳过，不靠扩展名），
+并把跳过行为打印出来（`skipped_binary=N`）而不是悄悄蒙住。
+同时补了反向测试 `test_pii_scan_ignores_binary_but_still_catches_text`：
+同一目录下放一个含真邮箱的文本文件，必须仍被抓到 —— 证明跳二进制没有把检查变瞎。
 
 ## 已知局限（如实写）
 - recall@5 = 0.92 而非 1.0：跨文档题里问题同时点名 2~3 篇文档，BM25 会把其中一篇挤出前 5。
