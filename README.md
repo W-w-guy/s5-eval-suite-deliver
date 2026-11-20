@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | `1989_eval004/` | S5-EVAL-004 | `eval1989_deliver.zip` | 21 | 35,226 B | `0cb3975393af4d7c` |
 | `2008_eval012/` | S5-EVAL-012 | `match2008_deliver.zip` | 52 | 45,490 B | `0273d28a2bd3a25c` |
-| `2017_eval015/` | S5-EVAL-015 | `ip2017_deliver.zip` | 35 | 61,911 B | `00682bd2240f564b` |
+| `2017_eval015/` | S5-EVAL-015 | `ip2017_deliver.zip` | 51 | 78,453 B | `0f86d22c15ba515e` |
 | `2033_eval022/` | S5-EVAL-022 | `kqa2033_deliver.zip` | 145 | 163,601 B | `505f62a30cf7c19d` |
 | `2037_eval023/` | S5-EVAL-023 | `mt2037_deliver.zip` | 143 | 126,398 B | `6db494320cd5530e` |
 
@@ -83,7 +83,7 @@ python -m pytest tests -q        # 单元测试
 |---|---|---|---|
 | `1989_eval004` | `verify_1989.py` | 32 | 53 |
 | `2008_eval012` | `verify_2008.py` | 24 | 26 |
-| `2017_eval015` | `verify_2017.py` | 30 | 28 |
+| `2017_eval015` | `verify_2017.py` | 30 | 30 |
 | `2033_eval022` | `verify_2033.py` | 29 | 20 |
 | `2037_eval023` | `verify_2037.py` | 25 | 22 |
 
@@ -98,7 +98,7 @@ Ubuntu 侧是把 zip 重新上传后解压到**新建临时目录**再跑，不�
 |---|---|---|---|---|
 | 1989 | 53 passed | 53 passed | 32/32 rc=0 | PASS |
 | 2008 | 26 passed | 26 passed | 24/24 rc=0 | PASS |
-| 2017 | 28 passed | 28 passed | 30/30 rc=0 | PASS |
+| 2017 | 30 passed | 30 passed | 30/30 rc=0 | PASS |
 | 2033 | 20 passed | 20 passed | 29/29 rc=0 | PASS |
 | 2037 | 22 passed | 22 passed | 25/25 rc=0 | PASS |
 

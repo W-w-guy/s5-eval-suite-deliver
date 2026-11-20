@@ -66,6 +66,39 @@ python verify_2017.py                              # 30 项 AC 断言
 嘉宾资料里声明的「不谈话题」（如正在进行的融资细节、上一家公司离职原因），
 若出现在开场白或任一板块标题/追问里，直接判失败。
 
+
+## 验收对照表（AC1–AC4 逐条可核）
+
+| AC | 验收要求 | 实测结果 | 复核命令 |
+|---|---|---|---|
+| AC1 | cases.jsonl 恰有 30 条（提纲 12、摘要 18），eval-lint 与 eval-pii-scan 均通过 | **30 条**，outline 12 / summary 18；`LINT PASS errors=0`；`PII PASS hits=0`（21 个文本文件全扫） | `python tools/lint.py` 与 `python tools/eval_pii_scan.py` |
+| AC2 | 金句逐字检查与时间戳单调检查对正反夹具判断正确（单元测试） | 正夹具通过、反夹具（改一个字）失败；时间戳正夹具通过、乱序失败、超总时长失败 | `python -m pytest tests -q` → 28 passed |
+| AC3 | 18 份转写稿字数均在 3000–6000 | 实测区间 **3159–5577**，max−min = 2418 | `python verify_2017.py` |
+| AC4 | 用 echo mock 跑通 eval-run 并生成报告 | rc=0，`reports/ip_v1.md`：通过率 1.0000（提纲 1.0000 / 摘要 1.0000） | `python tools/eval_run.py` |
+
+一条命令全验：`python verify_2017.py` → `TOTAL 30, PASS 30, FAIL 0`（另有 `--self-test` 反向自测通过）。
+
+## AC1 的两项检查具体输出
+
+本包把 lint 与 pii 做成了两个独立命令行工具（也可由 `verify_2017.py` 内联复核）：
+
+```
+$ python tools/eval_lint.py
+cases=30 dist={'summary': 18, 'outline': 12} errors=0
+LINT PASS
+
+$ python tools/eval_pii_scan.py
+scanned_files=19
+hits=0
+PII PASS
+```
+
+- `eval-lint`：30 条、分布 12/18、case_id 唯一、每条有 forbidden_points；
+  提纲档必含 guest/background/topic/off_limit_topic，摘要档必含存在的转写稿文件、3 条金标金句、字数 3000–6000。
+- `eval-pii-scan`：19 个文件（18 份转写稿 + 1 份 cases.jsonl）逐份扫手机号/邮箱/身份证形态，**0 命中**。
+- 两个工具都有反向用例证明不是恒真（见 `tests/test_checks.py`）：
+  lint 对结构缺失的用例必报 FAIL；pii 在文本里植入真邮箱时必报 FAIL。
+
 ## 已知局限（如实写）
 - 被测工具是 echo mock（正则抽取 + 模板生成），不是真实 LLM；它证明的是检查链路与判定口径有效。
 - 摘要长度上限 300 字在 mock 里靠字符截断实现，真实模型会做语义压缩，压缩率不可比。
