@@ -1,0 +1,59 @@
+# kqa.retrieval 评测套件定义
+suite: kqa.retrieval
+version: 1.0.0
+description: 知识问答评测集——检索召回、答案要点与引用准确率
+
+knowledge_base:
+  docs_dir: kb_docs
+  doc_count: 120
+  categories:
+    space_rule: 空间使用规则
+    service: 服务目录
+    policy: 政策汇编
+    faq: 常见问题
+  required_fields: [doc_id, title, updated, visibility]
+  import:
+    script: tools/import_kb.py
+    expects_empty_instance: true      # AC1：必须在空实例上执行成功
+
+cases:
+  file: data/cases.jsonl
+  count: 50
+  distribution:
+    single_doc: 20      # 单文档事实
+    multi_doc: 12       # 跨文档综合
+    numeric_date: 10    # 数字与日期
+    paraphrase: 8       # 同义改写
+  per_case:
+    gold_doc_ids: "1~3 个，必须存在于知识库"
+    answer_points: "3~5 条，必须是知识文档中的原句"
+
+checks:
+  lint: tools/eval_lint.py
+  pii: tools/eval_pii_scan.py
+
+metrics:
+  recall_at_5:
+    desc: gold 文档是否进入检索前 5
+    threshold: 0.85
+  point_hit:
+    desc: 答案要点命中率
+    threshold: 0.80
+  citation_accuracy:
+    desc: 被引文档是否确实包含支撑该句的内容（逐句判断）
+    threshold: 0.95
+
+forbidden_points:
+  - 引用不在检索结果中的文档
+  - 数字与原文不一致
+
+runner:
+  script: tools/eval_run.py
+  topk: 5
+  provider: echo        # 被测工具的 mock：只用检索结果作答
+  # --break-citation 故意引错文档，用于验证引用准确率指标有效
+
+policy:
+  ai_output: 只进复核队列，不得直接对外发送
+  amount: AI 不计算金额，费用类问题只引用知识库中的标准
+  data: 知识库与问题全部虚构
