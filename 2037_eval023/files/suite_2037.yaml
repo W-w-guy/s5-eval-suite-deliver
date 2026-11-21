@@ -1,0 +1,43 @@
+# 知识问答多轮对话评测集（#2037）
+suite: kqa.multiturn
+version: 0.1.0
+problem_id: 2037
+description: 多轮追问、指代与条件变更的评测集（复用 EVAL-022 知识库夹具）
+
+cases:
+  file: data/cases.jsonl
+  count: 30
+  turns_per_case: "3–5（实测统一 4 轮）"
+  distribution:
+    coref: 8             # 指代消解（「它 / 那个」）
+    condition_change: 8  # 条件变更（换区/换批次）
+    topic_switch: 6      # 话题切换后回到原话题
+    correction: 8        # 用户纠正上一轮前提
+  kb_fixture: data/kb_docs（120 篇，复用 EVAL-022，未改动）
+  kb_index: data/facts_mt.json（标题 + #doc_id 保证唯一）
+
+metrics:
+  final_point_hit:
+    desc: 最后一轮答案要点命中率
+    threshold: 0.80
+  checkpoint_pass:
+    desc: 中间关键轮次（must_points）通过率
+    threshold: 1.00
+  forbidden_violations:
+    desc: 违反 forbidden_points 的次数（沿用错误前提 / 话题串味）
+    limit: 0
+
+forbidden_points:
+  - 沿用被纠正的错误前提作答
+  - 把上一轮话题的答案混入当前回答
+
+runner:
+  script: "python -m multiturn"
+  break_switches:
+    --break-history: 不传历史 -> 指代消解与纠正类必失败
+    --break-stale: 纠正后仍沿用旧前提 -> forbidden 必触发
+
+policy:
+  ai_output: 只进复核队列，不得直接对外发送
+  amount: AI 不计算金额
+  data: 对话与知识全部虚构
