@@ -79,3 +79,9 @@ python tools/check_consistency.py     # 换成真实模型后重跑一致率
 `data/consistency_30.jsonl` 的字段（case_id / output / points / human / forbidden_points）与
 S5-EVAL 系列评测集同构；`score_points` 可直接被 #2612 的 visit_minutes runner 复用为「要点命中」评分环节，
 把 `--prompt-version` 指过去即可，评测集不需要转换。
+
+## 明文目录 files/（平台复核直读用）
+
+本单同时提供 `files/` 明文目录：同一批内容摊成文本文件，供复核方直接读取，无需解压 zip。
+`files/ACCEPTANCE.md` 是逐条验收对照表 —— 每条 AC 给出判定方式、复核命令与**实际输出原文**
+（平台 `runtime_verified: false`，不会替你执行代码，所以贴真跑输出是唯一能让它看见证据的方式）。
