@@ -1,0 +1,35 @@
+=== Ubuntu 24.04.5 LTS / kernel 7.0.0-38-generic / Python 3.12.3 (real VM, not a cloud runner) ===
+=== flow: scp zip -> unzip into a fresh mktemp -d dir -> run verify + pytest, no shared dir with Windows ===
+
+--- verify_*.py ---
+[ OK ] AC1 cases.jsonl 恰 30 组 | 30
+[ OK ] AC1 每组 3–5 轮 | min 4 / max 4
+[ OK ] AC1 分布 指代8/条件变更8/话题切换6/纠正8 | {'coref': 8, 'condition_change': 8, 'topic_switch': 6, 'correction': 8}
+[ OK ] AC1 用例为 turns 数组格式 
+[ OK ] AC1 复用 EVAL-022 知识库夹具（120 篇） | 120
+[ OK ] AC1 每条引用的 kb_doc 都存在于知识库 
+[ OK ] AC2 eval-lint 命令行 rc=0 且打印 PASS 
+[ OK ] AC2 eval-pii-scan 命令行通过（0 命中） 
+[ OK ] AC2 lint 内部复核 0 错误 
+[ OK ] AC3 纠正类恰 8 组 | 8
+[ OK ] AC3 8 组纠正类全部写入 stale_premise* 的 forbidden_points | 8/8
+[ OK ] AC3 每条都指明被纠正的实体（wrong_entity） | 8/8
+[ OK ] AC3 每条都记录被纠正的具体值（wrong_value） | 8/8
+[ OK ] AC3 被纠正的旧值 ≠ 纠正后的新值（防 forbidden 恒假阳性） 
+[ OK ] AC4 echo mock 跑通 eval-run（rc=0） | rc=0
+[ OK ] AC4 生成 Markdown 报告 
+[ OK ] AC4 报告含「中间检查点」小节（逐轮可见） 
+[ OK ] AC4 报告含三项指标 
+[ OK ] AC4 三项指标均达标 | final=1.0000 cp=1.0000 forbidden=0
+[ OK ] AC4 每条用例的检查点轮次可定位 | 30
+[ OK ] 可证伪：不传历史 -> 退出码 1 | rc=1
+[ OK ] 可证伪：不传历史 -> 最后一轮要点命中率显著下降 | ['  final_point_hit    0.2667']
+[ OK ] 可证伪：纠正后沿用旧前提 -> 退出码 1 | rc=1
+[ OK ] 可证伪：纠正后沿用旧前提 -> forbidden 触发 8 次 | ['  forbidden          8']
+[ OK ] pytest 全套通过 | ......................                            
+
+TOTAL 25, PASS 25, FAIL 0
+
+--- pytest tests -q ---
+......................                                                   [100%]
+
