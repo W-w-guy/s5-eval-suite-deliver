@@ -1,0 +1,42 @@
+=== Ubuntu 24.04.5 LTS / kernel 7.0.0-38-generic / Python 3.12.3 (real VM, not a cloud runner) ===
+=== flow: scp zip -> unzip into a fresh mktemp -d dir -> run verify + pytest, no shared dir with Windows ===
+
+--- verify_*.py ---
+[ OK ] AC1 一致性样本 30 条 | 30
+[ OK ] AC1 有自检脚本（tools/check_consistency.py） 
+[ OK ] AC1 一致率 ≥ 90% | 0.9362（44/47）
+[ OK ] AC1 一致率不是 100%（留了真实分歧） | 0.93617
+[ OK ] AC1 生成一致性自检报告 
+[ OK ] AC1 报告含逐条对照表 | 47
+[ OK ] AC1 报告列出不一致项及原因 
+[ OK ] AC1 未达标时评分器拒绝启用（ScorerNotEligible） 
+[ OK ] AC1 assert_eligible 在低一致率时真的抛异常 
+[ OK ] AC2 合法 quote 保留 yes 
+[ OK ] AC2 编造的 quote -> 该要点记为 no 
+[ OK ] AC2 降级结果被记录（evidence_rejected） | [{'point_id': 'P1', 'quote': '本方案承诺 24 小时响应并赔付', 'judged': 'yes'}]
+[ OK ] AC2 判 yes 却无 quote -> 也记 no 
+[ OK ] AC2 桩模型 bad_quote 模式端到端降级 
+[ OK ] AC2 有对应 mock 测试且通过 
+[ OK ] AC3 满分但命中 forbidden -> score 仍为 1.0 | 1.0
+[ OK ] AC3 同时 violation=True 
+[ OK ] AC3 passed=False（一票否决） 
+[ OK ] AC3 记录命中的 forbidden 点与命中词 | [{'point_id': 'F1', 'desc': '承诺保本或保证收益', 'matched': '保本'}]
+[ OK ] AC3 否定句（不承诺保本）不误判为违规 
+[ OK ] AC3 有对应测试断言且通过 
+[ OK ] AC4 3 轮一致时不打标记 
+[ OK ] AC4 3 轮不一致 -> judge_unstable=True 
+[ OK ] AC4 2:1 取多数（yes）但仍标 unstable 
+[ OK ] AC4 平票取保守（no > partial > yes） | no
+[ OK ] AC4 有对应测试且通过 
+[ OK ] 境外/公网评审模型地址被硬拒（3/3） | 3
+[ OK ] 提示词模板带版本号 
+[ OK ] 提示词写明 evidence_quote 必须逐字出现 
+[ OK ] 提示词写明不判断金额 
+[ OK ] 金额类要点模型侧一律 no（由程序接管） 
+[ OK ] pytest 全套通过 | ........................................
+
+TOTAL 32, PASS 32, FAIL 0
+
+--- pytest tests -q ---
+.....................................................                    [100%]
+
