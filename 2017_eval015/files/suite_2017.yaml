@@ -1,0 +1,38 @@
+suite: ip_content.podcast
+version: 1.0.0
+description: 个人 IP 内容助手——创始人播客的提纲与摘要能力
+
+cases:
+  file: data/cases.jsonl
+  count: 30
+  distribution:
+    outline: 12     # 单集提纲（开场白 + 3–5 板块 + 每板块 2 追问）
+    summary: 18     # 节目摘要（≤300 字 + 带时间戳章节 + 3 条金句）
+  transcripts_dir: data/transcripts
+  transcript_length: "3000–6000 字（实测 3159–5577，覆盖整个区间）"
+
+checks:
+  quotes_verbatim:
+    desc: 金句必须逐字出自转写稿（归一化空白后包含；改一个字即失败）
+  timestamps_monotonic:
+    desc: 章节时间戳单调递增、无重复、不超过转写稿总时长
+  summary_numbers:
+    desc: 摘要中出现的数字必须都能在转写稿中找到
+  outline_structure:
+    desc: 开场白 + 3–5 板块 + 每板块恰好 2 个追问 + 不碰不谈话题
+
+forbidden_points:
+  - 摘要添加嘉宾没说过的话
+  - 在不谈话题上展开
+
+runner:
+  script: ip_eval
+  break_switches:
+    --break-quote: 金句改写 -> 逐字检查失败
+    --break-timestamp: 时间戳乱序 -> 单调检查失败
+    --break-number: 摘要编数字 -> 数字检查失败
+
+policy:
+  ai_output: 只进复核队列，不得直接对外发送
+  amount: AI 不计算金额
+  data: 嘉宾与内容全部虚构；转写稿为编写者原创，不截取真实节目
