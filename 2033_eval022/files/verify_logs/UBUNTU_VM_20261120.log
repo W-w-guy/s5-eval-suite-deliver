@@ -1,0 +1,49 @@
+=== Ubuntu 24.04.5 LTS / 7.0.0-38-generic / Python 3.12.3 (real VM) ===
+=== reviewer flow: zip kept in the SAME dir as unzip target ===
+=== zip sha256: 见仓库根 SHA256SUMS.txt（包内自记会自指，故不在此记录） ===
+
+--- tools/eval_pii_scan.py ---
+skipped_binary=2 ['kqa2033_deliver.zip', 'data/kb.sqlite3']
+hits=0
+PII PASS
+
+--- verify_2033.py ---
+[ OK ] AC1 知识文档恰有 120 篇 | 120
+[ OK ] AC1 导入脚本在空实例上执行成功（rc=0） | rc=0
+[ OK ] AC1 命令输出显示导入前为空 | ['before: docs=0']
+[ OK ] AC1 命令输出显示导入后 120 篇 | True
+[ OK ] AC1 实例内 doc 数确为 120 | 120
+[ OK ] AC1 每篇带 doc_id/标题/更新日期/可见范围 
+[ OK ] AC1 可见范围标签存在且非单一值 | {'all': 90, 'member': 30}
+[ OK ] AC2 cases.jsonl 恰有 50 条 | 50
+[ OK ] AC2 4 类分布 20/12/10/8 | {'single_doc': 20, 'multi_doc': 12, 'numeric_date': 10, 'paraphrase': 8}
+[ OK ] AC2 eval-lint 通过（0 错误） 
+[ OK ] AC2 eval-lint 命令行 rc=0 且打印 PASS 
+[ OK ] AC2 eval-pii-scan 通过（0 命中） | ['PII PASS']
+[ OK ] AC2 lint 能抓到坏金标（gold 文档不存在） 
+[ OK ] AC2 lint 能抓到凭空编造的答案要点 
+[ OK ] AC3 每条用例的 gold_doc_ids 都能在知识库中找到 
+[ OK ] AC3 每条 gold_doc_ids 数量在 1~3 
+[ OK ] AC3 每条 answer_points 数量在 3~5 
+[ OK ] AC3 每个答案要点都能在 gold 文档里逐字找到 
+[ OK ] AC4 用 echo mock 跑通 eval-run（rc=0） | rc=0
+[ OK ] AC4 输出含 recall@5 与 citation 
+[ OK ] AC4 生成 Markdown 报告 
+[ OK ] AC4 报告写明「检索 recall@5」 
+[ OK ] AC4 报告写明「引用准确率」 
+[ OK ] AC4 报告写明「答案要点命中率」 
+[ OK ] AC4 报告列出 forbidden_points 两项 
+[ OK ] AC4 三项指标均达标 | recall=0.9200 point=0.8228 cite=1.0000
+[ OK ] AC4 forbidden 两项均为 0 
+[ OK ] AC4 引用准确率可被证伪（--break-citation 时 <0.95 且触发 forbidden） | cite=0.4589 num=65
+[ OK ] AC4 pytest 全套通过 | ....................                    
+
+TOTAL 29, PASS 29, FAIL 0
+
+--- pytest tests -q ---
+....................                                                     [100%]
+20 passed in 0.79s
+
+--- verify_2033.py --self-test ---
+
+TOTAL 29, PASS 29, FAIL 0
