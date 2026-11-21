@@ -1,0 +1,345 @@
+{
+ "samples": 30,
+ "points_judged": 45,
+ "points_agree": 42,
+ "forbidden_judged": 2,
+ "forbidden_agree": 2,
+ "total_judgements": 47,
+ "total_agree": 44,
+ "agreement": 0.93617,
+ "threshold": 0.9,
+ "eligible": true,
+ "unstable_cases": [],
+ "detail": [
+  {
+   "case_id": "CONS-001",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-001",
+   "point_id": "F1",
+   "human": "yes",
+   "scorer": "violation",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-002",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-003",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-003",
+   "point_id": "F1",
+   "human": "yes",
+   "scorer": "violation",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-004",
+   "point_id": "P2",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-005",
+   "point_id": "P3",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-006",
+   "point_id": "P3",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-007",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-007",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-007",
+   "point_id": "P3",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-008",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-008",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-008",
+   "point_id": "P3",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-009",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-009",
+   "point_id": "P2",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-009",
+   "point_id": "P3",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-010",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-010",
+   "point_id": "P2",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-011",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-012",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-012",
+   "point_id": "P2",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-012",
+   "point_id": "P3",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-013",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-014",
+   "point_id": "P1",
+   "human": "partial",
+   "scorer": "partial",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-015",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-016",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-016",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-017",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-017",
+   "point_id": "P2",
+   "human": "partial",
+   "scorer": "no",
+   "agree": false
+  },
+  {
+   "case_id": "CONS-018",
+   "point_id": "P1",
+   "human": "partial",
+   "scorer": "no",
+   "agree": false
+  },
+  {
+   "case_id": "CONS-018",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-019",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-019",
+   "point_id": "P2",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-020",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-021",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "partial",
+   "agree": false
+  },
+  {
+   "case_id": "CONS-022",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-023",
+   "point_id": "P2",
+   "human": "partial",
+   "scorer": "partial",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-024",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-024",
+   "point_id": "P2",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-025",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-026",
+   "point_id": "P1",
+   "human": "partial",
+   "scorer": "partial",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-026",
+   "point_id": "P2",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-027",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-028",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-029",
+   "point_id": "P1",
+   "human": "yes",
+   "scorer": "yes",
+   "agree": true
+  },
+  {
+   "case_id": "CONS-030",
+   "point_id": "P1",
+   "human": "no",
+   "scorer": "no",
+   "agree": true
+  }
+ ],
+ "prompt_version": "v1.2.0"
+}
