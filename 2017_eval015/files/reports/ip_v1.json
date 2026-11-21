@@ -1,0 +1,703 @@
+{
+ "metrics": {
+  "cases": 30,
+  "summary_cases": 18,
+  "outline_cases": 12,
+  "pass_rate": 1.0,
+  "summary_pass_rate": 1.0,
+  "outline_pass_rate": 1.0,
+  "fails": []
+ },
+ "rows": [
+  {
+   "case_id": "IP-S01",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 10,
+     "bad": [],
+     "reason": "摘要中的 10 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 271,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S02",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 11,
+     "bad": [],
+     "reason": "摘要中的 11 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 291,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S03",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 5,
+     "bad": [],
+     "reason": "摘要中的 5 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 263,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S04",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 7,
+     "bad": [],
+     "reason": "摘要中的 7 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 279,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S05",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 8,
+     "bad": [],
+     "reason": "摘要中的 8 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 290,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S06",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 6,
+     "bad": [],
+     "reason": "摘要中的 6 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 262,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S07",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 7,
+     "bad": [],
+     "reason": "摘要中的 7 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 262,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S08",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 12,
+     "bad": [],
+     "reason": "摘要中的 12 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 294,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S09",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 8,
+     "bad": [],
+     "reason": "摘要中的 8 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 293,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S10",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 9,
+     "bad": [],
+     "reason": "摘要中的 9 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 300,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S11",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 8,
+     "bad": [],
+     "reason": "摘要中的 8 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 270,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S12",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 10,
+     "bad": [],
+     "reason": "摘要中的 10 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 298,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S13",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 9,
+     "bad": [],
+     "reason": "摘要中的 9 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 287,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S14",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 11,
+     "bad": [],
+     "reason": "摘要中的 11 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 269,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S15",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 6,
+     "bad": [],
+     "reason": "摘要中的 6 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 258,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S16",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 6,
+     "bad": [],
+     "reason": "摘要中的 6 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 266,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S17",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 7,
+     "bad": [],
+     "reason": "摘要中的 7 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 267,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-S18",
+   "kind": "summary",
+   "ok": true,
+   "reason": "三项检查全部通过",
+   "detail": {
+    "ok": true,
+    "quotes": {
+     "ok": true,
+     "checked": 3,
+     "bad": [],
+     "reason": "金句在各处逐字可查"
+    },
+    "timestamps": {
+     "ok": true,
+     "problems": [],
+     "checked": 10,
+     "reason": "时间戳单调、无重复、均不超总时长"
+    },
+    "numbers": {
+     "ok": true,
+     "checked": 7,
+     "bad": [],
+     "reason": "摘要中的 7 个数字都能在转写稿中找到"
+    },
+    "reason": "三项检查全部通过"
+   },
+   "summary_len": 280,
+   "sections": 10,
+   "quotes": 3
+  },
+  {
+   "case_id": "IP-O01",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O02",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O03",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O04",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O05",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O06",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O07",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O08",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O09",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O10",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O11",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  },
+  {
+   "case_id": "IP-O12",
+   "kind": "outline",
+   "ok": true,
+   "reason": "提纲结构合规且未碰不谈话题",
+   "detail": {
+    "ok": true,
+    "problems": [],
+    "reason": "提纲结构合规且未碰不谈话题"
+   }
+  }
+ ]
+}
