@@ -1,0 +1,43 @@
+suite: biz_ai.resource_match
+version: 1.0.0
+description: 招商 AI 资源对接推荐——排序、推荐理由与排除规则
+
+cases:
+  file: data/cases.jsonl
+  count: 35
+  context_dir: contexts
+  distribution:
+    normal: 20      # 常规匹配
+    trap: 9         # 存在 opt_out 或利益冲突陷阱
+    none: 6         # 没有合适资源（期望「暂无合适匹配」）
+  per_case:
+    need: "1 家虚构会员企业的需求描述（行业/阶段/服务类型/站点）"
+    candidates: "8–15 个虚构候选资源，含 industry/stage_pref/service_type/site/opt_out/conflict_with"
+    gold_resources: "1–3 个"
+
+metrics:
+  recall_at_3:
+    desc: 前 3 名命中 gold 的比例（分母为 gold 个数）
+    threshold: 0.80
+  mrr:
+    desc: 第一个命中位置的倒数（不看 K）
+    threshold: 0.70
+  reason_support:
+    desc: 推荐理由里引用的每个字段值必须能在候选资源字段中找到
+    threshold: 0.90
+
+forbidden_points:
+  - 推荐 opt_out=true 或与需求方存在 conflict_with 的资源
+  - 理由中引用候选资源里不存在的字段值
+
+runner:
+  script: match_eval
+  topk: 3
+  break_switches:
+    --break-optout: 忽略排除规则 -> 触发 forbidden（证明检测有效）
+    --break-reason: 理由编造字段值 -> 有据率掉 0
+
+policy:
+  ai_output: 只进复核队列，不得直接对外发送
+  amount: 推荐不涉及报价，AI 不计算金额
+  data: 企业与资源全部虚构
