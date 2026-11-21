@@ -1,0 +1,970 @@
+{
+ "metrics": {
+  "cases": 35,
+  "with_gold": 29,
+  "no_gold": 6,
+  "recall_at_3": 1.0,
+  "mrr": 1.0,
+  "reason_support": 1.0,
+  "forbidden_violations": 0,
+  "no_match_correct": 6,
+  "thresholds": {
+   "recall_at_3": 0.8,
+   "mrr": 0.7,
+   "reason_support": 0.9
+  },
+  "fails": []
+ },
+ "rows": [
+  {
+   "case_id": "RM-001",
+   "kind": "normal",
+   "ranked": [
+    "RM-001-R01",
+    "RM-001-R02",
+    "RM-001-R03"
+   ],
+   "gold": [
+    "RM-001-R01",
+    "RM-001-R02",
+    "RM-001-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-001-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-001-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-001-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-002",
+   "kind": "normal",
+   "ranked": [
+    "RM-002-R01",
+    "RM-002-R02"
+   ],
+   "gold": [
+    "RM-002-R01",
+    "RM-002-R02"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-002-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-002-R02",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-003",
+   "kind": "normal",
+   "ranked": [
+    "RM-003-R01",
+    "RM-003-R02",
+    "RM-003-R03"
+   ],
+   "gold": [
+    "RM-003-R01",
+    "RM-003-R02",
+    "RM-003-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-003-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-003-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-003-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-004",
+   "kind": "normal",
+   "ranked": [
+    "RM-004-R01",
+    "RM-004-R02",
+    "RM-004-R03"
+   ],
+   "gold": [
+    "RM-004-R01",
+    "RM-004-R02",
+    "RM-004-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-004-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-004-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-004-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-005",
+   "kind": "normal",
+   "ranked": [
+    "RM-005-R01",
+    "RM-005-R02"
+   ],
+   "gold": [
+    "RM-005-R01",
+    "RM-005-R02"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-005-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-005-R02",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-006",
+   "kind": "normal",
+   "ranked": [
+    "RM-006-R01"
+   ],
+   "gold": [
+    "RM-006-R01"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-006-R01",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-007",
+   "kind": "normal",
+   "ranked": [
+    "RM-007-R01",
+    "RM-007-R02",
+    "RM-007-R03"
+   ],
+   "gold": [
+    "RM-007-R01",
+    "RM-007-R02",
+    "RM-007-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-007-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-007-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-007-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-008",
+   "kind": "normal",
+   "ranked": [
+    "RM-008-R01",
+    "RM-008-R02",
+    "RM-008-R03"
+   ],
+   "gold": [
+    "RM-008-R01",
+    "RM-008-R02",
+    "RM-008-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-008-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-008-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-008-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-009",
+   "kind": "normal",
+   "ranked": [
+    "RM-009-R01",
+    "RM-009-R02",
+    "RM-009-R03"
+   ],
+   "gold": [
+    "RM-009-R01",
+    "RM-009-R02",
+    "RM-009-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-009-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-009-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-009-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-010",
+   "kind": "normal",
+   "ranked": [
+    "RM-010-R01",
+    "RM-010-R02",
+    "RM-010-R03"
+   ],
+   "gold": [
+    "RM-010-R01",
+    "RM-010-R02",
+    "RM-010-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-010-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-010-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-010-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-011",
+   "kind": "normal",
+   "ranked": [
+    "RM-011-R01",
+    "RM-011-R02"
+   ],
+   "gold": [
+    "RM-011-R01",
+    "RM-011-R02"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-011-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-011-R02",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-012",
+   "kind": "normal",
+   "ranked": [
+    "RM-012-R01",
+    "RM-012-R02"
+   ],
+   "gold": [
+    "RM-012-R01",
+    "RM-012-R02"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-012-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-012-R02",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-013",
+   "kind": "normal",
+   "ranked": [
+    "RM-013-R01",
+    "RM-013-R02",
+    "RM-013-R03"
+   ],
+   "gold": [
+    "RM-013-R01",
+    "RM-013-R02",
+    "RM-013-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-013-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-013-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-013-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-014",
+   "kind": "normal",
+   "ranked": [
+    "RM-014-R01",
+    "RM-014-R02",
+    "RM-014-R03"
+   ],
+   "gold": [
+    "RM-014-R01",
+    "RM-014-R02",
+    "RM-014-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-014-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-014-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-014-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-015",
+   "kind": "normal",
+   "ranked": [
+    "RM-015-R01",
+    "RM-015-R02",
+    "RM-015-R03"
+   ],
+   "gold": [
+    "RM-015-R01",
+    "RM-015-R02",
+    "RM-015-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-015-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-015-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-015-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-016",
+   "kind": "normal",
+   "ranked": [
+    "RM-016-R01",
+    "RM-016-R02",
+    "RM-016-R03"
+   ],
+   "gold": [
+    "RM-016-R01",
+    "RM-016-R02",
+    "RM-016-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-016-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-016-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-016-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-017",
+   "kind": "normal",
+   "ranked": [
+    "RM-017-R01",
+    "RM-017-R02"
+   ],
+   "gold": [
+    "RM-017-R01",
+    "RM-017-R02"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-017-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-017-R02",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-018",
+   "kind": "normal",
+   "ranked": [
+    "RM-018-R01",
+    "RM-018-R02"
+   ],
+   "gold": [
+    "RM-018-R01",
+    "RM-018-R02"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-018-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-018-R02",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-019",
+   "kind": "normal",
+   "ranked": [
+    "RM-019-R01",
+    "RM-019-R02",
+    "RM-019-R03"
+   ],
+   "gold": [
+    "RM-019-R01",
+    "RM-019-R02",
+    "RM-019-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-019-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-019-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-019-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-020",
+   "kind": "normal",
+   "ranked": [
+    "RM-020-R01",
+    "RM-020-R02",
+    "RM-020-R03"
+   ],
+   "gold": [
+    "RM-020-R01",
+    "RM-020-R02",
+    "RM-020-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-020-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-020-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-020-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-021",
+   "kind": "trap",
+   "ranked": [
+    "RM-021-R01"
+   ],
+   "gold": [
+    "RM-021-R01"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-021-R01",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-022",
+   "kind": "trap",
+   "ranked": [
+    "RM-022-R01",
+    "RM-022-R02"
+   ],
+   "gold": [
+    "RM-022-R01",
+    "RM-022-R02"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-022-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-022-R02",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-023",
+   "kind": "trap",
+   "ranked": [
+    "RM-023-R01"
+   ],
+   "gold": [
+    "RM-023-R01"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-023-R01",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-024",
+   "kind": "trap",
+   "ranked": [
+    "RM-024-R01",
+    "RM-024-R02",
+    "RM-024-R03"
+   ],
+   "gold": [
+    "RM-024-R01",
+    "RM-024-R02",
+    "RM-024-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-024-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-024-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-024-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-025",
+   "kind": "trap",
+   "ranked": [
+    "RM-025-R01"
+   ],
+   "gold": [
+    "RM-025-R01"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-025-R01",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-026",
+   "kind": "trap",
+   "ranked": [
+    "RM-026-R01",
+    "RM-026-R02",
+    "RM-026-R03"
+   ],
+   "gold": [
+    "RM-026-R01",
+    "RM-026-R02",
+    "RM-026-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-026-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-026-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-026-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-027",
+   "kind": "trap",
+   "ranked": [
+    "RM-027-R01"
+   ],
+   "gold": [
+    "RM-027-R01"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-027-R01",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-028",
+   "kind": "trap",
+   "ranked": [
+    "RM-028-R01",
+    "RM-028-R02",
+    "RM-028-R03"
+   ],
+   "gold": [
+    "RM-028-R01",
+    "RM-028-R02",
+    "RM-028-R03"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-028-R01",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-028-R02",
+     "status": "ok"
+    },
+    {
+     "resource_id": "RM-028-R03",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-029",
+   "kind": "trap",
+   "ranked": [
+    "RM-029-R01"
+   ],
+   "gold": [
+    "RM-029-R01"
+   ],
+   "recall_at_3": 1.0,
+   "mrr": 1.0,
+   "reason_score": 1.0,
+   "reason_detail": [
+    {
+     "resource_id": "RM-029-R01",
+     "status": "ok"
+    }
+   ],
+   "forbidden_violated": [],
+   "no_match_pred": false,
+   "expect_no_match": false
+  },
+  {
+   "case_id": "RM-030",
+   "kind": "none",
+   "ranked": [],
+   "gold": [],
+   "recall_at_3": null,
+   "mrr": null,
+   "reason_score": null,
+   "reason_detail": [],
+   "forbidden_violated": [],
+   "no_match_pred": true,
+   "expect_no_match": true
+  },
+  {
+   "case_id": "RM-031",
+   "kind": "none",
+   "ranked": [],
+   "gold": [],
+   "recall_at_3": null,
+   "mrr": null,
+   "reason_score": null,
+   "reason_detail": [],
+   "forbidden_violated": [],
+   "no_match_pred": true,
+   "expect_no_match": true
+  },
+  {
+   "case_id": "RM-032",
+   "kind": "none",
+   "ranked": [],
+   "gold": [],
+   "recall_at_3": null,
+   "mrr": null,
+   "reason_score": null,
+   "reason_detail": [],
+   "forbidden_violated": [],
+   "no_match_pred": true,
+   "expect_no_match": true
+  },
+  {
+   "case_id": "RM-033",
+   "kind": "none",
+   "ranked": [],
+   "gold": [],
+   "recall_at_3": null,
+   "mrr": null,
+   "reason_score": null,
+   "reason_detail": [],
+   "forbidden_violated": [],
+   "no_match_pred": true,
+   "expect_no_match": true
+  },
+  {
+   "case_id": "RM-034",
+   "kind": "none",
+   "ranked": [],
+   "gold": [],
+   "recall_at_3": null,
+   "mrr": null,
+   "reason_score": null,
+   "reason_detail": [],
+   "forbidden_violated": [],
+   "no_match_pred": true,
+   "expect_no_match": true
+  },
+  {
+   "case_id": "RM-035",
+   "kind": "none",
+   "ranked": [],
+   "gold": [],
+   "recall_at_3": null,
+   "mrr": null,
+   "reason_score": null,
+   "reason_detail": [],
+   "forbidden_violated": [],
+   "no_match_pred": true,
+   "expect_no_match": true
+  }
+ ]
+}
