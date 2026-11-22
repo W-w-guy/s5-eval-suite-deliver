@@ -1,0 +1,58 @@
+Ubuntu 真机复核日志（VM 192.168.112.128，2026-11-22 实跑）
+=========== ENV ===========
+Python 3.12.3
+Linux 7.0.0-38-generic x86_64
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+
+=========== 输入 ===========
+triage2022_deliver.zip  sha256 6250140e9bb006fec77b7ac8715739a9a74220801a928cb080d5c61911e1d8e1
+
+=========== 解压到全新目录后校验 ===========
+$ unzip -q triage2022.zip && cd triage2022
+$ sha256sum -c SHA256SUMS.txt
+tools/metrics.py: OK
+verify_2022.py: OK
+count: 49 OK / 0 FAILED
+
+=========== 重跑生成器后再校验（幂等） ===========
+$ python3 tools/gen_cases.py
+$ sha256sum -c SHA256SUMS.txt
+count: 49 OK / 0 FAILED
+
+=========== verify ===========
+$ python3 verify_2022.py
+[ OK ] AC1 cases.jsonl 恰有 35 条 | 35
+[ OK ] AC1 分布 常规20/高相似干扰10/全无关5 | {'normal': 20, 'high_similarity': 10, 'irrelevant': 5}
+[ OK ] AC1 每条 context 文件都存在
+[ OK ] AC1 每条 context 含 8~20 篇资讯 | 8..20
+[ OK ] AC1 eval-lint 命令行 rc=0 且打印 PASS | LINT PASS
+[ OK ] AC1 eval-pii-scan 命令行 rc=0 且打印 PASS | ['pii scanned=56 canary_hits=0 unexpected=0']
+[ OK ] AC1 每条含虚构会员行业画像
+[ OK ] AC1 每条含 gold 聚类/分类/前5
+[ OK ] AC1 含同一事件多来源报道的用例（>=30 条） | 35
+[ OK ] AC1 同事件报道措辞与日期都不同（非复制粘贴） | 35
+[ OK ] AC2 runner 跑通（rc=0） | rc=0
+[ OK ] AC2 聚类 pairwise F1 >=0.80 | 0.8763
+[ OK ] AC2 分类准确率 >=0.80 | 0.8843
+[ OK ] AC2 排序 NDCG@5 >=0.80 | 0.8607
+[ OK ] AC2 生成报告（md）
+[ OK ] AC2 报告含「聚类 pairwise F1」
+[ OK ] AC2 报告含「分类准确率」
+[ OK ] AC2 报告含「排序 NDCG@5」
+[ OK ] AC2 报告含「阈值敏感性表（默认值不是对着答案挑的）」
+[ OK ] AC2 --break-cluster 能打掉 F1（指标可证伪） | 0.0000
+[ OK ] AC2 --break-order 能打掉 NDCG@5 | 0.7317
+[ OK ] AC3 forbidden：同一事件出现两次 = 0
+[ OK ] AC3 forbidden：context 外资讯 = 0
+[ OK ] AC3 --leak 能触发 forbidden（检测有效） | 35
+[ OK ] AC3 重复事件检测函数手算正确 | ['E1']
+[ OK ] AC4 全无关样本 5 条 | 5
+[ OK ] AC4 5 条全无关样本的 Top5 均为空（即输出「本期无高相关资讯」） | [[], [], [], [], []]
+[ OK ] AC4 报告里单列无关样本统计
+[ OK ] pytest 全套通过 | ........................
+TOTAL 29, PASS 29, FAIL 0
+
+=========== pytest ===========
+$ python3 -m pytest tests -q
+........................                                                 [100%]
+24 passed

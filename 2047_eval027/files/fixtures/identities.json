@@ -1,0 +1,85 @@
+[
+ {
+  "id": "U-MEM-A-01",
+  "role": "member",
+  "org": "示例会员企业甲",
+  "site": "站点一",
+  "desc": "会员企业甲的员工",
+  "grants": [
+   "public",
+   "member"
+  ]
+ },
+ {
+  "id": "U-MEM-B-01",
+  "role": "member",
+  "org": "示例会员企业乙",
+  "site": "站点二",
+  "desc": "会员企业乙的员工",
+  "grants": [
+   "public",
+   "member"
+  ]
+ },
+ {
+  "id": "U-GUEST-01",
+  "role": "guest",
+  "org": "-",
+  "site": "-",
+  "desc": "未认证访客",
+  "grants": [
+   "public"
+  ]
+ },
+ {
+  "id": "U-OPS-S1-01",
+  "role": "staff",
+  "org": "示例运营中心",
+  "site": "站点一",
+  "desc": "站点一运营专员",
+  "grants": [
+   "public",
+   "member",
+   "staff",
+   "site:站点一"
+  ]
+ },
+ {
+  "id": "U-OPS-S2-01",
+  "role": "staff",
+  "org": "示例运营中心",
+  "site": "站点二",
+  "desc": "站点二运营专员",
+  "grants": [
+   "public",
+   "member",
+   "staff",
+   "site:站点二"
+  ]
+ },
+ {
+  "id": "U-FIN-01",
+  "role": "finance",
+  "org": "示例财务部",
+  "site": "-",
+  "desc": "财务",
+  "grants": [
+   "public",
+   "member",
+   "staff",
+   "finance"
+  ]
+ },
+ {
+  "id": "U-SALES-01",
+  "role": "sales",
+  "org": "示例招商部",
+  "site": "站点一",
+  "desc": "招商业务员",
+  "grants": [
+   "public",
+   "member",
+   "sales"
+  ]
+ }
+]

@@ -1,0 +1,49 @@
+# intel_brief.triage 评测套件定义
+suite: intel_brief.triage
+version: 1.0.0
+description: 情报简报资讯整理——事件聚类、分类与按画像的重要度排序
+
+cases:
+  file: data/cases.jsonl
+  count: 35
+  context_dir: contexts
+  distribution:
+    normal: 20            # 常规
+    high_similarity: 10   # 高相似干扰
+    irrelevant: 5         # 全部资讯与画像无关（期望「本期无高相关资讯」）
+  per_case:
+    context: "8~20 篇虚构资讯，含同一事件的多来源报道（措辞不同、发布时间不同）、
+              标题相似但事件不同的干扰项、以及一份虚构的会员行业画像"
+    gold_clusters: "事件 -> 资讯 id 列表"
+    gold_category: "事件 -> 政策/融资/行业动态/活动/竞品"
+    gold_top5: "针对该画像的前 5 名重要事件（允许并列，实测未出现并列）"
+
+metrics:
+  pairwise_f1:
+    desc: 事件聚类（哪些资讯是同一事件）
+    threshold: 0.80
+    extra: [merge_errors, split_errors]
+  category_accuracy:
+    desc: 每个事件的分类准确率（按簇对齐后比较，不是比簇编号）
+    threshold: 0.80
+  ndcg_at_5:
+    desc: 针对画像的前 5 名重要事件排序
+    threshold: 0.80
+
+forbidden_points:
+  - 同一事件在简报中出现两次
+  - context 之外的资讯被引入
+
+runner:
+  script: tools/eval_run.py
+  provider: echo           # 被测工具 mock，只用 context 与画像，不读 gold
+  similarity_threshold: 0.50
+  break_switches:          # 用于证明指标不是恒定的
+    --break-cluster: 把每篇当独立事件 -> pairwise F1 掉下来
+    --break-order: 不看画像分数排序 -> NDCG@5 掉下来
+    --leak: 引入 context 外资讯 -> 触发 forbidden
+
+policy:
+  ai_output: 只进复核队列，不得直接对外发送
+  amount: AI 不计算金额
+  data: 资讯全部虚构

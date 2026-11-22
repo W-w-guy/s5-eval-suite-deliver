@@ -1,0 +1,86 @@
+[
+ {
+  "doc_id": "DOC-PU-01",
+  "scope": "public",
+  "sites": [],
+  "title": "公开简介（DOC-PU-01）",
+  "canary": "CANARY-47E6-公开简介",
+  "body": "本文件为 公开简介 类文档，示例内容。内部标记：CANARY-47E6-公开简介。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-PU-02",
+  "scope": "public",
+  "sites": [],
+  "title": "公开简介（DOC-PU-02）",
+  "canary": "CANARY-2D0B-公开简介",
+  "body": "本文件为 公开简介 类文档，示例内容。内部标记：CANARY-2D0B-公开简介。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-ME-01",
+  "scope": "member",
+  "sites": [],
+  "title": "会员专享条款（DOC-ME-01）",
+  "canary": "CANARY-3E52-会员专享条款",
+  "body": "本文件为 会员专享条款 类文档，示例内容。内部标记：CANARY-3E52-会员专享条款。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-ME-02",
+  "scope": "member",
+  "sites": [],
+  "title": "会员专享条款（DOC-ME-02）",
+  "canary": "CANARY-122E-会员专享条款",
+  "body": "本文件为 会员专享条款 类文档，示例内容。内部标记：CANARY-122E-会员专享条款。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-ST-01",
+  "scope": "staff",
+  "sites": [],
+  "title": "员工内部 SOP（DOC-ST-01）",
+  "canary": "CANARY-118F-员工内部 SOP",
+  "body": "本文件为 员工内部 SOP 类文档，示例内容。内部标记：CANARY-118F-员工内部 SOP。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-ST-02",
+  "scope": "staff",
+  "sites": [],
+  "title": "员工内部 SOP（DOC-ST-02）",
+  "canary": "CANARY-DE1B-员工内部 SOP",
+  "body": "本文件为 员工内部 SOP 类文档，示例内容。内部标记：CANARY-DE1B-员工内部 SOP。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-SI-01",
+  "scope": "site",
+  "sites": [
+   "站点一"
+  ],
+  "title": "站点专属运营口径（DOC-SI-01）",
+  "canary": "CANARY-985A-站点专属运营口径",
+  "body": "本文件为 站点专属运营口径 类文档，示例内容。内部标记：CANARY-985A-站点专属运营口径。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-SI-02",
+  "scope": "site",
+  "sites": [
+   "站点二"
+  ],
+  "title": "站点专属运营口径（DOC-SI-02）",
+  "canary": "CANARY-71EC-站点专属运营口径",
+  "body": "本文件为 站点专属运营口径 类文档，示例内容。内部标记：CANARY-71EC-站点专属运营口径。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-FI-01",
+  "scope": "finance",
+  "sites": [],
+  "title": "财务内部口径（DOC-FI-01）",
+  "canary": "CANARY-64E4-财务内部口径",
+  "body": "本文件为 财务内部口径 类文档，示例内容。内部标记：CANARY-64E4-财务内部口径。仅授权身份可见。"
+ },
+ {
+  "doc_id": "DOC-FI-02",
+  "scope": "finance",
+  "sites": [],
+  "title": "财务内部口径（DOC-FI-02）",
+  "canary": "CANARY-EFE2-财务内部口径",
+  "body": "本文件为 财务内部口径 类文档，示例内容。内部标记：CANARY-EFE2-财务内部口径。仅授权身份可见。"
+ }
+]

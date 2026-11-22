@@ -1,6 +1,6 @@
-# S5 评测套件交付 · 5 单
+# S5 评测套件交付 · 8 单
 
-会员空间平台 Stage V「评测、红队与质量月报」模块的 5 个评测套件交付件。
+会员空间平台 Stage V「评测、红队与质量月报」模块的 8 个评测套件交付件。
 
 **所有数据均为虚构**：企业、资源、嘉宾、访谈转写稿、知识库政策与常见问题全部原创编写，
 不含任何真实个人或企业信息。每个包内都有 `eval-pii-scan`（手机号/邮箱/身份证形态）自检，全部 0 命中。
@@ -27,6 +27,9 @@
 | `2017_eval015/` | S5-EVAL-015 | `ip2017_deliver.zip` | 53 | 84,969 B | `71a0e83caaaaf598` | 35 |
 | `2033_eval022/` | S5-EVAL-022 | `kqa2033_deliver.zip` | 147 | 170,180 B | `56234e960b102d95` | 21 |
 | `2037_eval023/` | S5-EVAL-023 | `mt2037_deliver.zip` | 145 | 132,907 B | `0d3198c70a51374a` | 23 |
+| `2022_eval017/` | S5-EVAL-017 | `triage2022_deliver.zip` | 50 | 108,657 B | `6250140e9bb006fe` | 55 |
+| `2043_eval026/` | S5-EVAL-026 | `guard2043_deliver.zip` | 25 | 59,699 B | `821fefbf5cd53629` | 25 |
+| `2047_eval027/` | S5-EVAL-027 | `guard2047_deliver.zip` | 25 | 68,584 B | `46a19bdd0460d83b` | 25 |
 
 根目录 `SHA256SUMS.txt` 覆盖仓库内每个文件，可逐个校验。
 
@@ -39,6 +42,9 @@
 | 2017 | `files/data/cases.jsonl` | 30 行，outline 12 / summary 18；`files/data/transcripts/` 18 份转写稿 |
 | 2033 | `files/data/cases.jsonl` | 50 行，single_doc 20 / multi_doc 12 / numeric_date 10 / paraphrase 8 |
 | 2037 | `files/data/cases.jsonl` | 30 组，每组 4 轮；coref 8 / condition_change 8 / correction 8 / topic_switch 6 |
+| 2022 | `files/data/cases.jsonl` | 35 行，normal 20 / high_similarity 10 / irrelevant 5；`files/contexts/` 35 份，每份 8~20 篇资讯 |
+| 2043 | `files/data/guardrail_access_cases.jsonl` | 40 行；越权 30（`_allowed=false`）/ 正向对照 10（`_allowed=true`）；`files/fixtures/docs.json` 10 篇文档金丝雀 |
+| 2047 | `files/data/guardrail_leakage_cases.jsonl` | 45 行；6 类手法各 ≥6；`files/fixtures/contacts_canary.json` 6 条金丝雀（1990000 段 + .invalid） |
 | 2037 | `files/data/kb_index.jsonl` | 120 篇知识文档的 doc_id / 标题 / 字符数 / sha256 逐行可读 |
 
 ## 四、复跑方式（解压 zip 或直接用 files/ 目录）
