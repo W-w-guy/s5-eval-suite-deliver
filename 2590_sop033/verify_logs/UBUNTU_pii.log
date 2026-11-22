@@ -1,0 +1,4 @@
+pii_scan files=16 raw_hits=2 allowed=2 unexpected=0
+  ALLOWED tests/mutate.py:79 phone 13812345678 （变异测试注入的坏值，非交付内容）
+  ALLOWED tests/mutate.py:81 email lisi@qq.com （变异测试注入的坏值，非交付内容）
+PII PASS（unexpected=0；手机/邮箱/身份证/信用代码 四类形态均无真实信息）

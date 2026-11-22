@@ -1,0 +1,80 @@
+{
+  "template_version": "1.0",
+  "top_required": [
+    "template_id",
+    "name",
+    "version",
+    "trigger",
+    "target_object",
+    "owner_role",
+    "steps",
+    "metric",
+    "example_data_virtual"
+  ],
+  "trigger": {
+    "types": [
+      "event",
+      "schedule",
+      "manual"
+    ],
+    "event_pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$",
+    "schedule_required": [
+      "cron",
+      "timezone",
+      "query"
+    ]
+  },
+  "step_required": [
+    "id",
+    "name",
+    "role",
+    "due",
+    "escalate"
+  ],
+  "units": [
+    "work_hour",
+    "work_day",
+    "natural_day",
+    "work_minute"
+  ],
+  "escalate_allowed": [
+    "remind_only",
+    "escalate_to_supervisor",
+    "none"
+  ],
+  "anchors": [
+    "trigger",
+    "step_start",
+    "object.expire_at",
+    "object.start_at",
+    "object.last_workday",
+    "object.last_step_at"
+  ],
+  "cancel_on_pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$",
+  "forbidden_pii": [
+    "1[3-9]\\d{9}",
+    "[^\\s@]+@[^\\s@]+\\.[A-Za-z]{2,}",
+    "\\d{17}[\\dXx]"
+  ],
+  "allowed_vars": [
+    "企业名称",
+    "联系人",
+    "会员名称",
+    "员工姓名",
+    "活动名称",
+    "商机名称",
+    "关怀动作",
+    "计划日期",
+    "报价单编号",
+    "预约时间",
+    "访客姓名"
+  ],
+  "virtual_domains": [
+    "example.com",
+    "example.org",
+    "example.net",
+    "test.com",
+    "test.local",
+    "example.cn"
+  ]
+}

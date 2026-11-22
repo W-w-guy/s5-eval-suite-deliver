@@ -1,0 +1,32 @@
+==================================================================
+A. 静态校验变异（1 个模板 × 结构性缺陷，期望 lint 报 ERROR）
+[renewal]
+  检出  renewal: 删掉 trigger -> E001
+  检出  renewal: trigger.type 改成非法值 -> E010
+  检出  renewal: example_data_virtual 置 false -> E003
+  检出  renewal: steps 清空 -> E020
+  检出  renewal: metric 换成空串 -> E002
+  检出  renewal: 步骤 id 重复 -> E022
+  检出  renewal: 删掉第 1 步 role -> E021
+  检出  renewal: 第 1 步升级方式改成 email -> E024
+  检出  renewal: 第 1 步时限单位改成 hour -> E025
+  检出  renewal: 第 1 步时限锚点改成 made_up -> E027
+  检出  renewal: 第 1 步 offset 改成字符串 -> E026
+  检出  renewal: 非条件步骤硬塞 condition -> E029
+  检出  renewal: 话术里写入真实手机号 -> E030
+  检出  renewal: 话术里写入真实邮箱 -> E030
+  检出  renewal: 定时触发删掉 cron -> E013
+  检出  renewal: cron 段数不足 -> E015
+  检出  renewal: 去重窗口改成 0 -> E014
+  检出  renewal: 去重窗口改成字符串 -> E014
+  检出  renewal: cancel_on 写成中文 -> E012
+  检出  renewal: 第 3 步（条件步骤）删掉 condition -> E028
+B. 引擎行为变异（期望行为随配置一起失效）
+  检出  renewal: cron 改到 10:00 后 09:00 不再触发
+  检出  renewal: 去重窗口改 1 天后隔 2 天重复生成
+  检出  renewal: 对照原模板隔 2 天仍只有 1 个实例
+  检出  renewal: 删掉 cancel_on 后续约事件不再取消实例
+  检出  renewal: 条件改坏后健康分 39 的第③步被误跳过
+==================================================================
+变异断言 25 条：检出 25 / 漏检 0
+全部变异均被检出，校验器无盲区

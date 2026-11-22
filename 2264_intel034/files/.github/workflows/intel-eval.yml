@@ -1,0 +1,27 @@
+name: intel-eval
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: test                      # CI 属于测试环境，允许解析覆盖
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 单元测试（含每指标 >=2 手算用例）
+        run: python -m pytest tests -q
+      - name: 评测（任一门槛不达标则本步失败，PR 被拦截）
+        run: python -m intel_eval run --prompt-set ci
+      - name: 自检
+        run: python verify_2264.py
+      - name: 上传报告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: intel-eval-report
+          path: reports/

@@ -1,0 +1,10 @@
+{
+ "disallowed": [
+  "/admin/",
+  "/articles/draft/"
+ ],
+ "probe_urls": [
+  "http://gov-a.example/admin/settings.html",
+  "http://gov-a.example/articles/draft/d001.html"
+ ]
+}
