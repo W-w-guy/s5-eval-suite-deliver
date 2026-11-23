@@ -44,14 +44,16 @@ T = {
   "steps": []
 }
 
-def step(i, name, role, anchor, off, unit, guidance, outputs=None, checklist=None,
-         conditional=False, condition=None, skill=None, escalate="remind_only",
-         cascade_skip=False, blocking_rule=None):
+def step(i, name, role, anchor, off, unit, guidance, outputs=None, required=None,
+         checklist=None, conditional=False, condition=None, skill=None,
+         escalate="remind_only", cascade_skip=False, blocking_rule=None):
     d = {"id": i, "name": name, "role": role,
          "due": {"anchor": anchor, "offset": off, "unit": unit},
          "escalate": escalate, "guidance": guidance}
     if outputs: d["outputs"] = outputs
-    if outputs: d["required_outputs"] = outputs
+    # required 默认与 outputs 相同；显式传一份更短的清单 = 该步存在占位输出但不必填
+    req = outputs if required is None else required
+    if req: d["required_outputs"] = req
     if checklist: d["checklist"] = checklist
     if conditional:
         d["conditional"] = True
@@ -72,6 +74,9 @@ S2 = step(2, "关怀方案", "会员经理", "trigger", 5, "work_day",
   "依据第①步的风险原因拟定关怀动作与计划日期，写入关怀方案并同步给会员。"
   "AI 关怀建议草稿为占位字段 ai_care_draft，本阶段由人工填写，后续阶段接入生成服务后替换。",
   outputs=["care_action", "plan_date", "ai_care_draft"],
+  # ai_care_draft 是占位字段（工单：AI 关怀建议草稿为占位，后续阶段接入），
+  # 不列入 required_outputs —— 不填它也能完成第②步。
+  required=["care_action", "plan_date"],
   checklist=["关怀动作已从字典中选择", "计划日期已与会员确认"])
 
 S3 = step(3, "管理层介入", "运营主管", "trigger", 1, "work_day",
@@ -101,7 +106,9 @@ T["steps"] = [S1, S2, S3, S4, S5]
 
 
 if __name__ == "__main__":
-    out = os.path.join(HERE, "templates", "renewal.json")
+    # 工单指定路径：sop/templates/renewal.json
+    out = os.path.join(HERE, "sop", "templates", "renewal.json")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
     # newline="\n" 是必须的：Windows 文本模式默认把 \n 写成 CRLF，
     # 同一份脚本在两平台产出的 sha256 会不同（实测 6658B vs 6465B，差 193 字节 = 行数）。
     with open(out, "w", encoding="utf-8", newline="\n") as fh:

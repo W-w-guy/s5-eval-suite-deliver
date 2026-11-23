@@ -10,8 +10,8 @@ import os, subprocess, sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 ENV = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
 STEPS = [
-    ("1/3 sop-lint 静态校验（templates/renewal.json）",
-     [sys.executable, "-m", "sop.lint", "templates/renewal.json"]),
+    ("1/3 sop-lint 静态校验（sop/templates/renewal.json）",
+     [sys.executable, "-m", "sop.lint", "sop/templates/renewal.json"]),
     ("2/3 AC 集成测试（2590 续约预警）",
      [sys.executable, "tests/test_renewal_ac.py"]),
     ("3/3 变异测试（校验器盲区）",

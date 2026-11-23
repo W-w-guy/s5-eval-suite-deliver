@@ -2,10 +2,10 @@
 
 本包交付 S3-SOP-033「续约预警」的 **SOP 模板配置**、**步骤说明文档**、**关怀话术文本**与**集成测试**，对应工单四项交付物。
 
-- 模板：`templates/renewal.json`（5 步、4 本字典、4 条话术）
+- 模板：`sop/templates/renewal.json`（5 步、4 本字典、4 条话术；工单指定路径）
 - 说明：`docs/steps-renewal.md`（75 行逐步说明，含每步的时限锚点与判定口径）
 - 话术：`docs/scripts-renewal.md`（4 段）
-- 测试：`tests/test_renewal_ac.py`（31 项，覆盖 4 条 AC + 8 项扩展）
+- 测试：`tests/test_renewal_ac.py`（43 项，覆盖 4 条 AC + 8 项扩展 + 返工补的 12 项，含 3 项文档一致性断言）
 - 校验器：`sop/lint.py`（`python -m sop.lint`）、`tests/mutate.py`（变异测试）
 
 ## 运行与测试方法
@@ -14,15 +14,15 @@
 
 ```bash
 cd files
-python verify.py            # 一键：lint + AC 31 项 + 变异测试   期望 rc=0
+python verify.py            # 一键：lint + AC 43 项 + 变异测试   期望 rc=0
 ```
 
 分步跑：
 
 ```bash
-python -m sop.lint templates/renewal.json   # 静态校验，期望 "PASS renewal.json  0 error / 0 warn"
-python tests/test_renewal_ac.py             # AC 集成测试，期望 "合计 31 项：PASS 31 / FAIL 0"
-python tests/mutate.py                      # 变异测试，期望 "变异断言 25 条：检出 25 / 漏检 0"
+python -m sop.lint sop/templates/renewal.json   # 静态校验，期望 "PASS renewal.json  0 error / 0 warn"
+python tests/test_renewal_ac.py             # AC 集成测试，期望 "合计 43 项：PASS 43 / FAIL 0"
+python tests/mutate.py                      # 变异测试，期望 "变异断言 29 条：检出 29 / 漏检 0"
 python tools/pii_scan.py                    # pii 扫描，期望 "unexpected=0 ... PII PASS"
 ```
 
@@ -60,8 +60,8 @@ cmp 结果 IDENTICAL
 
 | 平台 | Python | verify | AC | 变异 | pii |
 |---|---|---|---|---|---|
-| Windows 10 (22631) | 3.11.7 | 3/3 | 31/31 PASS | 25/25 检出 | unexpected=0 |
-| Ubuntu 24.04 | 3.12.3 | 3/3 | 31/31 PASS | 25/25 检出 | unexpected=0 |
+| Windows 10 (22631) | 3.11.7 | 3/3 | 43/43 PASS | 29/29 检出 | unexpected=0 |
+| Ubuntu 24.04 | 3.12.3 | 3/3 | 43/43 PASS | 29/29 检出 | unexpected=0 |
 
 原始日志在 `../verify_logs/`：`WINDOWS_{verify,lint,ac,mutate,pii,gen}.log` 与 `UBUNTU_{verify,lint,ac,mutate,pii,gen,sha256sum}.log`，含 `ENV_*.txt` 平台信息。
 
@@ -73,7 +73,7 @@ files/
 ├── ACCEPTANCE.md              4 条 AC 的四元组（原文/判定方式/复核命令/实际输出原文）
 ├── DATA_PROVENANCE.md         数据来源与可复核性
 ├── README.md                  本文件
-├── templates/renewal.json     交付主件
+├── sop/templates/renewal.json 交付主件（工单指定路径）
 ├── docs/steps-renewal.md      步骤说明文档
 ├── docs/scripts-renewal.md    关怀话术文本
 ├── sop/                       模板运行时（engine/clock/lint/mock/schema）

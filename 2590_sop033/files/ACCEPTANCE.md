@@ -12,21 +12,21 @@
 
 **判定方式**
 
-1. `sop/lint.py` 对 `templates/renewal.json` 报 **0 error / 0 warn**（退出码 0）。
+1. `sop/lint.py` 对 `sop/templates/renewal.json` 报 **0 error / 0 warn**（退出码 0）。
 2. 「可以成功发布」落到引擎侧的实际动作：`Engine([tpl], ...)` 能加载并注册该模板 —— 加载失败会抛异常，加载成功即代表模板结构可被运行时接受。
 3. 这两点是**两个独立判定**：lint 是静态规则校验，Engine 加载是运行时接受；只过其中一个不算过。
 
 **复核命令**
 
 ```bash
-python -m sop.lint templates/renewal.json      # 期望 rc=0
+python -m sop.lint sop/templates/renewal.json  # 期望 rc=0
 python tests/test_renewal_ac.py                # 内含 AC1.4「引擎可加载模板」
 ```
 
 **实际输出原文**
 
 ```
-$ python -m sop.lint templates/renewal.json
+$ python -m sop.lint sop/templates/renewal.json
 PASS renewal.json  0 error / 0 warn
 
 $ python tests/test_renewal_ac.py
@@ -53,15 +53,19 @@ PASS  AC1.4 引擎可加载模板（可发布）
 用 `sop/clock.py:FrozenClock` 冻结虚拟时钟（不读系统时间，产物可复现），逐项断言：
 
 1. 会籍到期前 90 天（`expire_at=2026-05-31`，基准日 `2026-03-02 09:00`）的会员 → 当天 09:00 **必须**生成 1 个实例。
-2. 触发走命名查询 `membership_expiring_within(days=90)`，且**已进入流失预警**的会员同样命中。
-3. 同日再次调度 → 不重复生成（同日幂等）。
+2. 触发走命名查询 `membership_expiring_within(days=90)`，且**已进入流失预警**的会员同样命中——
+   用一个到期日在 90 天窗口**之外**（距到期 200 天）但已进入流失预警的会员来证明：
+   它被命中的唯一可能路径就是 query 的 `churn_warning_at` 分支；同一条数据在未进流失预警时必须不命中（反向对照）。
+3. **次日 09:00 再次调度**（cron 确实命中）→ 不重复生成。
+   判据是「`matched=1` 且 `created=0`」，即查询有命中但实例数不增；不能用「换个非 09:00 的时刻所以没触发」来充当去重证据——
+   那种写法在去重功能完全失效时也会通过。
 4. 第 119 天 → 仍在去重窗口内，不生成。
 5. 第 120 天（满）→ 窗口关闭；第 121 天 → 可再次触发。
 
 **复核命令**
 
 ```bash
-python tests/test_renewal_ac.py     # AC2.1 ~ AC2.8
+python tests/test_renewal_ac.py     # AC2.1 ~ AC2.8 + AC2.9 / AC2.9b / AC2.10
 ```
 
 **实际输出原文**
@@ -70,11 +74,14 @@ python tests/test_renewal_ac.py     # AC2.1 ~ AC2.8
 PASS  AC2.1 09:00 定时任务命中并生成实例
 PASS  AC2.2 命中命名查询 membership_expiring_within(days=90)
 PASS  AC2.3 实例绑定 membership 对象且第一步已派给会员经理
-PASS  AC2.4 同日再次调度不重复生成
+PASS  AC2.4 次日 09:00 再次调度（cron 已命中）不重复生成
 PASS  AC2.5 119 天后仍在去重窗口内，不生成
 PASS  AC2.6 121 天后去重窗口已过
 PASS  AC2.7 119 天仍在窗口内
 PASS  AC2.8 满 120 天窗口关闭
+PASS  AC2.9 已进入流失预警的会员（到期在 90 天外）同样被命中并生成实例
+PASS  AC2.9b 命中来源是该会员的 churn_warning_at（非到期窗口）
+PASS  AC2.10 对照：到期在 90 天外且未进流失预警 → 不命中
 ```
 
 **约束与边界**
@@ -105,7 +112,7 @@ PASS  AC2.8 满 120 天窗口关闭
 **复核命令**
 
 ```bash
-python tests/test_renewal_ac.py     # AC3.1 ~ AC3.5
+python tests/test_renewal_ac.py     # AC3.1 ~ AC3.6
 python tests/mutate.py              # 「条件改坏后健康分 39 的第③步被误跳过」
 ```
 
@@ -117,6 +124,7 @@ PASS  AC3.2 跳过原因已记录
 PASS  AC3.3 跳过后第④步被激活
 PASS  AC3.4 重点会员 → 第③步必须生成
 PASS  AC3.5 健康分 39<40 → 第③步必须生成
+PASS  AC3.6 健康分恰好 40（非重点）→ 第③步 skipped（边界不算「低于 40」）
 
 （变异）
 检出  renewal: 条件改坏后健康分 39 的第③步被误跳过
@@ -146,7 +154,7 @@ PASS  AC3.5 健康分 39<40 → 第③步必须生成
 **复核命令**
 
 ```bash
-python tests/test_renewal_ac.py     # AC4.1 ~ AC4.6
+python tests/test_renewal_ac.py     # AC4.1 ~ AC4.7
 ```
 
 **实际输出原文**
@@ -158,11 +166,16 @@ PASS  AC4.3 SOP 引擎未调用 CRM 生命周期写入接口
 PASS  AC4.4 membership.lifecycle_status 仍为 active
 PASS  AC4.5 引擎对象副本也未改状态
 PASS  AC4.6 CRM 守卫确实会拒绝 SOP 侧写入（排除假通过）
+PASS  AC4.7 反例：模板一旦声明写生命周期状态，引擎走守卫并被拒（AC4.3 因此可失败）
 ```
 
 **约束与边界**
 
-- 只断言「状态还是 active」不够：如果引擎压根没接上 CRM，「没改」就毫无意义。所以 AC4.6 专门证明守卫**会**拒绝，让 AC4.3 的「0 次调用」有意义。
+- 只断言「状态还是 active」不够：如果引擎压根没接上 CRM，「没改」就毫无意义。
+- 因此做了两层反证：AC4.6 证明守卫**会**拒绝；AC4.7 更进一步，构造一份**故意声明写生命周期状态**的模板副本喂给同一个引擎，
+  要求引擎必须走守卫、被拒（`PermissionError`）、`blocked` 记到 1 条、而库里状态仍是 active。
+  这样 AC4.3 的「0 次调用」才是「有没有写都逃不掉」意义上的真通过，而不是「压根没有写入路径」。
+  守卫通过 `Engine(..., crm_guard=...)` 注入，引擎不持有 membership 表本身。
 - 第⑤步的输出只做记录：续约 / 流失（**原因必填**）/ 延期。选了流失但没填原因 → 拒绝完成（见 EX8）。
 - 会员生命周期状态由员工在 CRM 中确认，**系统不自动修改** —— 这条在模板里体现为模板不含任何 `crm.lifecycle.*` 写操作，lint 侧也不允许出现。
 
@@ -170,7 +183,7 @@ PASS  AC4.6 CRM 守卫确实会拒绝 SOP 侧写入（排除假通过）
 
 ## 附：扩展断言（工单未点名，但属于「模板配置」的应有之义）
 
-`python tests/test_renewal_ac.py` 另跑 9 项（EX1~EX8），全部 PASS：
+`python tests/test_renewal_ac.py` 另跑 11 项（EX1~EX8 八项边界用例 + DOC1~DOC3 三项文档一致性断言），全部 PASS：
 
 ```
 PASS  EX1 第①步截止 = 触发后 3 个工作日 18:00
@@ -181,9 +194,12 @@ PASS  EX5 收到 membership.renewed 后实例被取消
 PASS  EX6 未完成待办一并取消
 PASS  EX7 缺必填输出时拒绝完成第①步
 PASS  EX8 选流失未填原因时拒绝完成第⑤步
+PASS  DOC1 步骤说明文档覆盖每个步骤的名称/角色/必填输出
+PASS  DOC2 话术文档逐段对应模板 scripts 的每个键
+PASS  DOC3 话术文档段落数 = 模板 scripts 键数（4）
 ```
 
-合计 **31 项：PASS 31 / FAIL 0**。
+合计 **43 项：PASS 43 / FAIL 0**。
 
 ## 附：本包**没有**做的事（如实列出）
 

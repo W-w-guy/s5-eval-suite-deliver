@@ -112,7 +112,8 @@ class _RO:
 
 
 class Engine:
-    def __init__(self, templates, objects, clock, notifier=None, holidays=None, effects=None):
+    def __init__(self, templates, objects, clock, notifier=None, holidays=None,
+                 effects=None, crm_guard=None):
         self.templates = {t["template_id"]: t for t in templates}
         self.objects = objects            # {object_type: {id: dict}}
         self.clock = clock
@@ -123,6 +124,11 @@ class Engine:
         self.events_seen = []
         self.audit = []
         self.effects = effects or {}      # {api 名: callable(inst, spec, data)}
+        # AC4：会员生命周期状态的唯一写入方是员工在 CRM 中确认。
+        # 引擎不持有该表，只持有一个「会拒绝」的守卫；模板若声明写这条状态，
+        # 引擎必须走守卫（必被拒），而不是绕过它直接落库。
+        self.crm_guard = crm_guard
+        self.lifecycle_write_attempts = []
 
     # ---------- 查询 ----------
     def obj(self, template, object_id):
@@ -244,6 +250,19 @@ class Engine:
             return
         if eff.get("when") and not eval_condition(eff["when"], data, inst.flat()):
             return
+        # 生命周期状态写入走独立通道：必须经过注入的 CRM 守卫，
+        # 守卫会抛 PermissionError 并在 blocked 里留痕。没有守卫就是配置错误，
+        # 直接报错，绝不静默放行。
+        if eff.get("api") == "crm.update_lifecycle_status":
+            if self.crm_guard is None:
+                raise RuntimeError(
+                    "模板声明写入会员生命周期状态，但未注入 CRM 守卫；"
+                    "该状态只能由员工在 CRM 中确认")
+            args = dict(eff.get("args") or {})
+            self.lifecycle_write_attempts.append(dict(step=spec["id"], args=args))
+            return self.crm_guard.update_lifecycle_status(
+                args.get("membership_id") or inst.object_id,
+                args.get("status"), args.get("operator"))
         fn = self.effects.get(eff["api"])
         if fn is None:
             raise RuntimeError(f"效应 {eff['api']} 未注册处理函数")

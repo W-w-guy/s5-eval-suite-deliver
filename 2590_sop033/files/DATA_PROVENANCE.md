@@ -4,24 +4,25 @@
 
 ## 一、数据从哪来
 
-本包**没有外部数据源**。`templates/renewal.json` 与 `docs/*.md` 全部由同一个生成器从一份内嵌常量生成：
+本包**没有外部数据源**。`sop/templates/renewal.json` 由生成器从一份内嵌常量字典生成
+（`docs/*.md` 依据这份模板整理，并有测试断言二者不漂移，见第三节末尾）：
 
 | 项 | 值 |
 |---|---|
 | 生成脚本 | `tools/build_renewal.py` |
-| sha256 | `b2e23395caaee787edcc657ce726da12003044c19757a96a7b1993b961fa980c` |
-| 大小 | 6,266 字节 |
+| sha256 | `cf264bf505323cffe45580f6faf25903d06967e3920a924a811c32137b160e62` |
+| 大小 | 6,871 字节 |
 | 随机性 | **无随机数**。模板是常量字典，`random` 未被 import |
 | 外部依赖 | 仅标准库 `json` / `os` / `datetime` |
 | 重跑命令 | `python tools/build_renewal.py` |
-| 重跑产出 | `templates/renewal.json`（6,658 字节，5 步） |
-| 重跑幂等性 | 已在全新临时目录实跑验证：产出 sha256 = `0d26b9d3455537efbc43cbe17c07de618be3db1b463754d0b751827f5c548826`，与包内文件**逐字节相同** |
+| 重跑产出 | `sop/templates/renewal.json`（6,440 字节，5 步） |
+| 重跑幂等性 | 已在全新临时目录实跑验证：产出 sha256 = `8420dcb9e8f1c3807042e12e717e182aec9f2cbfb2a61fbe76cf366d1b9d6bf1`，与包内文件**逐字节相同** |
 
 ## 二、产出规模（可直接数）
 
 | 交付物 | 规模 | 可数方式 |
 |---|---|---|
-| `templates/renewal.json` | 5 个步骤、4 本字典、4 条话术 | `python -c "import json;t=json.load(open('templates/renewal.json'));print(len(t['steps']),{k:len(v) for k,v in t['dictionaries'].items()})"` |
+| `sop/templates/renewal.json` | 5 个步骤、4 本字典、4 条话术 | `python -c "import json;t=json.load(open('sop/templates/renewal.json'));print(len(t['steps']),{k:len(v) for k,v in t['dictionaries'].items()})"` |
 | 字典词条 | risk_reason 8 / renewal_intent 5 / care_action 6 / outcome 3 | 同上 |
 | `docs/steps-renewal.md` | 75 行，逐步说明 | `wc -l docs/steps-renewal.md` |
 | `docs/scripts-renewal.md` | 4 段话术 | `wc -l` |
@@ -47,13 +48,16 @@
 
 ```
 $ python tools/pii_scan.py
-pii_scan files=15 raw_hits=2 allowed=2 unexpected=0
-  ALLOWED tests/mutate.py:79 phone 1381****678 （变异测试注入的坏值，非交付内容）
-  ALLOWED tests/mutate.py:81 email li**@**.com （变异测试注入的坏值，非交付内容）
+pii_scan files=16 raw_hits=2 allowed=2 unexpected=0
+  ALLOWED tests/mutate.py:80 phone 1381****678 （变异测试注入的坏值，非交付内容）
+  ALLOWED tests/mutate.py:82 email li**@**.com （变异测试注入的坏值，非交付内容）
 PII PASS（unexpected=0；手机/邮箱/身份证/信用代码 四类形态均无真实信息）
 ```
 
-**这里如实说明那 2 条 `ALLOWED` 是什么**：变异测试必须注入「形如真实」的号码与邮箱，才能证明 lint 的 E030 真的会报错。这两条字符串**只作为被注入的坏值**存在于 `tests/mutate.py`，不在任何交付内容（模板、文档、话术）里。扫描器逐行判定豁免，并把豁免条数单独打印（`allowed=2`），不会被静默吞掉。交付内容本体（`templates/` `docs/`）扫描结果 0 命中。
+**本文件里这两行输出已打码**：原样抄出被扫描器命中的字符串，会让本文件自己变成新的命中源（第一版就这样把自己扫红了）。
+打码后仍保留行号与类别，可复核。
+
+**这里如实说明那 2 条 `ALLOWED` 是什么**：变异测试必须注入「形如真实」的号码与邮箱，才能证明 lint 的 E030 真的会报错。这两条字符串**只作为被注入的坏值**存在于 `tests/mutate.py`，不在任何交付内容（模板、文档、话术）里。扫描器逐行判定豁免，并把豁免条数单独打印（`allowed=2`），不会被静默吞掉。交付内容本体（`sop/templates/` `docs/`）扫描结果 0 命中。
 
 ### 第 3 层：不含客户名称
 
@@ -73,4 +77,18 @@ grep -rn "会员空间\|商务会员" . --include=*.py --include=*.md --include=
 python tools/build_renewal.py          # 重跑生成，与包内文件逐字节相同
 python tools/pii_scan.py               # unexpected=0
 python verify.py                       # lint / AC / 变异 全绿
+```
+
+## 六、文档与模板不漂移（本轮返工新增）
+
+`docs/steps-renewal.md` 与 `docs/scripts-renewal.md` 是**依据模板整理**的说明文档，不是独立事实源。
+为防止文档写着模板里没有的东西，测试里加了文档一致性断言（`test_docs_match_template`）：
+
+- 模板里每个步骤的 `id` / `name` / `role` / `required_outputs` 必须都能在 `docs/steps-renewal.md` 找到对应行；
+- 话术文档里的段落数必须等于模板 `scripts` 的键数。
+
+改模板而忘了改文档时，这三类断言会红。复核：
+
+```bash
+python tests/test_renewal_ac.py     # 期望含 PASS  DOC1 / DOC2 / DOC3
 ```

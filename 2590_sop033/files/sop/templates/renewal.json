@@ -113,8 +113,7 @@
       ],
       "required_outputs": [
         "care_action",
-        "plan_date",
-        "ai_care_draft"
+        "plan_date"
       ],
       "checklist": [
         "关怀动作已从字典中选择",

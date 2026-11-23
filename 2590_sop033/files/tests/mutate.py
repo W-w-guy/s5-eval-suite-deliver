@@ -12,7 +12,8 @@ sys.path.insert(0, ROOT)
 from sop import lint, clock as C, mock as M
 from sop.engine import Engine
 
-TEMPLATE_DIR = os.path.join(ROOT, "templates")
+# 工单指定路径：sop/templates/renewal.json
+TEMPLATE_DIR = os.path.join(ROOT, "sop", "templates")
 TEMPLATES = {os.path.basename(p)[:-5]: json.load(open(p, encoding="utf-8"))
              for p in sorted(glob.glob(os.path.join(TEMPLATE_DIR, "*.json")))}
 PASS = 0
@@ -189,12 +190,89 @@ def run_engine_mutations():
                                 "ai_care_draft": "x"})
     ok("renewal: 条件改坏后健康分 39 的第③步被误跳过") if i.step(3)["state"] == "skipped" else miss("renewal: 条件改坏后第③步仍生成")
 
+def run_rework_mutations():
+    """针对返工四项新增的变异：证明新加的断言不是「怎么改都通过」。"""
+    tpl = copy.deepcopy(TEMPLATES["renewal"])
+
+    # R1) 把占位字段 ai_care_draft 塞回第②步必填 → 「不填也能完成」必须失效
+    t = copy.deepcopy(tpl)
+    for st in t["steps"]:
+        if st["id"] == 2:
+            st["required_outputs"] = list(st.get("outputs") or [])
+    nb = M.Notebook()
+    repo = M.MembershipRepo([dict(id="m1", org_id="o", site_id="s", health_score=60,
+                                  is_key_member=False, expire_at=datetime(2026, 5, 31),
+                                  lifecycle_status="active", churn_warning_at=None)], nb)
+    eng, _, _ = world(t, {"membership": {"m1": repo.all()[0]}}, "2026-03-02 09:00")
+    eng.tick({"membership_expiring_within": repo})
+    i = list(eng.instances.values())[0]
+    eng.complete_step(i.id, 1, {"health_score_snapshot": 60, "interactions_90d": 3,
+                                "risk_reason": ["其他"], "renewal_intent": "犹豫"})
+    blocked = False
+    try:
+        eng.complete_step(i.id, 2, {"care_action": "高层拜访", "plan_date": "d"})
+    except ValueError:
+        blocked = True
+    ok("renewal: ai_care_draft 放回必填后，不填草稿就无法完成第②步") if blocked \
+        else miss("renewal: ai_care_draft 放回必填后仍能完成第②步")
+
+    # R2) 依赖变异：摘掉 mock 的 churn_warning_at 分支 →
+    #     到期在 90 天窗口外的流失预警会员不再命中（AC2.9 会红）
+    class _NoChurnRepo(M.MembershipRepo):
+        def query(self, name, **params):
+            if name == "membership_expiring_within":
+                days = int(params["days"]); now = params["now"]
+                return [r for r in self.all()
+                        if 0 < (r["expire_at"] - now).total_seconds() / 86400.0 <= days]
+            return super().query(name, **params)
+    nb2 = M.Notebook()
+    exp = datetime(2026, 9, 18)     # 距 2026-03-02 正好 200 天
+    repo2 = _NoChurnRepo([dict(id="m1", org_id="o", site_id="s", health_score=70,
+                               is_key_member=False, expire_at=exp,
+                               lifecycle_status="active",
+                               churn_warning_at=datetime(2026, 2, 25))], nb2)
+    eng2, _, _ = world(copy.deepcopy(tpl), {"membership": {"m1": repo2.all()[0]}},
+                       "2026-03-02 09:00")
+    eng2.tick({"membership_expiring_within": repo2})
+    ok("renewal: 摘掉 churn 分支后，到期 200 天外的流失预警会员不再命中") if not eng2.instances \
+        else miss("renewal: 摘掉 churn 分支后仍命中（说明断言没测到该分支）")
+
+    # R3) 边界变异：条件把「低于 40」写成「不高于 40」→ 健康分恰好 40 的会员第③步被误生成
+    t3 = copy.deepcopy(tpl)
+    setpath(t3, "steps.2.condition", "object.is_key_member or object.health_score <= 40")
+    nb3 = M.Notebook()
+    repo3 = M.MembershipRepo([dict(id="m1", org_id="o", site_id="s", health_score=40,
+                                   is_key_member=False, expire_at=datetime(2026, 5, 31),
+                                   lifecycle_status="active", churn_warning_at=None)], nb3)
+    eng3, _, _ = world(t3, {"membership": {"m1": repo3.all()[0]}}, "2026-03-02 09:00")
+    eng3.tick({"membership_expiring_within": repo3})
+    i3 = list(eng3.instances.values())[0]
+    eng3.complete_step(i3.id, 1, {"health_score_snapshot": 40, "interactions_90d": 4,
+                                  "risk_reason": ["其他"], "renewal_intent": "犹豫"})
+    eng3.complete_step(i3.id, 2, {"care_action": "高层拜访", "plan_date": "d"})
+    ok("renewal: 边界改成 <=40 后，健康分 40 的会员第③步被误生成（AC3.6 会红）") \
+        if i3.step(3)["state"] == "active" else miss("renewal: 边界改成 <=40 后第③步仍跳过")
+
+
+def run_doc_mutations():
+    """文档一致性断言（DOC1）也必须能失败：模板多一个文档里没有的必填输出，必须报缺失。"""
+    steps_md = open(os.path.join(ROOT, "docs", "steps-renewal.md"), encoding="utf-8").read()
+    t = copy.deepcopy(TEMPLATES["renewal"])
+    t["steps"][0]["required_outputs"] = list(t["steps"][0]["required_outputs"]) + ["made_up_field"]
+    missing = [out for out in t["steps"][0]["required_outputs"] if out not in steps_md]
+    ok("renewal: 模板新增必填输出而文档未同步 → DOC1 报缺失") if missing \
+        else miss("renewal: 模板新增必填输出但 DOC1 没报缺失")
+
+
 if __name__ == "__main__":
     print("=" * 66)
     print(f"A. 静态校验变异（1 个模板 × 结构性缺陷，期望 lint 报 ERROR）")
     run_lint_mutations()
     print("B. 引擎行为变异（期望行为随配置一起失效）")
     run_engine_mutations()
+    print("C. 返工新增断言的反向验证（期望断言随缺陷一起失效）")
+    run_rework_mutations()
+    run_doc_mutations()
     print("=" * 66)
     print(f"变异断言 {PASS + FAIL} 条：检出 {PASS} / 漏检 {FAIL}")
     if MISSES:

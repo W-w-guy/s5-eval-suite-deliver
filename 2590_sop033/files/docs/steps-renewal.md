@@ -1,6 +1,7 @@
 # 步骤说明 · 续约预警
 
-> 本文件由 `tools/build_docs.py` 从 `templates/renewal.json` 自动生成，与模板配置同源，勿手工修改。
+> 本文件依据 `sop/templates/renewal.json`（工单指定路径）整理，字段与模板一一对应。
+> 二者的不漂移由 `tests/test_renewal_ac.py` 的 DOC1~DOC3 断言守住：改模板不同步改本文件，测试会红。
 
 - 模板 ID：`S3-SOP-033-renewal`
 - 版本：1.0.0

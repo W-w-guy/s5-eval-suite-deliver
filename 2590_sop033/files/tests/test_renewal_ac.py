@@ -2,6 +2,7 @@
 """2590「续约预警」验收测试：逐条对应工单 AC 1-4，另加边界用例。
 运行：python tests/test_renewal_ac.py        退出码 0=全通过"""
 import json, os, sys, traceback
+from copy import deepcopy
 from datetime import datetime, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,7 +11,8 @@ sys.path.insert(0, ROOT)
 from sop import lint, clock as C, mock as M
 from sop.engine import Engine
 
-TPL_PATH = os.path.join(ROOT, "templates", "renewal.json")
+# 工单指定路径：sop/templates/renewal.json（测试、lint、生成器三处必须同源）
+TPL_PATH = os.path.join(ROOT, "sop", "templates", "renewal.json")
 PASS = 0
 FAIL = 0
 RESULTS = []
@@ -26,21 +28,26 @@ def load():
     return json.load(open(TPL_PATH, encoding="utf-8"))
 
 
-def make_world(now, expire_at, health=55, key_member=False, mids=("m-001",)):
-    """虚构数据世界：一条会籍 + 引擎。"""
+def make_world(now, expire_at, health=55, key_member=False, mids=("m-001",),
+               churn_at=None, templates=None):
+    """虚构数据世界：一条会籍 + 引擎。
+    churn_at：该会员进入流失预警的时间（None=未进入），用于覆盖 mock 的 churn 分支。
+    templates：可注入模板副本（AC4.3 反例用），默认加载交付模板。
+    """
     nb = M.Notebook()
     guard = M.CrmWriteGuard(nb)
     rows = []
-    for i, mid in enumerate(mids):
+    for mid in mids:
         rows.append({"id": mid, "org_id": "org-v", "site_id": "site-v",
                      "health_score": health, "is_key_member": key_member,
                      "expire_at": expire_at, "lifecycle_status": "active",
-                     "churn_warning_at": None})
+                     "churn_warning_at": churn_at})
     repo = M.MembershipRepo(rows, nb)
     clk = C.FrozenClock(now)
-    tpl = load()
-    eng = Engine([tpl], {"membership": {r["id"]: r for r in repo.all()}},
-                 clk, notifier=M.Notifier(nb))
+    tpls = templates if templates is not None else [load()]
+    # 守卫必须注入引擎 —— 否则 AC4.3 的 blocked==0 是「压根没接」造成的假通过
+    eng = Engine(tpls, {"membership": {r["id"]: r for r in repo.all()}},
+                 clk, notifier=M.Notifier(nb), crm_guard=guard)
     return eng, repo, guard, clk, nb
 
 
@@ -79,10 +86,14 @@ def test_ac2_frozen_clock_trigger_and_dedupe():
           and inst.steps[0]["state"] == "active"
           and eng.templates[inst.template_id]["steps"][0]["role"] == "会员经理")
 
-    # 120 天内不重复触发
-    clk.set("2026-03-02 10:00")
-    eng.tick({"membership_expiring_within": repo})
-    check("AC2.4 同日再次调度不重复生成", len(eng.instances) == 1, f"{len(eng.instances)}")
+    # 120 天内不重复触发：换到【次日 09:00】再调度。
+    # 原写法用同日 10:00，不生成只是因为 cron 不命中，和去重无关 —— 功能坏了也会通过。
+    # 现在要求 cron 确实命中（matched==1）而实例数不增（created==0），非去重莫属。
+    clk.set("2026-03-03 09:00")
+    ran2 = eng.tick({"membership_expiring_within": repo})
+    check("AC2.4 次日 09:00 再次调度（cron 已命中）不重复生成",
+          bool(ran2) and ran2[0]["matched"] == 1 and ran2[0]["created"] == 0
+          and len(eng.instances) == 1, f"{ran2} inst={len(eng.instances)}")
 
     clk.set("2026-06-29 09:00")   # +119 天
     eng.tick({"membership_expiring_within": repo})
@@ -96,6 +107,72 @@ def test_ac2_frozen_clock_trigger_and_dedupe():
     check("AC2.7 119 天仍在窗口内", eng._dedupe_hit(tpl, "m-001") is True)
     clk.set("2026-06-30 09:00")   # +120 天，窗口为 [0,120) 半开区间
     check("AC2.8 满 120 天窗口关闭", eng._dedupe_hit(tpl, "m-001") is False)
+
+
+def test_ac2b_churn_warning_member_matched():
+    """工单：已进入流失预警的会员同样命中。
+    构造一个到期日在 90 天窗口【之外】但已进入流失预警的会员 ——
+    只有 sop/mock.py:41 的 churn_warning_at 分支真的执行，它才会被命中。
+    """
+    now = datetime(2026, 3, 2, 9, 0)
+    expire = now + timedelta(days=200)      # 距到期 200 天，超出 90 天窗口
+    eng, repo, guard, clk, nb = make_world(now, expire, churn_at=now - timedelta(days=5))
+    ran = eng.tick({"membership_expiring_within": repo})
+    check("AC2.9 已进入流失预警的会员（到期在 90 天外）同样被命中并生成实例",
+          bool(ran) and ran[0]["matched"] == 1 and len(eng.instances) == 1,
+          f"{ran} inst={len(eng.instances)}")
+    check("AC2.9b 命中来源是该会员的 churn_warning_at（非到期窗口）",
+          (now - expire).days < 0 and abs((expire - now).days) == 200,
+          f"expire_delta={(expire - now).days}d")
+
+    # 反向对照：同一到期日、未进入流失预警 → 不命中。
+    # 两条合起来才能证明命中来自 churn 分支，而不是别的路径。
+    eng2, repo2, *_ = make_world(now, expire, churn_at=None)
+    ran2 = eng2.tick({"membership_expiring_within": repo2})
+    check("AC2.10 对照：到期在 90 天外且未进流失预警 → 不命中",
+          bool(ran2) and ran2[0]["matched"] == 0 and len(eng2.instances) == 0,
+          f"{ran2} inst={len(eng2.instances)}")
+
+
+def test_ac_ai_draft_optional():
+    """工单：AI 关怀建议草稿为占位，后续阶段接入 —— 不能挡住第②步完成。"""
+    now = datetime(2026, 3, 2, 9, 0)
+    expire = now + timedelta(days=90)
+    tpl = load()
+    spec2 = {x["id"]: x for x in tpl["steps"]}[2]
+    check("AC5.1 模板把 ai_care_draft 保留在 outputs（占位）",
+          "ai_care_draft" in spec2.get("outputs", []), str(spec2.get("outputs")))
+    check("AC5.2 ai_care_draft 不在 required_outputs",
+          "ai_care_draft" not in spec2.get("required_outputs", []),
+          str(spec2.get("required_outputs")))
+
+    eng, repo, guard, clk, nb = make_world(now, expire)
+    eng.tick({"membership_expiring_within": repo})
+    inst = list(eng.instances.values())[0]
+    eng.complete_step(inst.id, 1, {"health_score_snapshot": 55, "interactions_90d": 9,
+                                   "risk_reason": ["竞品接触"], "renewal_intent": "犹豫"})
+    ok = True
+    try:
+        eng.complete_step(inst.id, 2, {"care_action": "价格方案沟通",
+                                       "plan_date": "2026-03-12"})   # 故意不填 ai_care_draft
+    except ValueError:
+        ok = False
+    check("AC5.3 不填 ai_care_draft 也能完成第②步", ok and inst.step(2)["state"] == "done",
+          inst.step(2)["state"])
+
+    # 反向：必填项仍然必须拦住（否则「非必填」会把整个输出校验一起废掉）
+    eng2, repo2, *_ = make_world(now, expire)
+    eng2.tick({"membership_expiring_within": repo2})
+    i2 = list(eng2.instances.values())[0]
+    eng2.complete_step(i2.id, 1, {"health_score_snapshot": 55, "interactions_90d": 2,
+                                  "risk_reason": ["其他"], "renewal_intent": "犹豫"})
+    blocked = False
+    try:
+        eng2.complete_step(i2.id, 2, {"plan_date": "2026-03-12"})     # 缺 care_action
+    except ValueError:
+        blocked = True
+    check("AC5.4 缺 care_action 时仍拒绝完成第②步（必填项没被一起放开）",
+          blocked and i2.step(2)["state"] == "active", i2.step(2)["state"])
 
 
 def test_ac3_skip_management_step():
@@ -134,6 +211,17 @@ def test_ac3_skip_management_step():
                                   "ai_care_draft": "占位"})
     check("AC3.5 健康分 39<40 → 第③步必须生成", i3.step(3)["state"] == "active", i3.step(3)["state"])
 
+    # 边界：健康分【恰好 40】。工单口径是「低于 40 才生成」，所以 40 属于不生成，
+    # 第③步必须 skipped。这一条此前缺失，交期说明里却声称测过。
+    eng4, repo4, *_ = make_world(now, expire, health=40, key_member=False)
+    eng4.tick({"membership_expiring_within": repo4})
+    i4 = list(eng4.instances.values())[0]
+    eng4.complete_step(i4.id, 1, {"health_score_snapshot": 40, "interactions_90d": 6,
+                                  "risk_reason": ["其他"], "renewal_intent": "犹豫"})
+    eng4.complete_step(i4.id, 2, {"care_action": "高层拜访", "plan_date": "2026-03-10"})
+    check("AC3.6 健康分恰好 40（非重点）→ 第③步 skipped（边界不算「低于 40」）",
+          i4.step(3)["state"] == "skipped", i4.step(3)["state"])
+
 
 def test_ac4_lifecycle_untouched():
     now = datetime(2026, 3, 2, 9, 0)
@@ -152,8 +240,9 @@ def test_ac4_lifecycle_untouched():
     check("AC4.1 第⑤步已完成", inst.step(5)["state"] == "done", inst.step(5)["state"])
     check("AC4.2 实例状态 done", inst.state == "done", inst.state)
     check("AC4.3 SOP 引擎未调用 CRM 生命周期写入接口",
-          len(guard.blocked) == 0 and "crm.update_lifecycle_status" not in nb.apis(),
-          f"blocked={guard.blocked}")
+          len(guard.blocked) == 0 and not eng.lifecycle_write_attempts
+          and "crm.update_lifecycle_status" not in nb.apis(),
+          f"blocked={guard.blocked} attempts={eng.lifecycle_write_attempts}")
     check("AC4.4 membership.lifecycle_status 仍为 active",
           repo.get("m-001")["lifecycle_status"] == "active",
           repo.get("m-001")["lifecycle_status"])
@@ -166,6 +255,58 @@ def test_ac4_lifecycle_untouched():
     except PermissionError:
         raised = True
     check("AC4.6 CRM 守卫确实会拒绝 SOP 侧写入（排除假通过）", raised, str(guard.blocked))
+
+    # ★ 上一条只证明「守卫本身会拒」，没证明「引擎真的把守卫接进来了」。
+    #   反例：给第⑤步加一条写生命周期的 effect，引擎必须走守卫、被拒、留痕；
+    #   若引擎绕开守卫直连，blocked 会停在 0，AC4.3 立刻变红。
+    tpl_bad = deepcopy(load())
+    for spec in tpl_bad["steps"]:
+        if spec["id"] == 5:
+            spec["effect"] = {"api": "crm.update_lifecycle_status",
+                              "args": {"status": "renewed", "operator": "sop-engine"}}
+    eng_b, repo_b, guard_b, clk_b, nb_b = make_world(now, expire, templates=[tpl_bad])
+    eng_b.tick({"membership_expiring_within": repo_b})
+    ib = list(eng_b.instances.values())[0]
+    eng_b.complete_step(ib.id, 1, {"health_score_snapshot": 55, "interactions_90d": 8,
+                                   "risk_reason": ["其他"], "renewal_intent": "倾向续约"})
+    eng_b.complete_step(ib.id, 2, {"care_action": "高层拜访", "plan_date": "2026-03-10"})
+    eng_b.complete_step(ib.id, 4, {"quote_id": "Q-2026-0002"})
+    refused = False
+    try:
+        eng_b.complete_step(ib.id, 5, {"outcome": "续约"})
+    except PermissionError:
+        refused = True
+    check("AC4.7 反例：模板一旦声明写生命周期状态，引擎走守卫并被拒（AC4.3 因此可失败）",
+          refused and len(guard_b.blocked) == 1
+          and repo_b.get("m-001")["lifecycle_status"] == "active",
+          f"refused={refused} blocked={guard_b.blocked}")
+
+
+def test_docs_match_template():
+    """文档与模板不漂移：docs/ 是说明文档，不是独立事实源。
+    改模板忘了改文档时，这三条必须红。"""
+    tpl = load()
+    steps_md = open(os.path.join(ROOT, "docs", "steps-renewal.md"), encoding="utf-8").read()
+    scripts_md = open(os.path.join(ROOT, "docs", "scripts-renewal.md"), encoding="utf-8").read()
+
+    missing = []
+    for st in tpl["steps"]:
+        for key in ("name", "role"):
+            if st[key] not in steps_md:
+                missing.append(f"step{st['id']}.{key}={st[key]}")
+        for out in st.get("required_outputs", []):
+            if out not in steps_md:
+                missing.append(f"step{st['id']}.required={out}")
+    check("DOC1 步骤说明文档覆盖每个步骤的名称/角色/必填输出", not missing, str(missing[:6]))
+
+    n_scripts = len(tpl["scripts"])
+    heads = [f"## {k}" for k in tpl["scripts"]]
+    lost = [h for h in heads if h not in scripts_md]
+    check("DOC2 话术文档逐段对应模板 scripts 的每个键",
+          not lost and n_scripts == len(heads), f"missing={lost} n={n_scripts}")
+    n_md = scripts_md.count("\n## ")
+    check("DOC3 话术文档段落数 = 模板 scripts 键数（4）",
+          n_md == n_scripts, f"{n_md} vs {n_scripts}")
 
 
 def test_extra_edges():
@@ -227,8 +368,9 @@ def test_extra_edges():
 
 def main():
     tests = [test_ac1_lint_and_publish, test_ac2_frozen_clock_trigger_and_dedupe,
+             test_ac2b_churn_warning_member_matched, test_ac_ai_draft_optional,
              test_ac3_skip_management_step, test_ac4_lifecycle_untouched,
-             test_extra_edges]
+             test_docs_match_template, test_extra_edges]
     for t in tests:
         try:
             t()
