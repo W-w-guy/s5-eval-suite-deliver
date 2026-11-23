@@ -1,7 +1,7 @@
-pii_scan files=53 raw_hits=10 allowed=10 unexpected=0
-  ALLOWED DATA_PROVENANCE.md:68 email contact@example.invalid（RFC 2606 保留域）
-  ALLOWED DATA_PROVENANCE.md:68 email a@b.example（RFC 2606 保留域）
-  ALLOWED DATA_PROVENANCE.md:71 email a@b.example（RFC 2606 保留域）
+pii_scan files=46 raw_hits=10 allowed=10 unexpected=0
+  ALLOWED DATA_PROVENANCE.md:64 email contact@example.invalid（RFC 2606 保留域）
+  ALLOWED DATA_PROVENANCE.md:64 email a@b.example（RFC 2606 保留域）
+  ALLOWED DATA_PROVENANCE.md:67 email a@b.example（RFC 2606 保留域）
   ALLOWED intel_eval/pipeline.py:39 email contact@example.invalid（RFC 2606 保留域）
   ALLOWED tests/test_metrics_handcalc.py:139 phone 13800001111
   ALLOWED tests/test_metrics_handcalc.py:141 email a@b.example

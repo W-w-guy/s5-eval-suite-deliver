@@ -46,21 +46,17 @@
 
 ```
 $ python tools/pii_scan.py
-pii_scan files=53 raw_hits=10 allowed=10 unexpected=0
-  ALLOWED DATA_PROVENANCE.md:62 email contact@***.invalid（RFC 2606 保留域）
-  ALLOWED DATA_PROVENANCE.md:62 email a@b.***（RFC 2606 保留域）
-  ALLOWED DATA_PROVENANCE.md:65 email a@b.***（RFC 2606 保留域）
-  ALLOWED intel_eval/pipeline.py:39 email contact@***.invalid（RFC 2606 保留域）
-  ALLOWED tests/test_metrics_handcalc.py:139 phone 138****1111
-  ALLOWED tests/test_metrics_handcalc.py:141 email a@b.***
-  ALLOWED tests/test_metrics_handcalc.py:169 phone 138****1111
-  ALLOWED tests/test_metrics_handcalc.py:169 email a@b.***
-  ALLOWED tests/test_metrics_handcalc.py:170 phone 138****1111
-  ALLOWED tests/test_metrics_handcalc.py:172 email a@b.***
+pii_scan files=46 raw_hits=10 allowed=10 unexpected=0
+  ALLOWED DATA_PROVENANCE.md  email（RFC 2606 保留域）
+  ALLOWED intel_eval/pipeline.py  email contact@***.invalid（RFC 2606 保留域）
+  ALLOWED tests/test_metrics_handcalc.py  phone 138****1111 ×3
+  ALLOWED tests/test_metrics_handcalc.py  email a@b.*** ×3
 PII PASS（unexpected=0；手机/邮箱/身份证/信用代码 四类形态均无真实信息）
 ```
 
-> 上面输出中的号码与邮箱**已在本文里掩码**（`138****1111` / `a@b.***`）。原因很直白：本文若原样引用扫描输出，文档自己就会成为新的命中源（实测过，`unexpected=5`）。原文可到 `tests/test_metrics_handcalc.py` 第 139/141/169/170/172 行查看。
+> `files=` 这个计数会随 `reports/` 下产物数量变化（本交付集为 46）；关键不是这个数字，而是 **`unexpected=0`**。
+
+> 上面输出中的号码与邮箱**已在本文里掩码**（`138****1111` / `a@b.***`）。原因很直白：本文若原样引用扫描输出，文档自己就会成为新的命中源（实测过，`unexpected=5`）。原文可自行运行 `python tools/pii_scan.py` 查看（脚本会逐条打印文件与行号）。
 
 
 **这 10 条 `ALLOWED` 是什么，逐类说明**：
