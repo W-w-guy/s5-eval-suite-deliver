@@ -1,7 +1,6 @@
 ACCEPTANCE.md: OK
 DATA_PROVENANCE.md: OK
 README.md: OK
-verify.py: OK
 docs/scripts-renewal.md: OK
 docs/steps-renewal.md: OK
 sop/__init__.py: OK
@@ -10,9 +9,9 @@ sop/engine.py: OK
 sop/lint.py: OK
 sop/mock.py: OK
 sop/schema.json: OK
-templates/renewal.json: OK
+sop/templates/renewal.json: OK
 tests/mutate.py: OK
 tests/test_renewal_ac.py: OK
 tools/build_renewal.py: OK
 tools/pii_scan.py: OK
-rc=0
+verify.py: OK

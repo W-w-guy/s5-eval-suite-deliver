@@ -6,22 +6,34 @@ PASS  AC1.4 引擎可加载模板（可发布）
 PASS  AC2.1 09:00 定时任务命中并生成实例
 PASS  AC2.2 命中命名查询 membership_expiring_within(days=90)
 PASS  AC2.3 实例绑定 membership 对象且第一步已派给会员经理
-PASS  AC2.4 同日再次调度不重复生成
+PASS  AC2.4 次日 09:00 再次调度（cron 已命中）不重复生成
 PASS  AC2.5 119 天后仍在去重窗口内，不生成
 PASS  AC2.6 121 天后去重窗口已过
 PASS  AC2.7 119 天仍在窗口内
 PASS  AC2.8 满 120 天窗口关闭
+PASS  AC2.9 已进入流失预警的会员（到期在 90 天外）同样被命中并生成实例
+PASS  AC2.9b 命中来源是该会员的 churn_warning_at（非到期窗口）
+PASS  AC2.10 对照：到期在 90 天外且未进流失预警 → 不命中
+PASS  AC5.1 模板把 ai_care_draft 保留在 outputs（占位）
+PASS  AC5.2 ai_care_draft 不在 required_outputs
+PASS  AC5.3 不填 ai_care_draft 也能完成第②步
+PASS  AC5.4 缺 care_action 时仍拒绝完成第②步（必填项没被一起放开）
 PASS  AC3.1 非重点且健康分>=40 → 第③步 skipped
 PASS  AC3.2 跳过原因已记录
 PASS  AC3.3 跳过后第④步被激活
 PASS  AC3.4 重点会员 → 第③步必须生成
 PASS  AC3.5 健康分 39<40 → 第③步必须生成
+PASS  AC3.6 健康分恰好 40（非重点）→ 第③步 skipped（边界不算「低于 40」）
 PASS  AC4.1 第⑤步已完成
 PASS  AC4.2 实例状态 done
 PASS  AC4.3 SOP 引擎未调用 CRM 生命周期写入接口
 PASS  AC4.4 membership.lifecycle_status 仍为 active
 PASS  AC4.5 引擎对象副本也未改状态
 PASS  AC4.6 CRM 守卫确实会拒绝 SOP 侧写入（排除假通过）
+PASS  AC4.7 反例：模板一旦声明写生命周期状态，引擎走守卫并被拒（AC4.3 因此可失败）
+PASS  DOC1 步骤说明文档覆盖每个步骤的名称/角色/必填输出
+PASS  DOC2 话术文档逐段对应模板 scripts 的每个键
+PASS  DOC3 话术文档段落数 = 模板 scripts 键数（4）
 PASS  EX1 第①步截止 = 触发后 3 个工作日 18:00
 PASS  EX2 第②步截止 = 完成后 5 个工作日（周一 03-02 +5 工作日 = 周一 03-09）
 PASS  EX3 第④步锚定 object.expire_at - 30 自然日
@@ -31,4 +43,4 @@ PASS  EX6 未完成待办一并取消
 PASS  EX7 缺必填输出时拒绝完成第①步
 PASS  EX8 选流失未填原因时拒绝完成第⑤步
 ==============================================================
-合计 31 项：PASS 31 / FAIL 0
+合计 43 项：PASS 43 / FAIL 0

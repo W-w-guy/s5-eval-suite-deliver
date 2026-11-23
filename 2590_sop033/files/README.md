@@ -52,7 +52,7 @@ Ubuntu   sop/templates/renewal.json  6,440 字节  sha256 8420dcb9e8f1c3807042e1
 cmp 结果 IDENTICAL
 ```
 
-**为什么这条值得写进 README**：如果只在 Windows 上验证，`重跑生成器产出与包内一致` 这条断言在 Ubuntu 上会直接失败——买家一跑就 mismatch，而我们在自己机器上看到的是全绿。包内文本文件统一为 LF（17 个文件），`SHA256SUMS` 在两平台 `sha256sum -c` 均 17/17 OK。
+**为什么这条值得写进 README**：如果只在 Windows 上验证，`重跑生成器产出与包内一致` 这条断言在 Ubuntu 上会直接失败——买家一跑就 mismatch，而我们在自己机器上看到的是全绿。包内全部文本文件统一为 LF，`SHA256SUMS` 列 17 个受校验文件（不列自身），两平台 `sha256sum -c` 均 17/17 OK。
 
 **注意**：`SHA256SUMS` 不列自身（列了 `sha256sum -c` 恒有 1 条 FAIL），`__pycache__` 不参与校验。
 
