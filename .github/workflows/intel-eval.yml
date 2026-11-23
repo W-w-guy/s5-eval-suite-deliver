@@ -1,0 +1,36 @@
+# 本文件仅用于「交付仓内可实跑」演示。
+# 与 2264_intel034/files/.github/workflows/intel-eval.yml 的差别只有一处：
+# 本仓把交付件放在子目录，故需 defaults.run.working-directory 指过去。
+# 买家在自己仓库使用时，直接用 2264_intel034/files/ 下那份（无需 working-directory）。
+name: intel-eval
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: 2264_intel034/files
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: test                      # CI 属于测试环境，允许解析覆盖
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 单元测试（含每指标 >=2 手算用例）
+        run: python -m pytest tests -q
+      - name: 评测（任一门槛不达标则本步失败，PR 被拦截）
+        run: python -m intel_eval run --prompt-set ci
+      - name: 自检
+        run: python verify_2264.py
+      - name: 上传报告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: intel-eval-report
+          path: 2264_intel034/files/reports/

@@ -68,3 +68,22 @@ Python 3.11+，零第三方运行时依赖（pytest 仅跑单测需要）。
 ```bash
 python tools/provenance.py --selftest
 ```
+
+## 六、关于 CI 配置（两处位置，用途不同）
+
+仓库里有两份 `intel-eval.yml`，**内容用途不同，别混用**：
+
+| 位置 | 用于 | 说明 |
+|---|---|---|
+| `2264_intel034/files/.github/workflows/intel-eval.yml` | 交给买家 | 假定**包内文件已铺到买家仓库根目录**，无需 `working-directory`；随 zip 一起交付，属交付件本体 |
+| `.github/workflows/intel-eval.yml`（本仓根目录） | 本仓自证 | 本仓把交付件放在子目录 `2264_intel034/files/`，故多一行 `defaults.run.working-directory`；仅用于在本仓跑出绿勾 |
+
+**为什么要放根目录**：GitHub 只识别仓库根目录的 `.github/workflows/`。
+放在 `2264_intel034/files/.github/workflows/` 下，GitHub 不会执行，等于「配置存在但从不运行」。
+
+**如何迁到买家仓库**：把 `2264_intel034/files/` 下的内容铺到买家仓库根目录，
+`intel-eval.yml` 会自动落在 `.github/workflows/`，无需改动；再按需配置
+`APP_ENV=test`（CI 属测试环境）即可。数据不出网由 `INTEL_TEST_RESOLVER` fail-closed 保证，
+不依赖 GitHub 托管 runner 的位置。
+
+> 注：zip 与 `2264_intel034/` 目录仍逐字节一致；根目录这份 `.github/` 是追加物，不属于交付件本体。
