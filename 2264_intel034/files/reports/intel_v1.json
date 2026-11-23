@@ -1,11 +1,19 @@
 {
  "prompt_set": "v1",
+ "prompt_spec": {
+  "id": "v1",
+  "name": "首句基线版",
+  "strategy": "first_sentence",
+  "max_len": 150,
+  "note": "取正文第一句。基线策略，不含金额/比例等关键事实。"
+ },
+ "crawl_source": "discovered",
  "metrics": {
   "body_similarity": 1.0,
   "publish_date_accuracy": 1.0,
   "policy_type_accuracy": 1.0,
   "deadline_accuracy": 1.0,
-  "key_fact_coverage": 1.0,
+  "key_fact_coverage": 0.0,
   "numeric_flagged_ratio": 1.0,
   "no_link_into_queue": 0,
   "robots_violations": 0,
@@ -28,12 +36,16 @@
    "dropped": 1,
    "queued": 0
   },
-  "_fails": []
+  "_fails": [
+   "key_fact_coverage"
+  ]
  },
  "dropped": [
   {
    "case_id": "IT-009",
-   "reason": "no_original_link"
+   "url": "http://gov-a.example/articles/a009.html",
+   "reason": "no_original_link",
+   "evidence": "dead_link_field: 正文出现「已失效」"
   }
  ],
  "queued": []

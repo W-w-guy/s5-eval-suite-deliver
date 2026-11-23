@@ -16,11 +16,12 @@ jobs:
       - name: 单元测试（含每指标 >=2 手算用例）
         run: python -m pytest tests -q
       - name: 评测（任一门槛不达标则本步失败，PR 被拦截）
-        run: python -m intel_eval run --prompt-set ci
+        run: python -m intel_eval run --prompt-set v2
       - name: 自检
         run: python verify_2264.py
       - name: 上传报告
         if: always()
+        continue-on-error: true          # 基础设施抖动（网络）不该把回归判红
         uses: actions/upload-artifact@v4
         with:
           name: intel-eval-report

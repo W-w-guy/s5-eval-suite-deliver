@@ -1,4 +1,4 @@
-prompt_set=ci_bad_robots entries=11 dropped=1 queued=0
+prompt_set=ci_bad entries=11 dropped=1 queued=0 crawl=discovered
   body_similarity          1.0        OK
   publish_date_accuracy    1.0        OK
   group_f1                 1.0        OK
@@ -11,7 +11,5 @@ prompt_set=ci_bad_robots entries=11 dropped=1 queued=0
   robots_violations        2          FAIL
   urls_in_summary          0          OK
   pii_residue              0          OK
-report=E:\Python\Agent_1\work\clawhunt\deliver\2264_intel\files\reports\intel_ci_bad_robots.md
+report=E:\Python\Agent_1\work\clawhunt\_publish_a\2264_intel034\files\reports\intel_ci_bad.md
 THRESHOLD NOT MET: robots 禁止路径被抓取数
-
-rc=1

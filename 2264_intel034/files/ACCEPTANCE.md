@@ -12,22 +12,25 @@
 
 **判定方式**（三重，缺一不算过）
 
-1. `python -m intel_eval run --prompt-set v1` 退出码 **0**（11 项门槛全过）。
-2. **同时**产出 `reports/intel_v1.md` 与 `reports/intel_v1.json` 两份文件 —— 不是只有其中一份。
+1. `python -m intel_eval run --prompt-set v2` 退出码 **0**（11 项门槛全过）。
+   > 为什么基线用 v2 而不用 v1：v1 是「首句」策略，摘要不含金额/比例，关键事实覆盖率实测 **0.0**，
+   > 退出码 **1**。它是**故意保留的低分对照**，用来证明门槛真的会拦 —— 详见 AC4 之后的「两版对照」。
+2. **同时**产出 `reports/intel_v2.md` 与 `reports/intel_v2.json` 两份文件 —— 不是只有其中一份。
 3. JSON 的 `metrics` 里 **11 个键逐个存在**，且 Markdown 表格确实是 **11 行指标**（数行数，不是「看起来有」）。
 
 **复核命令**
 
 ```bash
-python -m intel_eval run --prompt-set v1
-python verify_2264.py            # AC1 共 17 项断言
+python -m intel_eval run --prompt-set v2      # 期望 rc=0
+python -m intel_eval run --prompt-set v1      # 期望 rc=1（低分对照）
+python verify_2264.py                          # AC1 共 17 项断言
 ```
 
 **实际输出原文**
 
 ```
-$ python -m intel_eval run --prompt-set v1
-prompt_set=v1 entries=11 dropped=1 queued=0
+$ python -m intel_eval run --prompt-set v2
+prompt_set=v2 entries=11 dropped=1 queued=0 crawl=discovered
   body_similarity          1.0        OK
   publish_date_accuracy    1.0        OK
   group_f1                 1.0        OK
@@ -40,7 +43,7 @@ prompt_set=v1 entries=11 dropped=1 queued=0
   robots_violations        0          OK
   urls_in_summary          0          OK
   pii_residue              0          OK
-report=.../reports/intel_v1.md
+report=.../reports/intel_v2.md
 THRESHOLD OK
 ```
 
@@ -125,14 +128,14 @@ $ python verify_2264.py
 **复核命令**
 
 ```bash
-python -m intel_eval run --prompt-set ci_bad_robots --ignore-robots ; echo "rc=$?"
+python -m intel_eval run --prompt-set ci_bad --ignore-robots ; echo "rc=$?"
 python -m pytest tests -q
 ```
 
 **实际输出原文**
 
 ```
-$ python -m intel_eval run --prompt-set ci_bad_robots --ignore-robots
+$ python -m intel_eval run --prompt-set ci_bad --ignore-robots
   robots_violations        2          FAIL
 THRESHOLD NOT MET: robots 禁止路径被抓取数
 rc=1
@@ -147,7 +150,7 @@ $ python verify_2264.py
 [ OK ] AC3 有对应测试且通过
 ```
 
-产物对照：`reports/intel_v1.json`（正常，0）与 `reports/intel_ci_bad_robots.json`（故意犯规，2）**都在包里**，可直接对比，不必重跑。
+产物对照：`reports/intel_v2.json`（正常，0）与 `reports/intel_ci_bad.json`（故意犯规，2）**都在包里**，可直接对比，不必重跑。
 
 **约束与边界**
 
@@ -165,8 +168,8 @@ $ python verify_2264.py
 
 1. **11 个指标函数逐个点名**（不是抽样），每个至少 2 个手算用例。
 2. 用例是**手算**：期望值在测试里写成字面常量并在注释里给出算式，不是「跑一遍把输出抄进断言」。
-3. 断言手算用例总数 ≥ 22（实测 **38**）。
-4. 全部单元测试通过（实测 **59 passed**）。
+3. 断言手算用例总数 ≥ 22（实测 **47**）。
+4. 全部单元测试通过（实测 **79 passed**）。
 
 **复核命令**
 
@@ -179,20 +182,23 @@ python verify_2264.py
 **实际输出原文**
 
 ```
-$ python -m pytest tests --co -q
-tests/test_guard_robots_cli.py: 18
-tests/test_metrics_handcalc.py: 41      → 合计 59
+$ python -m pytest tests --co
+tests/test_guard_robots_cli.py::...            （18 条）
+tests/test_metrics_handcalc.py::...            （41 条）
+tests/test_rework_fixes.py::...                （20 条）
+                                        → 合计 79 条
 
 $ python -m pytest tests -q
-...........................................................              [100%]
-59 passed
+........................................................................ [ 91%]
+.......                                                                  [100%]
+79 passed
 ```
 
 ```
 $ python verify_2264.py
 [ OK ] AC4 11 个指标都有对应用例 | ['test_m01','test_m02',...,'test_m11']
 [ OK ] AC4 每个指标至少 2 个手算用例
-[ OK ] AC4 手算用例总数 >= 22 | 38
+[ OK ] AC4 手算用例总数 >= 22 | 47
 [ OK ] AC4 全部单元测试通过
 ```
 
@@ -211,3 +217,50 @@ $ python verify_2264.py
 - 不实现真实的 DNS 解析覆盖（需要 root/hosts 权限）：改用 `INTEL_TEST_RESOLVER` 环境变量做进程内解析映射，且只允许内网段。
 - 不做定时调度与报告归档（属 CI 侧职责），只提供 `.github/workflows/intel-eval.yml` 作为可直接用的合并拦截配置。
 - 不计算任何金额（AI 不计算金额），摘要与报告里无金额字段。
+
+---
+
+## 附：提示词两版对照（证明 `--prompt-set` 真的改变了结果）
+
+改造前，版本号只用作报告文件名，两版十二项指标完全相同 —— 评审据此判为 blocker。
+现在版本真正进流水线：`v1` 取正文首句，`v2` 优先取含金额/比例的句子。
+
+```bash
+python -m intel_eval run --prompt-set v1 ; echo rc=$?    # rc=1
+python -m intel_eval run --prompt-set v2 ; echo rc=$?    # rc=0
+python -m intel_eval compare --a v1 --b v2
+```
+
+`reports/compare_v1_vs_v2.md` 原文（节选关键行）：
+
+```
+> - `v1`：首句基线版（取正文第一句。基线策略，不含金额/比例等关键事实。）
+> - `v2`：关键事实优先版（优先取含金额/比例的关键事实句，没有则退回含截止日期的句子，再退回首句。）
+| 摘要关键事实覆盖率 | 0.0 | 1.0 | +1 | >= 0.8 | 未通过 | 通过 |
+总结：1 项变好，0 项变差。
+```
+
+即：**两版在同一批数据上走出了不同结论**（v1 覆盖率 0.0 → 不达标；v2 1.0 → 达标），
+这是「版本传进了流水线」的直接证据，而不是把版本号写进文件名。
+
+## 附：返工六条的逐条证据
+
+| # | 意见 | 断言名 | 实测 |
+|---|---|---|---|
+| 1 | [blocker] prompt-set 没进流水线，compare 两版相同 | `test_stub_model_outputs_differ_by_prompt_set`、`test_compare_reports_real_difference`、`test_unknown_prompt_set_raises` | v1/v2 摘要不同；未知版本抛 `ValueError` 不静默退回 |
+| 2 | [major] 第 8 项由金标字段决定，恒为 0 | `test_detect_original_link_dead` / `_live` / `_absent_field` / `_no_url`、`test_m08_counts_dropped_entries` | 四种页面形态各自判定；m08 输入含被丢弃条目 |
+| 3 | [major] 第 7 项标出项与指标同规则，恒为 1.0 | `test_m07_uses_independent_rule`、`test_m07_drops_below_one_when_pipeline_misses`、`test_m07_partial`、`test_m07_date_triple_tolerates_formatting` | 流水线漏标时指标得 **0.0**（此前结构上不可能低于 1.0） |
+| 4 | [major] 抓取清单取自金标 URL | `test_crawl_list_comes_from_discovery`、`test_gold_fallback_is_marked` | `crawl=discovered`；回退时明确标 `gold_fallback` |
+| 5 | [minor] CI 文件只有 files/ 当根目录才触发 | 仓库根目录 `.github/workflows/intel-eval.yml`（含 `working-directory`） | 见仓库根 README 第六节 |
+| 6 | [minor] m01 只测了 text_similarity | `test_m01_body_similarity_average_handcalc`、`test_m01_body_similarity_empty_and_single` | 多对求平均手算 0.75；空列表 0.0；单对 2/3 |
+
+**每一条都配了「缺陷存在时会失败」的性质**，而不是只写一个能通过的断言：
+
+- 意见 1：`test_compare_reports_real_difference` 断言两版 `key_fact_coverage` **不相等**，若版本没进流水线，这条必红。
+- 意见 2：`test_detect_original_link_absent_field_means_own_article` 断言「没写原文链接 → 按本站原文」，
+  若实现改成「没写就判无」，11 篇原创稿会被丢光，这条必红。
+- 意见 3：`test_m07_drops_below_one_when_pipeline_misses` 构造「一条都没标」，断言指标 == 0.0，
+  若仍用同一套规则算，这条必红。
+- 意见 4：`test_gold_fallback_is_marked` 断言不传发现清单时必须标 `gold_fallback`，
+  防止「悄悄照抄金标」而不被发现。
+- 意见 6：手算值写死在注释里（0.75 = (1.0+0.5)/2），若把平均写成求和，这条必红。

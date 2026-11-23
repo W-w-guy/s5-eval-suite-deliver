@@ -176,24 +176,81 @@ def m06_key_fact_coverage(pairs: list) -> float:
     return round(hit / total, 6) if total else 1.0
 
 
+# ---------------- 第二套比对（m07 专用，独立于流水线的核对规则） ----------------
+# 为什么要有第二套：如果「应标出项」和流水线的核对项用同一段代码算出来，
+# 这个指标在结构上必然恒为 1.0 —— 它只能验证「自己等于自己」，发现不了核对环节的漏标。
+# 两套规则的实质差别：
+#   流水线（pipeline.numeric_check_items）：原始字符串子串匹配，"150" in "1500 万元" 为真。
+#   本套（independent_mismatch_items）：按【数值 token】比对，150 ≠ 1500，能抓到前缀包含导致的漏标。
+FULLWIDTH = {ord(c): ord("0") + (ord(c) - ord("０")) for c in "０１２３４５６７８９"}
+FULLWIDTH.update({ord("．"): ord("."), ord("％"): ord("%")})
+
+
+def _norm_digits(s: str) -> str:
+    """全角数字转半角，去千分位逗号。"""
+    return (s or "").translate(FULLWIDTH).replace(",", "").replace("，", "")
+
+
+def norm_num(tok: str) -> str:
+    """数值规范化：整数去掉尾部 .0，浮点保留最短表示。"""
+    t = _norm_digits(str(tok)).strip()
+    m = re.fullmatch(r"\d+(?:\.\d+)?", t)
+    if not m:
+        return t
+    f = float(t)
+    return str(int(f)) if f == int(f) else repr(f)
+
+
+def norm_date(tok: str) -> str:
+    """日期规范化成 YYYY-MM-DD，容忍 2026年4月1日 / 2026-4-1 / 2026/04/01。"""
+    m = DATE_RE.search(_norm_digits(str(tok)))
+    if not m:
+        return _norm_digits(str(tok)).strip()
+    return "%04d-%02d-%02d" % (int(m.group(1)), int(m.group(2)), int(m.group(3)))
+
+
+def mismatch_key(tok: str) -> str:
+    """把一项归成 "D:<日期>" 或 "N:<数值>"，供「应标出」与「已标出」两端对齐。"""
+    t = _norm_digits(str(tok)).strip()
+    if DATE_RE.search(t):
+        return "D:" + norm_date(t)
+    return "N:" + norm_num(t)
+
+
+def independent_mismatch_items(summary: str, body: str) -> list:
+    """应被标出的项：摘要里出现、但原文的【数值集合】里不存在的数字与日期。
+
+    返回 [{raw, key}]。这是 m07 的分子分母来源，与流水线的 check_items 无关。
+    """
+    s_dates = [x for x in dates_in(summary)]
+    s_wo = DATE_RE.sub(" ", (summary or ""))
+    body_dates = {norm_date(x) for x in dates_in(body)}
+    body_nums = {norm_num(x) for x in numbers_in(DATE_RE.sub(" ", (body or "")))}
+    out = []
+    for x in s_dates:
+        if norm_date(x) not in body_dates:
+            out.append({"raw": x, "key": mismatch_key(x)})
+    for x in numbers_in(s_wo):
+        if norm_num(x) not in body_nums:
+            out.append({"raw": x, "key": mismatch_key(x)})
+    return out
+
+
 def m07_numeric_mismatch_flagged(cases: list) -> float:
     """摘要中与原文不一致的数字/日期被核对项标出的比例。
 
-    cases = [{summary, body, flagged:[...]}]。先算出「应标出」的项：
-    摘要里出现、但原文里找不到的日期与数字。再算其中被 flagged 覆盖的比例。
+    cases = [{summary, body, flagged:[...]}]。
+    「应标出项」由 independent_mismatch_items 用【第二套规则】算（按数值 token 比对），
+    「已标出」取流水线的 flagged。两套规则不同，所以漏标会让这个指标真的掉下去。
     """
     need = flagged = 0
     for c in cases:
-        s, b = c["summary"], c["body"]
-        bad_dates = [x for x in dates_in(s) if x not in b]
-        # 先剔除已判过的日期串再抽数字，否则 "2026-01-01" 会被拆成 2026/01/01 重复计数。
-        s_wo_dates = DATE_RE.sub(" ", s)
-        bad_nums = [x for x in numbers_in(s_wo_dates) if x not in b]
-        bad = bad_dates + bad_nums
-        fl = set(c.get("flagged") or [])
-        for x in bad:
+        # 应标出项来自【第二套比对】，不是流水线自己的核对规则
+        items = independent_mismatch_items(c["summary"], c["body"])
+        fl = {mismatch_key(x) for x in (c.get("flagged") or [])}
+        for it in items:
             need += 1
-            if x in fl:
+            if it["key"] in fl:
                 flagged += 1
     return round(flagged / need, 6) if need else 1.0
 

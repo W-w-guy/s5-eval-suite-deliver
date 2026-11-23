@@ -11,6 +11,11 @@ import re
 from . import extract, metrics
 
 LINK_RE = re.compile(r'href="([^"]+)"')
+ARTICLE_RE = re.compile(r"<article\b[^>]*>(.*?)</article>", re.S | re.I)
+
+# 「原文链接」失效标记：出现这些字样说明原文地址已不可用。
+# 这条判定只看页面本身，不看金标的 has_original_link 字段（返工意见 2 的要求）。
+LINK_DEAD_MARKERS = ("已失效", "未保留", "无法访问", "已删除", "找不到", "链接失效")
 
 PHONE = re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")
 LAND = re.compile(r"(?<!\d)0\d{2,3}-\d{7,8}(?!\d)")
@@ -35,6 +40,30 @@ def desensitize(text: str) -> str:
     return t
 
 
+def detect_original_link(html: str, body_text: str) -> tuple:
+    """判定该页面是否带可用的原文链接。返回 (has_link: bool, evidence: str)。
+
+    判据（只读页面，不读金标）：
+      1. 正文里【没有】「原文链接」字样 → 本页即原文，视为有原文链接。
+      2. 正文里有「原文链接」字样：
+         - 出现失效标记（已失效 / 未保留 / 无法访问 …）→ 无原文链接；
+         - 其后没有可跟到 http(s) 的锚点 → 无原文链接；
+         - 否则 → 有原文链接。
+    第 1 条是关键：不能因为「没写原文链接」就判成无，那会把本站原创稿全判掉。
+    """
+    art = ARTICLE_RE.search(html or "")
+    scope = art.group(1) if art else (body_text or "")
+    if "原文链接" not in scope:
+        return True, "no_link_field: 正文未出现「原文链接」字样，按本站原文处理"
+    for mk in LINK_DEAD_MARKERS:
+        if mk in scope:
+            return False, "dead_link_field: 正文出现「%s」" % mk
+    tail = scope.split("原文链接", 1)[1]
+    if re.search(r'href="https?://', tail) or re.search(r"https?://\S+", tail):
+        return True, "live_link_field: 「原文链接」后跟有效 http(s) 地址"
+    return False, "link_field_without_url: 出现「原文链接」但无可用地址"
+
+
 def _strip_placeholders(text: str) -> str:
     """去掉明显是占位的联系方式串，避免被 pii_hits 误判（占位不是真实残留）。"""
     return text
@@ -56,12 +85,17 @@ def numeric_check_items(summary: str, body: str) -> list:
 
 
 class Pipeline:
-    def __init__(self, fetcher, model=None):
+    def __init__(self, fetcher, model=None, prompt_set="v1"):
         self.fetcher = fetcher
-        self.model = model or extract.StubModel()
+        self.prompt_set = prompt_set
+        # 模型桩按 prompt_set 变体构造 —— 版本必须真的传进流水线，
+        # 否则 compare 两版输出必然相同（返工意见 1）。
+        self.model = model or extract.StubModel(prompt_set)
         self.entries = []          # 处理结果
         self.dropped = []          # 丢弃原因
         self.queued = []           # 进核对队列的
+        self.seen = []             # 所有判定过的条目（含被丢弃的），供 m08 用
+        self.crawl_source = None   # discovered / gold_fallback
 
     def discover(self, list_urls: list) -> list:
         """从列表页发现文章链接。这一步会自然遇到 robots 禁止路径（后台入口、草稿），
@@ -89,18 +123,37 @@ class Pipeline:
         from urllib.parse import urlparse
         return urlparse(url).netloc
 
-    def process(self, gold_rows: list) -> list:
-        for g in gold_rows:
-            r = self.fetcher.fetch(g["url"])
+    def process(self, gold_rows: list, urls: list = None) -> list:
+        """跑加工流水线。
+
+        urls：从列表页/RSS 发现的抓取清单（返工意见 4 要求抓取清单来自站点发现，
+              而不是照抄金标里的 url）。金标只用于事后对照打分。
+              传 None 时退回金标 url，并在 crawl_source 里标出来，便于复核是否是「照抄金标」。
+        """
+        self.gold_by_url = {g["url"]: g for g in gold_rows}
+        if urls is None:
+            urls = [g["url"] for g in gold_rows]
+            self.crawl_source = "gold_fallback"
+        else:
+            self.crawl_source = "discovered"
+
+        for url in urls:
+            g = self.gold_by_url.get(url)          # 仅用于事后对照，不参与抓取决策
+            cid = g["case_id"] if g else "URL-" + str(abs(hash(url)) % 100000)
+            r = self.fetcher.fetch(url)
             if r["status"] != 200:
-                self.dropped.append({"case_id": g["case_id"], "reason": "fetch_failed",
+                self.dropped.append({"case_id": cid, "url": url, "reason": "fetch_failed",
                                      "status": r["status"]})
                 continue
             body = extract.extract_body(r["html"])
             text = body["text"]
-            # 无原文链接 -> 直接丢弃，不进队列
-            if not g.get("has_original_link", True):
-                self.dropped.append({"case_id": g["case_id"], "reason": "no_original_link"})
+            # 是否有原文链接由流水线读页面自己判断（返工意见 2：不能读金标字段）
+            has_link, link_evidence = detect_original_link(r["html"], text)
+            self.seen.append({"case_id": cid, "url": url, "has_original_link": has_link})
+            if not has_link:
+                self.dropped.append({"case_id": cid, "url": url,
+                                     "reason": "no_original_link",
+                                     "evidence": link_evidence})
                 continue
             safe = desensitize(text)
             summary_raw = self.model.summarize(safe)
@@ -108,20 +161,22 @@ class Pipeline:
             summary = EMAIL.sub("", summary)
             items = numeric_check_items(summary, text)
             rec = {
-                "case_id": g["case_id"],
-                "url": g["url"],
+                "case_id": cid,
+                "url": url,
                 "body_text": text,
                 "publish_date": body.get("publish_date"),
-                "policy_type": self.model.classify(g.get("title", ""), text),
+                "policy_type": self.model.classify((g or {}).get("title", ""), text),
                 "deadline": extract_deadline(text),
                 "summary": summary,
                 "check_items": items,
-                "has_original_link": True,
+                "has_original_link": has_link,      # 流水线判定值，不是金标字段
+                "link_evidence": link_evidence,
+                "prompt_set": self.prompt_set,
                 "sent_to_model": safe,
             }
             self.entries.append(rec)
             if items:
-                self.queued.append({"case_id": g["case_id"], "items": items})
+                self.queued.append({"case_id": cid, "items": items})
         return self.entries
 
     # ---------- 聚合指标 ----------
@@ -192,9 +247,13 @@ class Pipeline:
             "numeric_flagged_ratio": g.m07_numeric_mismatch_flagged(
                 [{"summary": e["summary"], "body": e["body_text"],
                   "flagged": e["check_items"]} for e in self.entries]),
+            # m08 的输入是【所有判定过的条目】（含被丢弃的），不是只算进了 entries 的那批。
+            # 只算 entries 会永远得 0：无原文链接的条目根本不在 entries 里，
+            # 于是「丢弃逻辑失效、把它们也塞进队列」这种缺陷完全测不出来。
             "no_link_into_queue": g.m08_no_link_into_queue(
-                [{"has_original_link": e["has_original_link"], "queued": e["case_id"] in
-                  {q["case_id"] for q in self.queued}} for e in self.entries]),
+                [{"has_original_link": e["has_original_link"],
+                  "queued": e["case_id"] in {q["case_id"] for q in self.queued}}
+                 for e in self.seen]),
             "robots_violations": g.m09_robots_violations(self.fetcher),
             "urls_in_summary": g.m10_urls_in_summary([e["summary"] for e in self.entries]),
             "pii_residue": g.m11_pii_residue([e["sent_to_model"] for e in self.entries]),

@@ -29,7 +29,7 @@
 | 列表页 | 2 页（`page-1.html` / `page-2.html`） | `ls site/gov-a.example/page-*.html` |
 | RSS | 1 份（12 条 item） | `grep -c "<item>" site/gov-a.example/rss.xml` |
 | robots 禁止路径 | 2 条（`/admin/`、`/articles/draft/`，且真实存在） | `cat site/gov-a.example/robots.txt` |
-| 单元测试 | 59 个（18 guard/robots + 41 指标手算） | `python -m pytest tests --co -q` |
+| 单元测试 | 79 个（18 guard/robots + 41 指标手算 + 20 返工回归） | `python -m pytest tests --co` |
 | AC 断言 | 34 项 | `python verify_2264.py` |
 
 ## 三、虚构性怎么保证（三层）
@@ -46,13 +46,13 @@
 
 ```
 $ python tools/pii_scan.py
-pii_scan files=45 raw_hits=10 allowed=10 unexpected=0
-  ALLOWED DATA_PROVENANCE.md:50 email contact@example.invalid（RFC 2606 保留域）
-  ALLOWED DATA_PROVENANCE.md:52 email a@b.example（RFC 2606 保留域）
-  ALLOWED DATA_PROVENANCE.md:59 email contact@example.invalid（RFC 2606 保留域）
-  ALLOWED intel_eval/pipeline.py:34 email contact@example.invalid（RFC 2606 保留域）
+pii_scan files=53 raw_hits=10 allowed=10 unexpected=0
+  ALLOWED DATA_PROVENANCE.md:62 email contact@***.invalid（RFC 2606 保留域）
+  ALLOWED DATA_PROVENANCE.md:62 email a@b.***（RFC 2606 保留域）
+  ALLOWED DATA_PROVENANCE.md:65 email a@b.***（RFC 2606 保留域）
+  ALLOWED intel_eval/pipeline.py:39 email contact@***.invalid（RFC 2606 保留域）
   ALLOWED tests/test_metrics_handcalc.py:139 phone 138****1111
-  ALLOWED tests/test_metrics_handcalc.py:141 email a@b.example
+  ALLOWED tests/test_metrics_handcalc.py:141 email a@b.***
   ALLOWED tests/test_metrics_handcalc.py:169 phone 138****1111
   ALLOWED tests/test_metrics_handcalc.py:169 email a@b.***
   ALLOWED tests/test_metrics_handcalc.py:170 phone 138****1111
@@ -100,7 +100,7 @@ grep -rn "会员空间\|商务会员" . --include=*.py --include=*.md --include=
 python tools/gen_site.py        # 重跑生成，7 个关键产物的 sha256 与包内一致
 python tools/pii_scan.py        # unexpected=0
 python verify_2264.py           # 34/34
-python -m pytest tests -q       # 59 passed
+python -m pytest tests -q       # 79 passed
 ```
 
 ## 六、报告里的 1.0 说明什么、不说明什么（主动标注）

@@ -118,11 +118,12 @@ def cmd_run(a):
         srv = _serve_site(a.port)
         resolver = {DEFAULT_HOST: ("127.0.0.1", a.port)}
     f = fetch.Fetcher(resolver, ignore_robots=a.ignore_robots)
-    pl = pipeline.Pipeline(f)
+    pl = pipeline.Pipeline(f, prompt_set=a.prompt_set)
     try:
         base_url = a.site.rstrip("/")
-        pl.discover([base_url + "/page-1.html", base_url + "/page-2.html"])
-        pl.process(gold)
+        # 抓取清单来自列表页/RSS 发现（返工意见 4）；金标只用于事后对照打分
+        discovered = pl.discover([base_url + "/page-1.html", base_url + "/page-2.html"])
+        pl.process(gold, urls=discovered)
     finally:
         if srv:
             srv.shutdown()
@@ -131,11 +132,15 @@ def cmd_run(a):
     md = os.path.join(REPORTS, "intel_%s.md" % a.prompt_set)
     js = os.path.join(REPORTS, "intel_%s.json" % a.prompt_set)
     open(md, "w", encoding="utf-8", newline="\n").write(build_report_md(m, a.prompt_set))
-    json.dump({"prompt_set": a.prompt_set, "metrics": m,
+    json.dump({"prompt_set": a.prompt_set,
+               "prompt_spec": extract.prompt_set_spec(a.prompt_set),
+               "crawl_source": pl.crawl_source,
+               "metrics": m,
                "dropped": pl.dropped, "queued": pl.queued},
               open(js, "w", encoding="utf-8", newline="\n"), ensure_ascii=False, indent=1)
-    print("prompt_set=%s entries=%d dropped=%d queued=%d" % (
-        a.prompt_set, m["_counts"]["entries"], m["_counts"]["dropped"], m["_counts"]["queued"]))
+    print("prompt_set=%s entries=%d dropped=%d queued=%d crawl=%s" % (
+        a.prompt_set, m["_counts"]["entries"], m["_counts"]["dropped"], m["_counts"]["queued"],
+        pl.crawl_source))
     order = ["body_similarity", "publish_date_accuracy", "group_f1", "merge_errors",
              "policy_type_accuracy", "deadline_accuracy", "key_fact_coverage",
              "numeric_flagged_ratio", "no_link_into_queue", "robots_violations",
@@ -159,7 +164,13 @@ def cmd_compare(a):
             return 2
     A, B = json.load(open(pa, encoding="utf-8"))["metrics"], json.load(open(pb, encoding="utf-8"))["metrics"]
     keys = list(metrics.THRESHOLDS)
+    sa = json.load(open(pa, encoding="utf-8")).get("prompt_spec", {})
+    sb = json.load(open(pb, encoding="utf-8")).get("prompt_spec", {})
     L = ["# 提示词版本对比 %s vs %s" % (a.a, a.b), "",
+         "> 两版走的是不同的摘要策略，因此指标可以真的不同：",
+         "> - `%s`：%s（%s）" % (a.a, (sa.get("name") or "?"), (sa.get("note") or "")),
+         "> - `%s`：%s（%s）" % (a.b, (sb.get("name") or "?"), (sb.get("note") or "")),
+         "",
          "| 指标 | %s | %s | 差值 | 门槛 | %s | %s |" % (a.a, a.b, a.a, a.b),
          "|---|---|---|---|---|---|---|"]
     better = worse = 0

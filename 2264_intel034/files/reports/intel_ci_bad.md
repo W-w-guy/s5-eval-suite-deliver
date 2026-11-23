@@ -1,4 +1,4 @@
-# 情报简报评测报告（prompt-set=ci_bad_robots）
+# 情报简报评测报告（prompt-set=ci_bad）
 
 > 样例全部虚构：域名使用 example 保留域名，企业与人物均不存在。
 > 生产中 AI 输出一律进复核队列，不得直接对外发送；AI 不计算任何金额。

@@ -18,7 +18,7 @@ intel_eval/
 site/gov-a.example/   自带虚构站点（12 篇 + robots 禁止路径）
 data/gold.jsonl       12 条金标（正文黄金文本、日期、截止、类型、归组、关键事实）
 data/robots_probe.json robots 禁止路径与探测 URL
-tests/                59 个用例（11 个指标各 >=2 个手算用例）
+tests/                79 个用例（11 个指标各 >=2 个手算用例，共 47 项手算）
 reports/              评测报告与版本对比
 .github/workflows/intel-eval.yml  CI 配置
 verify_2264.py        4 条 AC 的 34 项断言
@@ -26,11 +26,12 @@ verify_2264.py        4 条 AC 的 34 项断言
 
 ## 怎么跑
 ```bash
-python -m intel_eval run --prompt-set v1            # 默认门槛，全过则 rc=0
-python -m intel_eval run --prompt-set v1 --ignore-robots   # 故意违反 robots，rc=1（CI 拦截演示）
-python -m intel_eval compare --a v1 --b v2          # 两版提示词对比
+python -m intel_eval run --prompt-set v1            # 首句基线策略：关键事实覆盖率 0.0，rc=1
+python -m intel_eval run --prompt-set v2            # 关键事实优先策略：11 项全过，rc=0
+python -m intel_eval run --prompt-set ci_bad --ignore-robots   # 故意违反 robots，rc=1（CI 拦截演示）
+python -m intel_eval compare --a v1 --b v2          # 两版提示词对比（结果真的不同）
 python -m intel_eval serve-site --port 8099         # 单独起站点
-python -m pytest tests -q                           # 59 个用例
+python -m pytest tests -q                           # 79 个用例
 python verify_2264.py                               # 34 项 AC 断言
 ```
 
@@ -43,7 +44,7 @@ python verify_2264.py                               # 34 项 AC 断言
 | 3 | 转载归组 F1（且误合并=0） | ≥0.95 / =0 | 1.0000 / 0 |
 | 4 | policy_type 准确率 | ≥0.85 | 1.0000 |
 | 5 | 截止日期准确率 | ≥0.90 | 1.0000 |
-| 6 | 摘要关键事实覆盖率 | ≥0.80 | 1.0000 |
+| 6 | 摘要关键事实覆盖率 | ≥0.80 | 1.0000（v2）／0.0000（v1 基线） |
 | 7 | 不一致数字/日期被标出比例 | =1.0 | 1.0000 |
 | 8 | 无原文链接进入核对队列数 | =0 | 0 |
 | 9 | robots 禁止路径被抓取数 | =0 | 0 |
@@ -96,8 +97,8 @@ policy_type/cluster_id/key_facts/has_original_link）与 033 的 `annotations/ar
 
 | 平台 | Python | sha256sum -c | verify | pytest | pii | run v1 | run --ignore-robots |
 |---|---|---|---|---|---|---|---|
-| Windows 10 (22631) | 3.11.7 | 39/39 | 34/34 PASS | 59 passed | unexpected=0 | rc=0 | rc=1 |
-| Ubuntu 24.04.5 | 3.12.3 | 39/39 | 34/34 PASS | 59 passed | unexpected=0 | rc=0 | rc=1 |
+| Windows 10 (22631) | 3.11.7 | 42/42 | 34/34 PASS | 79 passed | unexpected=0 | rc=0 | rc=1 |
+| Ubuntu 24.04 | 3.12.3 | 42/42 | 34/34 PASS | 79 passed | unexpected=0 | rc=0 | rc=1 |
 
 原始日志在 `../verify_logs/`：
 
@@ -112,3 +113,34 @@ UBUNTU_verify.log / UBUNTU_pytest.log / UBUNTU_pii.log / UBUNTU_sha256sum.log
 ```
 
 Ubuntu 侧的 `verify`/`pytest` 是在**解压到全新目录之后**跑的（不是原目录），顺序为 `unzip → sha256sum -c → verify → pytest`，确保买家拿到包之后的路径与我们验证时一致。
+
+## 返工修订说明（ver2，逐条对应评审六条意见）
+
+| # | 评审意见 | 改了什么 | 可复核的断言 |
+|---|---|---|---|
+| 1 | [blocker] `--prompt-set` 只当文件名，`compare` 两版完全相同 | 版本真的进流水线：`extract.PROMPT_SETS` 定义策略，`StubModel(prompt_set)` 按策略产出摘要（v1=首句，v2=关键事实优先）；`Pipeline` 持有 `prompt_set` | `test_stub_model_outputs_differ_by_prompt_set`、`test_compare_reports_real_difference`；实测 v1 覆盖率 0.0 / v2 1.0，compare 报「1 项变好」 |
+| 2 | [major] 第 8 项由金标字段决定，结构上只能为 0 | `pipeline.detect_original_link()` 读页面自己判定（有「原文链接」字样+失效标记→无；无该字样→本站原文；有字样无 URL→无）；`m08` 输入改为**所有判定过的条目**（含被丢弃的） | `test_detect_original_link_dead/live/absent_field/no_url`、`test_m08_counts_dropped_entries` |
+| 3 | [major] 第 7 项标出项与指标同规则，恒为 1.0 | 新增 `metrics.independent_mismatch_items()` 作第二套比对：按**数值 token** 比对，`150 ≠ 1500`（流水线用子串匹配会漏标） | `test_m07_uses_independent_rule`、`test_m07_drops_below_one_when_pipeline_misses`（得 0.0） |
+| 4 | [major] 抓取清单取自金标 URL | `process(gold, urls=discovered)`，清单来自列表页/RSS 发现；金标只做事后对照；`crawl_source` 标 `discovered`/`gold_fallback` 供复核 | `test_crawl_list_comes_from_discovery`、`test_gold_fallback_is_marked` |
+| 5 | [minor] CI 文件只有把 files/ 当仓库根目录才触发 | 交付仓根目录已放 `.github/workflows/intel-eval.yml`（含 `working-directory: 2264_intel034/files`）；包内这份给买家铺到根目录用，README 写明两者用途 | 见仓库根 README 第六节 |
+| 6 | [minor] m01 只测了 `text_similarity`，没测求平均函数 | 为 `m01_body_similarity` 补多对手算（0.75）与空列表/单对用例 | `test_m01_body_similarity_average_handcalc`、`test_m01_body_similarity_empty_and_single` |
+
+**意见 1 的具体证据**（改造前后对照）：
+
+```
+改造前：__main__.py 里 Pipeline(f) 不接 prompt_set，版本只出现在报告文件名
+        reports/compare_v1_vs_v2.md 中 v1/v2 十二项指标全部相同
+改造后：Pipeline(f, prompt_set=a.prompt_set) -> StubModel(prompt_set) 按策略取句
+        v1（首句）        key_fact_coverage = 0.0   rc=1
+        v2（关键事实优先） key_fact_coverage = 1.0   rc=0
+        compare 报告新增两版策略说明，且总结行显示「1 项变好，0 项变差」
+```
+
+**意见 3 为什么要两套规则**：如果「应标出项」和流水线的核对项由同一段代码算出，
+这个指标在结构上必然恒为 1.0 —— 它只能验证「自己等于自己」。所以第二套改成按数值 token 比对：
+流水线的 `"150" in "1500 万元"` 为真（漏标），第二套认定 `150 ≠ 1500`（应标出）。
+`test_m07_drops_below_one_when_pipeline_misses` 构造「一条都没标」的输入，指标得 0.0 —— 证明它会掉。
+
+**意见 2 为什么不能只看「没写原文链接就判无」**：本站 12 篇里有 11 篇是原创稿，正文里不出现
+「原文链接」字样。若按「无该字样 = 无原文链接」处理，这 11 篇会被全部丢弃，评测直接失效。
+现在的判据是「有该字样 + 出现失效标记 → 无；无该字样 → 按本站原文处理」。

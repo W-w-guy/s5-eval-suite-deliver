@@ -1,5 +1,13 @@
 {
- "prompt_set": "ci_bad_robots",
+ "prompt_set": "ci_bad",
+ "prompt_spec": {
+  "id": "ci_bad",
+  "name": "CI 故障注入档",
+  "strategy": "key_fact_first",
+  "max_len": 150,
+  "note": "CI 故意抓 robots 禁止路径，用于证明门槛会让退出码非 0。"
+ },
+ "crawl_source": "discovered",
  "metrics": {
   "body_similarity": 1.0,
   "publish_date_accuracy": 1.0,
@@ -35,7 +43,9 @@
  "dropped": [
   {
    "case_id": "IT-009",
-   "reason": "no_original_link"
+   "url": "http://gov-a.example/articles/a009.html",
+   "reason": "no_original_link",
+   "evidence": "dead_link_field: 正文出现「已失效」"
   }
  ],
  "queued": []

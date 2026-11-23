@@ -1,5 +1,13 @@
 {
  "prompt_set": "v2",
+ "prompt_spec": {
+  "id": "v2",
+  "name": "关键事实优先版",
+  "strategy": "key_fact_first",
+  "max_len": 150,
+  "note": "优先取含金额/比例的关键事实句，没有则退回含截止日期的句子，再退回首句。"
+ },
+ "crawl_source": "discovered",
  "metrics": {
   "body_similarity": 1.0,
   "publish_date_accuracy": 1.0,
@@ -33,7 +41,9 @@
  "dropped": [
   {
    "case_id": "IT-009",
-   "reason": "no_original_link"
+   "url": "http://gov-a.example/articles/a009.html",
+   "reason": "no_original_link",
+   "evidence": "dead_link_field: 正文出现「已失效」"
   }
  ],
  "queued": []
