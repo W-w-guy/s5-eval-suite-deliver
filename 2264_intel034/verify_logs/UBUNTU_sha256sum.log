@@ -1,9 +1,7 @@
+.github/workflows/intel-eval.yml: OK
 ACCEPTANCE.md: OK
 DATA_PROVENANCE.md: OK
 README.md: OK
-pytest.ini: OK
-verify_2264.py: OK
-.github/workflows/intel-eval.yml: OK
 data/gold.jsonl: OK
 data/robots_probe.json: OK
 intel_eval/__init__.py: OK
@@ -13,11 +11,7 @@ intel_eval/fetch.py: OK
 intel_eval/guard.py: OK
 intel_eval/metrics.py: OK
 intel_eval/pipeline.py: OK
-site/gov-a.example/index.html: OK
-site/gov-a.example/page-1.html: OK
-site/gov-a.example/page-2.html: OK
-site/gov-a.example/robots.txt: OK
-site/gov-a.example/rss.xml: OK
+pytest.ini: OK
 site/gov-a.example/admin/settings.html: OK
 site/gov-a.example/articles/a001.html: OK
 site/gov-a.example/articles/a002.html: OK
@@ -32,9 +26,15 @@ site/gov-a.example/articles/a010.html: OK
 site/gov-a.example/articles/a011.html: OK
 site/gov-a.example/articles/a012.html: OK
 site/gov-a.example/articles/draft/d001.html: OK
+site/gov-a.example/index.html: OK
+site/gov-a.example/page-1.html: OK
+site/gov-a.example/page-2.html: OK
+site/gov-a.example/robots.txt: OK
+site/gov-a.example/rss.xml: OK
 tests/conftest.py: OK
 tests/test_guard_robots_cli.py: OK
 tests/test_metrics_handcalc.py: OK
+tests/test_rework_fixes.py: OK
 tools/gen_site.py: OK
 tools/pii_scan.py: OK
-rc=0
+verify_2264.py: OK

@@ -1,0 +1,4 @@
+python3 tools/gen_site.py 重跑后逐文件 cmp：
+SAME data/gold.jsonl
+SAME site/gov-a.example/robots.txt
+SAME site/gov-a.example/articles/a001.html

@@ -1,0 +1,15 @@
+prompt_set=ci_bad entries=11 dropped=1 queued=0 crawl=discovered
+  body_similarity          1.0        OK
+  publish_date_accuracy    1.0        OK
+  group_f1                 1.0        OK
+  merge_errors             0          OK
+  policy_type_accuracy     1.0        OK
+  deadline_accuracy        1.0        OK
+  key_fact_coverage        1.0        OK
+  numeric_flagged_ratio    1.0        OK
+  no_link_into_queue       0          OK
+  robots_violations        2          FAIL
+  urls_in_summary          0          OK
+  pii_residue              0          OK
+report=/home/a/rw2264_v2/2264_intel034/files/reports/intel_ci_bad.md
+THRESHOLD NOT MET: robots 禁止路径被抓取数

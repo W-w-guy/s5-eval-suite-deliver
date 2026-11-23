@@ -97,8 +97,8 @@ policy_type/cluster_id/key_facts/has_original_link）与 033 的 `annotations/ar
 
 | 平台 | Python | sha256sum -c | verify | pytest | pii | run v1 | run --ignore-robots |
 |---|---|---|---|---|---|---|---|
-| Windows 10 (22631) | 3.11.7 | 42/42 | 34/34 PASS | 79 passed | unexpected=0 | rc=0 | rc=1 |
-| Ubuntu 24.04 | 3.12.3 | 42/42 | 34/34 PASS | 79 passed | unexpected=0 | rc=0 | rc=1 |
+| Windows 10 (22631) | 3.11.7 | 40/40 | 34/34 PASS | 79 passed | unexpected=0 | rc=0 | rc=1 |
+| Ubuntu 24.04 | 3.12.3 | 40/40 | 34/34 PASS | 79 passed | unexpected=0 | rc=0 | rc=1 |
 
 原始日志在 `../verify_logs/`：
 
@@ -106,8 +106,11 @@ policy_type/cluster_id/key_facts/has_original_link）与 033 的 `annotations/ar
 ENV_WINDOWS.txt / ENV_UBUNTU.txt      平台与 Python 版本
 WINDOWS_verify.log                     34 项 AC 断言逐条输出
 WINDOWS_pii.log                        整包 pii 扫描
-WINDOWS_run_v1.log                     AC1 基线：11 项门槛全过，rc=0
+WINDOWS_run_v2.log                     AC1 基线（v2）：11 项门槛全过，rc=0
+WINDOWS_run_v1.log                     v1 低分对照：关键事实覆盖率 0.0，rc=1
 WINDOWS_run_ci_bad.log                 AC3 反例：robots_violations=2，rc=1
+WINDOWS_pytest.log                     pytest 79 条
+CROSS_PLATFORM.md                      两平台日志哈希对照（哪些相同、哪些只差路径）
 WINDOWS_gen.log                        生成器重跑
 UBUNTU_verify.log / UBUNTU_pytest.log / UBUNTU_pii.log / UBUNTU_sha256sum.log
 ```
