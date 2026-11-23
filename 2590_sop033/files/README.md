@@ -39,22 +39,26 @@ python tools/build_renewal.py
 
 ```
 同一份 tools/build_renewal.py
-  Windows  产出 templates/renewal.json = 6,658 字节  sha256 0d26b9d3…
-  Ubuntu   产出 templates/renewal.json = 6,465 字节  sha256 4f1d6e04…
+  Windows  产出 renewal.json = 6,658 字节  sha256 0d26b9d3…
+  Ubuntu   产出 renewal.json = 6,465 字节  sha256 4f1d6e04…
   差值 193 字节 = 文件行数 → 正是 Windows 文本模式默认把 \n 写成 CRLF
 ```
 
-修法：生成器写文件时显式 `newline="\n"`。修后：
+修法：生成器写文件时显式 `newline="\n"`。修后（本轮返工重新实测）：
 
 ```
-Windows  6,465 字节  sha256 4f1d6e049f043ff29519a1c36e1242340398d345893d638e98810ca494069e6d
-Ubuntu   6,465 字节  sha256 4f1d6e049f043ff29519a1c36e1242340398d345893d638e98810ca494069e6d
+Windows  sop/templates/renewal.json  6,440 字节  sha256 8420dcb9e8f1c3807042e12e717e182aec9f2cbfb2a61fbe76cf366d1b9d6bf1
+Ubuntu   sop/templates/renewal.json  6,440 字节  sha256 8420dcb9e8f1c3807042e12e717e182aec9f2cbfb2a61fbe76cf366d1b9d6bf1
 cmp 结果 IDENTICAL
 ```
 
-**为什么这条值得写进 README**：如果只在 Windows 上验证，`重跑生成器产出与包内一致` 这条断言在 Ubuntu 上会直接失败——买家一跑就 mismatch，而我们在自己机器上看到的是全绿。包内所有文本文件已统一为 LF（17 个文件），`SHA256SUMS` 在两平台 `sha256sum -c` 均 17/17 OK。
+**为什么这条值得写进 README**：如果只在 Windows 上验证，`重跑生成器产出与包内一致` 这条断言在 Ubuntu 上会直接失败——买家一跑就 mismatch，而我们在自己机器上看到的是全绿。包内文本文件统一为 LF（17 个文件），`SHA256SUMS` 在两平台 `sha256sum -c` 均 17/17 OK。
 
 **注意**：`SHA256SUMS` 不列自身（列了 `sha256sum -c` 恒有 1 条 FAIL），`__pycache__` 不参与校验。
+
+## 生成本文件的顺序陷阱（本轮踩到，如实记录）
+
+`SHA256SUMS` 必须在**所有文件改完之后**才生成。本轮我先算了校验和，之后又去给 `DATA_PROVENANCE.md` 里抄出来的命中字符串打码，导致 Ubuntu 上 `sha256sum -c` 报 `DATA_PROVENANCE.md: FAILED`。这类错在本机不会自己冒出来——只有真去 `-c` 一遍才看得见。
 
 ## 已实测的双平台结果
 
