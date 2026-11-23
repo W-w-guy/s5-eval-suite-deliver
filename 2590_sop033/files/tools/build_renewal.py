@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""生成 deliverable：templates/renewal.json（S3-SOP-033 续约预警）
+"""生成 deliverable：sop/templates/renewal.json（S3-SOP-033 续约预警）
 模板内容依据工单【本单范围】逐条落地；示例数据全部虚构。"""
 import json, os
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

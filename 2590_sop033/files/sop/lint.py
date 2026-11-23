@@ -1,5 +1,5 @@
 """sop-lint · SOP 模板配置静态校验器（纯标准库，无三方依赖）
-用法: python -m sop.lint templates/renewal.json [...]
+用法: python -m sop.lint sop/templates/renewal.json [...]
 退出码: 0=全部通过 1=存在 ERROR"""
 import json, os, re, sys
 
