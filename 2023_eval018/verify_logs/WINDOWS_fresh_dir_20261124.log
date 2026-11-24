@@ -1,0 +1,41 @@
+=== verify rc=0 ===
+[ OK ] AC1 cases.jsonl 恰有 40 条 | 40
+[ OK ] AC1 生成 28 / 疑难 12 | {'generated': 28, 'difficult': 12}
+[ OK ] AC1 4 种版式各 10 份 | {'standard': 10, 'two_column': 10, 'table_heavy': 10, 'minimal': 10}
+[ OK ] AC1 3 种载体 14/13/13 | {'text_pdf': 14, 'scanned_pdf': 13, 'docx': 13}
+[ OK ] AC1 每份标准答案恰为 15 个字段（多/少均失败） | n=40
+[ OK ] AC1 critical 字段为含税/不含税金额、甲乙方代码、服务起止日 | ['amount_total', 'amount_ex_tax', 'party_a_code', 'party_b_code', 'service_start', 'service_end']
+[ OK ] AC1 12 种疑难类型齐全（逐条比对） | 12
+[ OK ] AC1 40 份文件的格式与 carrier 声明一致（docx 真 OOXML / pdf 真 PDF / 扫描件无文字层） | []
+[ OK ] AC1 eval-lint 通过（rc=0） | eval-lint: cases=40 layouts=4 carriers=3 errors=0 warnings=0
+[ OK ] AC1 eval-pii-scan 通过（unexpected_hits=0） | eval-pii-scan: files=83 unexpected_hits=0 exempt_999999=432 pdf_without_textlayer=13（其正文以 data/plain 同源文本被扫描）
+[ OK ] AC2 标红召回 3 组手工构造：全标红=1.0 / 半标红=0.5 / 全不标红=0.0 | [1.0, 0.5, 0.0]
+[ OK ] AC2 召回的分子分母口径写死：分母=识别错误字段数 | wrong_total=2 recall=0.5
+[ OK ] AC2 识别正确却被标红单独计数、不进召回分母 | right_but_flagged=[]
+[ OK ] AC2 无识别错误时召回按显式约定记 1.0 | 1.0
+[ OK ] AC2 单元测试全部通过 | ....................                                                     [100%]
+[ OK ] AC3 runner 跑通且指标达标（rc=0） | cases=40 field_acc=0.9900 flag_recall=0.9750 critical_unflagged=0 wrong=6 false_flag=0
+[ OK ] AC3 报告单列「错而未标红明细」小节 | reports/doc_verify.md
+[ OK ] AC3 报告中「错而未标红的 critical 字段数」= 0 | 0
+[ OK ] AC3 报告按字段输出准确率 | 15 个字段行
+[ OK ] AC3 报告截图由 mock 输出渲染、非空白 | 83495 bytes
+[ OK ] AC3 截图对应 reports/doc_verify.json（同一 tag 同一批输出） | tag=verify
+[ OK ] AC4 全部 80 个信用代码第 3-8 位为 999999 | n=80 命中区划码=['999999']
+[ OK ] AC4 信用代码均为 18 位且字符集合法 | []
+[ OK ] AC4 脚本检查输出可复核（eval-lint 内同样校验代码格式，rc=0） | eval-lint: cases=40 layouts=4 carriers=3 errors=0 warnings=0
+[ OK ] 破坏 --break-flag 打掉自检后 critical 未标红 > 0 且 rc=1 | cases=40 field_acc=0.9900 flag_recall=0.9000 critical_unflagged=3 wrong=6 false_flag=0
+[ OK ] 破坏 --break-accuracy 让日期解析错后 rc=1 | cases=40 field_acc=0.9750 flag_recall=0.7625 critical_unflagged=9 wrong=15 false_flag=0
+
+TOTAL 26, PASS 26, FAIL 0
+=== pytest rc=0 ===
+....................                                                     [100%]
+=== lint rc=0 ===
+eval-lint: cases=40 layouts=4 carriers=3 errors=0 warnings=0
+=== pii rc=0 ===
+eval-pii-scan: files=83 unexpected_hits=0 exempt_999999=432 pdf_without_textlayer=13（其正文以 data/plain 同源文本被扫描）
+=== regenerate-reports rc=0 ===
+cases=40 field_acc=0.9900 flag_recall=0.9750 critical_unflagged=0 wrong=6 false_flag=0
+report=E:\Python\Agent_1\work\clawhunt\_fresh2023b\reports\doc_v1.md
+THRESHOLD OK
+=== regenerate-dist rc=0 ===
+distribution: rows=40 dims=6 -> dist/distribution.csv, dist/distribution.md

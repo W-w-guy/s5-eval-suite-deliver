@@ -9,3 +9,8 @@ _*.bat
 _*.txt
 _*.log
 _*.py
+
+# 交付件里的 Python 包文件不能忽略（_*.py 规则会误伤 __init__.py / __main__.py）
+!/**/files/**/__init__.py
+!/**/files/**/__main__.py
+!/**/files/**/_**.py

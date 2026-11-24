@@ -1,0 +1,3630 @@
+{
+ "metrics": {
+  "cases": 40,
+  "field_accuracy": 0.99,
+  "flag_recall": 0.975,
+  "critical_unflagged_total": 0,
+  "wrong_total": 6,
+  "wrong_unflagged_total": 1,
+  "false_flag_total": 0,
+  "thresholds": {
+   "field_accuracy": 0.9,
+   "flag_recall": 0.95
+  },
+  "fails": []
+ },
+ "rows": [
+  {
+   "case_id": "CT-001",
+   "kind": "generated",
+   "layout": "standard",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 100000,
+     "pred": "100,000.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 6000.0,
+     "pred": "6,000.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 106000.0,
+     "pred": "106,000.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0001",
+     "pred": "HT-2026-0001",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999994607170974",
+     "pred": "919999994607170974",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999994707636926",
+     "pred": "919999994707636926",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-03-01",
+     "pred": "2027-03-01",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-03-01",
+     "pred": "2026-03-01",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-02-01",
+     "pred": "2026-02-01",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-002",
+   "kind": "generated",
+   "layout": "two_column",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 101300,
+     "pred": "101,300.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 13169.0,
+     "pred": "13,169.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 114469.0,
+     "pred": "114,469.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0002",
+     "pred": "HT-2026-0002",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999992850800480",
+     "pred": "919999992850800480",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999993772224485",
+     "pred": "919999993772224485",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-04-04",
+     "pred": "2027-04-04",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-04-02",
+     "pred": "2026-04-02",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-03-06",
+     "pred": "2026-03-06",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-003",
+   "kind": "generated",
+   "layout": "table_heavy",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 102600,
+     "pred": "102,600.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 9234.0,
+     "pred": "9,234.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 111834.0,
+     "pred": "111,834.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0003",
+     "pred": "HT-2026-0003",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999991232563205",
+     "pred": "919999991232563205",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999994204763663",
+     "pred": "919999994204763663",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-05-07",
+     "pred": "2027-05-07",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-05-03",
+     "pred": "2026-05-03",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-04-11",
+     "pred": "2026-04-11",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-004",
+   "kind": "generated",
+   "layout": "minimal",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 103900,
+     "pred": "103,900.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 6234.0,
+     "pred": "6,234.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 110134.0,
+     "pred": "110,134.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0004",
+     "pred": "HT-2026-0004",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999999282566383",
+     "pred": "919999999282566383",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999998644857136",
+     "pred": "919999998644857136",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-10",
+     "pred": "2027-06-10",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-06-04",
+     "pred": "2026-06-04",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-05-16",
+     "pred": "2026-05-16",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-005",
+   "kind": "generated",
+   "layout": "standard",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 105200,
+     "pred": "105,200.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 13676.0,
+     "pred": "13,676.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 118876.0,
+     "pred": "118,876.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0005",
+     "pred": "HT-2026-0005",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999996325950914",
+     "pred": "919999996325950914",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999998616364826",
+     "pred": "919999998616364826",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-07-13",
+     "pred": "2027-07-13",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-07-05",
+     "pred": "2026-07-05",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-06-21",
+     "pred": "2026-06-21",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-006",
+   "kind": "generated",
+   "layout": "two_column",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 106500,
+     "pred": "106,500.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 9585.0,
+     "pred": "9,585.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 116085.0,
+     "pred": "116,085.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0006",
+     "pred": "HT-2026-0006",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999991065858451",
+     "pred": "919999991065858451",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999992669824918",
+     "pred": "919999992669824918",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-08-16",
+     "pred": "2027-08-16",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-08-06",
+     "pred": "2026-08-06",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-07-26",
+     "pred": "2026-07-26",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-007",
+   "kind": "generated",
+   "layout": "table_heavy",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 107800,
+     "pred": "107,800.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 6468.0,
+     "pred": "6,468.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 114268.0,
+     "pred": "114,268.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0007",
+     "pred": "HT-2026-0007",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999998179437583",
+     "pred": "919999998179437583",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999994725581433",
+     "pred": "919999994725581433",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-03-19",
+     "pred": "2027-03-19",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-03-07",
+     "pred": "2026-03-07",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-02-04",
+     "pred": "2026-02-04",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-008",
+   "kind": "generated",
+   "layout": "minimal",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 109100,
+     "pred": "109,100.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 14183.0,
+     "pred": "14,183.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 123283.0,
+     "pred": "123,283.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0008",
+     "pred": "HT-2026-0008",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999998659855039",
+     "pred": "919999998659855039",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999997391729080",
+     "pred": "919999997391729080",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-04-22",
+     "pred": "2027-04-22",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-04-08",
+     "pred": "2026-04-08",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-03-09",
+     "pred": "2026-03-09",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-009",
+   "kind": "generated",
+   "layout": "standard",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 110400,
+     "pred": "110,400.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 9936.0,
+     "pred": "9,936.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 120336.0,
+     "pred": "120,336.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0009",
+     "pred": "HT-2026-0009",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999998810724520",
+     "pred": "919999998810724520",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999995735562203",
+     "pred": "919999995735562203",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-05-25",
+     "pred": "2027-05-25",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-05-09",
+     "pred": "2026-05-09",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-04-14",
+     "pred": "2026-04-14",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-010",
+   "kind": "generated",
+   "layout": "two_column",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 111700,
+     "pred": "111,700.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 6702.0,
+     "pred": "6,702.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 118402.0,
+     "pred": "118,402.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0010",
+     "pred": "HT-2026-0010",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999998306197020",
+     "pred": "919999998306197020",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999995612168405",
+     "pred": "919999995612168405",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-01",
+     "pred": "2027-06-01",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-06-10",
+     "pred": "2026-06-10",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-05-19",
+     "pred": "2026-05-19",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-011",
+   "kind": "generated",
+   "layout": "table_heavy",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 113000,
+     "pred": "113,000.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 14690.0,
+     "pred": "14,690.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 127690.0,
+     "pred": "127,690.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0011",
+     "pred": "HT-2026-0011",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999992452149437",
+     "pred": "919999992452149437",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999992725803574",
+     "pred": "919999992725803574",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-07-04",
+     "pred": "2027-07-04",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-07-11",
+     "pred": "2026-07-11",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-06-24",
+     "pred": "2026-06-24",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-012",
+   "kind": "generated",
+   "layout": "minimal",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 114300,
+     "pred": "114,300.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 10287.0,
+     "pred": "10,287.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 124587.0,
+     "pred": "124,587.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0012",
+     "pred": "HT-2026-0012",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999990455080165",
+     "pred": "919999990455080165",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999992958411359",
+     "pred": "919999992958411359",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-08-07",
+     "pred": "2027-08-07",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-08-12",
+     "pred": "2026-08-12",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-07-02",
+     "pred": "2026-07-02",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-013",
+   "kind": "generated",
+   "layout": "standard",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 115600,
+     "pred": "115,600.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 6936.0,
+     "pred": "6,936.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 122536.0,
+     "pred": "122,536.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0013",
+     "pred": "HT-2026-0013",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999992041509287",
+     "pred": "919999992041509287",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999998730794729",
+     "pred": "919999998730794729",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-03-10",
+     "pred": "2027-03-10",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-03-13",
+     "pred": "2026-03-13",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-02-07",
+     "pred": "2026-02-07",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-014",
+   "kind": "generated",
+   "layout": "two_column",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 116900,
+     "pred": "116,900.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 15197.0,
+     "pred": "15,197.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 132097.0,
+     "pred": "132,097.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0014",
+     "pred": "HT-2026-0014",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999999141545367",
+     "pred": "919999999141545367",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999995273534846",
+     "pred": "919999995273534846",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-04-13",
+     "pred": "2027-04-13",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-04-14",
+     "pred": "2026-04-14",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-03-12",
+     "pred": "2026-03-12",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-015",
+   "kind": "generated",
+   "layout": "table_heavy",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 118200,
+     "pred": "118,200.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 10638.0,
+     "pred": "10,638.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 128838.0,
+     "pred": "128,838.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0015",
+     "pred": "HT-2026-0015",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999998786853104",
+     "pred": "919999998786853104",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999999385004959",
+     "pred": "919999999385004959",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-05-16",
+     "pred": "2027-05-16",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-05-15",
+     "pred": "2026-05-15",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-04-17",
+     "pred": "2026-04-17",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-016",
+   "kind": "generated",
+   "layout": "minimal",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 119500,
+     "pred": "119,500.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 7170.0,
+     "pred": "7,170.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 126670.0,
+     "pred": "126,670.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0016",
+     "pred": "HT-2026-0016",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999990802856718",
+     "pred": "919999990802856718",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999996271576699",
+     "pred": "919999996271576699",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-19",
+     "pred": "2027-06-19",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-06-16",
+     "pred": "2026-06-16",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-05-22",
+     "pred": "2026-05-22",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-017",
+   "kind": "generated",
+   "layout": "standard",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 120800,
+     "pred": "120,800.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 15704.0,
+     "pred": "15,704.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 136504.0,
+     "pred": "136,504.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0017",
+     "pred": "HT-2026-0017",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999996640310901",
+     "pred": "919999996640310901",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999998161027410",
+     "pred": "919999998161027410",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-07-22",
+     "pred": "2027-07-22",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-07-17",
+     "pred": "2026-07-17",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-06-27",
+     "pred": "2026-06-27",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-018",
+   "kind": "generated",
+   "layout": "two_column",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 122100,
+     "pred": "122,100.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 10989.0,
+     "pred": "10,989.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 133089.0,
+     "pred": "133,089.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0018",
+     "pred": "HT-2026-0018",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999992867164946",
+     "pred": "919999992867164946",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999992927157019",
+     "pred": "919999992927157019",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-08-25",
+     "pred": "2027-08-25",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-08-18",
+     "pred": "2026-08-18",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-07-05",
+     "pred": "2026-07-05",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-019",
+   "kind": "generated",
+   "layout": "table_heavy",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 123400,
+     "pred": "123,400.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 7404.0,
+     "pred": "7,404.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 130804.0,
+     "pred": "130,804.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0019",
+     "pred": "HT-2026-0019",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999995344663450",
+     "pred": "919999995344663450",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999999422231808",
+     "pred": "919999999422231808",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-03-01",
+     "pred": "2027-03-01",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-03-19",
+     "pred": "2026-03-19",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-02-10",
+     "pred": "2026-02-10",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-020",
+   "kind": "generated",
+   "layout": "minimal",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 124700,
+     "pred": "124,700.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 16211.0,
+     "pred": "16,211.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 140911.0,
+     "pred": "140,911.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0020",
+     "pred": "HT-2026-0020",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999990145107095",
+     "pred": "919999990145107095",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999991951751178",
+     "pred": "919999991951751178",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-04-04",
+     "pred": "2027-04-04",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-04-20",
+     "pred": "2026-04-20",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-03-15",
+     "pred": "2026-03-15",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-021",
+   "kind": "generated",
+   "layout": "standard",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 126000,
+     "pred": "126,000.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 11340.0,
+     "pred": "11,340.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 137340.0,
+     "pred": "137,340.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0021",
+     "pred": "HT-2026-0021",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999993965611300",
+     "pred": "919999993965611300",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999999168306711",
+     "pred": "919999999168306711",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-05-07",
+     "pred": "2027-05-07",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-05-21",
+     "pred": "2026-05-21",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-04-20",
+     "pred": "2026-04-20",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-022",
+   "kind": "generated",
+   "layout": "two_column",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 127300,
+     "pred": "127,300.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 7638.0,
+     "pred": "7,638.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 134938.0,
+     "pred": "134,938.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0022",
+     "pred": "HT-2026-0022",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999991158545770",
+     "pred": "919999991158545770",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999996152382127",
+     "pred": "919999996152382127",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-10",
+     "pred": "2027-06-10",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-06-22",
+     "pred": "2026-06-22",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-05-25",
+     "pred": "2026-05-25",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-023",
+   "kind": "generated",
+   "layout": "table_heavy",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 128600,
+     "pred": "128,600.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 16718.0,
+     "pred": "16,718.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 145318.0,
+     "pred": "145,318.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0023",
+     "pred": "HT-2026-0023",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999994885587202",
+     "pred": "919999994885587202",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999996644504347",
+     "pred": "919999996644504347",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-07-13",
+     "pred": "2027-07-13",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-07-23",
+     "pred": "2026-07-23",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-06-03",
+     "pred": "2026-06-03",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-024",
+   "kind": "generated",
+   "layout": "minimal",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 129900,
+     "pred": "129,900.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 11691.0,
+     "pred": "11,691.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 141591.0,
+     "pred": "141,591.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0024",
+     "pred": "HT-2026-0024",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999995143827436",
+     "pred": "919999995143827436",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999998131601938",
+     "pred": "919999998131601938",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-08-16",
+     "pred": "2027-08-16",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-08-24",
+     "pred": "2026-08-24",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-07-08",
+     "pred": "2026-07-08",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-025",
+   "kind": "generated",
+   "layout": "standard",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 131200,
+     "pred": "131,200.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 7872.0,
+     "pred": "7,872.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 139072.0,
+     "pred": "139,072.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0025",
+     "pred": "HT-2026-0025",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999992238460512",
+     "pred": "919999992238460512",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999996755563689",
+     "pred": "919999996755563689",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-03-19",
+     "pred": "2027-03-19",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-03-25",
+     "pred": "2026-03-25",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-02-13",
+     "pred": "2026-02-13",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-026",
+   "kind": "generated",
+   "layout": "two_column",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 132500,
+     "pred": "132,500.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 17225.0,
+     "pred": "17,225.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 149725.0,
+     "pred": "149,725.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0026",
+     "pred": "HT-2026-0026",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999994523240154",
+     "pred": "919999994523240154",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999993897004177",
+     "pred": "919999993897004177",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-04-22",
+     "pred": "2027-04-22",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-04-26",
+     "pred": "2026-04-26",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-03-18",
+     "pred": "2026-03-18",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-027",
+   "kind": "generated",
+   "layout": "table_heavy",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 133800,
+     "pred": "133,800.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 12042.0,
+     "pred": "12,042.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 145842.0,
+     "pred": "145,842.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0027",
+     "pred": "HT-2026-0027",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999994053184411",
+     "pred": "919999994053184411",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999992831851610",
+     "pred": "919999992831851610",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-05-25",
+     "pred": "2027-05-25",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-05-27",
+     "pred": "2026-05-27",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-04-23",
+     "pred": "2026-04-23",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-028",
+   "kind": "generated",
+   "layout": "minimal",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 135100,
+     "pred": "135,100.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 8106.0,
+     "pred": "8,106.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 143206.0,
+     "pred": "143,206.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0028",
+     "pred": "HT-2026-0028",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999996445599358",
+     "pred": "919999996445599358",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999995962591263",
+     "pred": "919999995962591263",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-01",
+     "pred": "2027-06-01",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-06-01",
+     "pred": "2026-06-01",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-05-01",
+     "pred": "2026-05-01",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-029",
+   "kind": "difficult",
+   "layout": "standard",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 0.866667,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 136400,
+     "pred": "136,400.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 17732.0,
+     "pred": "17,732.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 154132.0,
+     "pred": "154,132.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0029",
+     "pred": "HT-2026-0029",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999992166232939",
+     "pred": "919999992166232939",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999993822343049",
+     "pred": "91999999■■■■343049",
+     "ok": false
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈■■有限公司",
+     "ok": false
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-07-04",
+     "pred": "2027-07-04",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-07-02",
+     "pred": "2026-07-02",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-06-06",
+     "pred": "2026-06-06",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [
+    "party_b_code",
+    "party_b_name"
+   ],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-030",
+   "kind": "difficult",
+   "layout": "two_column",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 0.933333,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 137700,
+     "pred": "137,700.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 12393.0,
+     "pred": "12,393.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 150093.0,
+     "pred": "150,093.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0030",
+     "pred": "HT-2026-0030",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999990781127697",
+     "pred": "919999990781127697",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999990197599666",
+     "pred": "919999990197599666",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": null,
+     "ok": false
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-08-07",
+     "pred": "2027-08-07",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-08-03",
+     "pred": "2026-08-03",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-07-11",
+     "pred": "2026-07-11",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [
+    "payment_terms"
+   ],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-031",
+   "kind": "difficult",
+   "layout": "table_heavy",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 139000,
+     "pred": "139,000.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 8340.0,
+     "pred": "8,340.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 147340.0,
+     "pred": "147,340.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0031",
+     "pred": "HT-2026-0031",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999991411101992",
+     "pred": "919999991411101992",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999998505029394",
+     "pred": "919999998505029394",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-03-10",
+     "pred": "2027-03-10",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-03-04",
+     "pred": "2026-03-04",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-02-16",
+     "pred": "2026-02-16",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-032",
+   "kind": "difficult",
+   "layout": "minimal",
+   "carrier": "text_pdf",
+   "read_as": "pdf_text",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 140300,
+     "pred": "140,300.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 18239.0,
+     "pred": "18,239.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 158539.0,
+     "pred": "158,539.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0032",
+     "pred": "HT-2026-0032",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999991001131356",
+     "pred": "919999991001131356",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999997558505474",
+     "pred": "919999997558505474",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-12",
+     "pred": "2027-06-12",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-04-05",
+     "pred": "2026-04-05",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-03-21",
+     "pred": "2026-03-21",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-033",
+   "kind": "difficult",
+   "layout": "standard",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 0.866667,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 141600,
+     "pred": "141,600.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 12744.0,
+     "pred": "12,744.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 154344.0,
+     "pred": "154,344.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0033",
+     "pred": "HT-2026-0033",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999994280234177",
+     "pred": "919999994280234177",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999992618607423",
+     "pred": "919999992618607423",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-05-16",
+     "pred": null,
+     "ok": false
+    },
+    "service_start": {
+     "gold": "2026-05-06",
+     "pred": null,
+     "ok": false
+    },
+    "sign_date": {
+     "gold": "2026-04-26",
+     "pred": "2026-04-26",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [
+    "service_end",
+    "service_start"
+   ],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-034",
+   "kind": "difficult",
+   "layout": "two_column",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 142900,
+     "pred": "142,900.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 8574.0,
+     "pred": "8,574.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 151474.0,
+     "pred": "151,474.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0034",
+     "pred": "HT-2026-0034",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999998332927911",
+     "pred": "919999998332927911",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999994210497556",
+     "pred": "919999994210497556",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-19",
+     "pred": "2027-06-19",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-06-07",
+     "pred": "2026-06-07",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-05-04",
+     "pred": "2026-05-04",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-035",
+   "kind": "difficult",
+   "layout": "table_heavy",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 144200,
+     "pred": "144,200.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 18746.0,
+     "pred": "18,746.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 162946.0,
+     "pred": "162,946.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0035",
+     "pred": "HT-2026-0035",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999990071849860",
+     "pred": "919999990071849860",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999999271748560",
+     "pred": "919999999271748560",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-07-22",
+     "pred": "2027-07-22",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-07-08",
+     "pred": "2026-07-08",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-06-09",
+     "pred": "2026-06-09",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-036",
+   "kind": "difficult",
+   "layout": "minimal",
+   "carrier": "scanned_pdf",
+   "read_as": "ocr_stub",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 145500,
+     "pred": "145,500.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 13095.0,
+     "pred": "13,095.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 158595.0,
+     "pred": "158,595.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0036",
+     "pred": "HT-2026-0036",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 4,
+     "pred": "4",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999990852384662",
+     "pred": "919999990852384662",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999990265827117",
+     "pred": "919999990265827117",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-08-25",
+     "pred": "2027-08-25",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-08-09",
+     "pred": "2026-08-09",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-07-14",
+     "pred": "2026-07-14",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-037",
+   "kind": "difficult",
+   "layout": "standard",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 146800,
+     "pred": "146,800.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 8808.0,
+     "pred": "8,808.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 155608.0,
+     "pred": "155,608.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0037",
+     "pred": "HT-2026-0037",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 5,
+     "pred": "5",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999994219177056",
+     "pred": "919999994219177056",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业甲有限公司",
+     "pred": "示例会员企业甲有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999998834368846",
+     "pred": "919999998834368846",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例云栈服务有限公司",
+     "pred": "示例云栈服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-03-01",
+     "pred": "2027-03-01",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-03-10",
+     "pred": "2026-03-10",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-02-19",
+     "pred": "2026-02-19",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-038",
+   "kind": "difficult",
+   "layout": "two_column",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 0.933333,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 148100,
+     "pred": "148,100.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 19253.0,
+     "pred": "19,253.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 167353.0,
+     "pred": "167,353.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0038",
+     "pred": "HT-2026-0038",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999998939376927",
+     "pred": "919999998939376927",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业乙有限公司",
+     "pred": "示例会员企业乙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999994285468076",
+     "pred": "919999994285468076",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例智联服务有限公司",
+     "pred": "示例智联服务",
+     "ok": false
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-04-04",
+     "pred": "2027-04-04",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-04-11",
+     "pred": "2026-04-11",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-03-24",
+     "pred": "2026-03-24",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 13,
+     "pred": "13",
+     "ok": true
+    }
+   },
+   "flag_recall": 0.0,
+   "wrong_fields": [
+    "party_b_name"
+   ],
+   "wrong_unflagged": [
+    "party_b_name"
+   ],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-039",
+   "kind": "difficult",
+   "layout": "table_heavy",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 149400,
+     "pred": "149,400.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 13446.0,
+     "pred": "13,446.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 162846.0,
+     "pred": "162,846.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0039",
+     "pred": "HT-2026-0039",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 7,
+     "pred": "7",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999996659770915",
+     "pred": "919999996659770915",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丙有限公司",
+     "pred": "示例会员企业丙有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999990718757544",
+     "pred": "919999990718757544",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例绿源服务有限公司",
+     "pred": "示例绿源服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-05-07",
+     "pred": "2027-05-07",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-05-12",
+     "pred": "2026-05-12",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-04-02",
+     "pred": "2026-04-02",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 9,
+     "pred": "9",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  },
+  {
+   "case_id": "CT-040",
+   "kind": "difficult",
+   "layout": "minimal",
+   "carrier": "docx",
+   "read_as": "docx",
+   "field_accuracy": 1.0,
+   "per_field": {
+    "amount_ex_tax": {
+     "gold": 150700,
+     "pred": "150,700.00",
+     "ok": true
+    },
+    "amount_tax": {
+     "gold": 9042.0,
+     "pred": "9,042.00",
+     "ok": true
+    },
+    "amount_total": {
+     "gold": 159742.0,
+     "pred": "159,742.00",
+     "ok": true
+    },
+    "contract_no": {
+     "gold": "HT-2026-0040",
+     "pred": "HT-2026-0040",
+     "ok": true
+    },
+    "page_count": {
+     "gold": 8,
+     "pred": "8",
+     "ok": true
+    },
+    "party_a_code": {
+     "gold": "919999992932699708",
+     "pred": "919999992932699708",
+     "ok": true
+    },
+    "party_a_name": {
+     "gold": "示例会员企业丁有限公司",
+     "pred": "示例会员企业丁有限公司",
+     "ok": true
+    },
+    "party_b_code": {
+     "gold": "919999995591268269",
+     "pred": "919999995591268269",
+     "ok": true
+    },
+    "party_b_name": {
+     "gold": "示例星河服务有限公司",
+     "pred": "示例星河服务有限公司",
+     "ok": true
+    },
+    "payment_terms": {
+     "gold": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "pred": "签订后 30 日内支付 50%，验收后 30 日内支付余款",
+     "ok": true
+    },
+    "seal_present": {
+     "gold": true,
+     "pred": true,
+     "ok": true
+    },
+    "service_end": {
+     "gold": "2027-06-10",
+     "pred": "2027-06-10",
+     "ok": true
+    },
+    "service_start": {
+     "gold": "2026-06-13",
+     "pred": "2026-06-13",
+     "ok": true
+    },
+    "sign_date": {
+     "gold": "2026-05-07",
+     "pred": "2026-05-07",
+     "ok": true
+    },
+    "tax_rate": {
+     "gold": 6,
+     "pred": "6",
+     "ok": true
+    }
+   },
+   "flag_recall": 1.0,
+   "wrong_fields": [],
+   "wrong_unflagged": [],
+   "critical_unflagged": [],
+   "right_but_flagged": []
+  }
+ ]
+}

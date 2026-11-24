@@ -1,0 +1,14 @@
+原件 verify: rc=0 OK
+M1 删掉一条用例                                [CAUGHT] rc=1 期望命中='恰有 40 条'
+M2 gold 多塞一个字段                           [CAUGHT] rc=1 期望命中='15 个字段'
+M3 扫描件与文字PDF互换文件                         [CAUGHT] rc=1 期望命中='扫描件无文字层'
+M4 载体声明改成 text_pdf 但文件仍是 docx            [CAUGHT] rc=1 期望命中='格式与 carrier 声明一致'
+M5 清空一条疑难的难度说明                           [CAUGHT] rc=1 期望命中='疑难类型齐全'
+M6 改掉一个信用代码的区划码                          [CAUGHT] rc=1 期望命中='999999'
+M7 召回分母改成全部字段                            [CAUGHT] rc=1 期望命中='口径写死'
+M8 runner 关闭自检标红                         [CAUGHT] rc=1 期望命中='critical'
+M9 报告删掉「错而未标红明细」小节                       [CAUGHT] rc=1 期望命中='错而未标红明细'
+M10 把一条疑难降级成生成用例                         [CAUGHT] rc=1 期望命中='生成 28 / 疑难 12'
+
+变异 10 个：CAUGHT 10，MISSED 0，INVALID 0
+结论：全部被抓住，断言有效

@@ -1,0 +1,53 @@
+suite: doc_auto.contract_fields
+version: 1.0.0
+description: 文档自动化 · 合同字段识别 评测集（40 份虚构合同 + 两项指标 + 错字段标红召回）
+
+cases:
+  file: data/cases.jsonl
+  count: 40
+  distribution:
+    generated: 28      # 取自 S5-DOC 虚构样例生成器的产出（tools/gen_contracts.py）
+    difficult: 12      # 人工编写的疑难样例，每份在 meta.difficulty 写明难点
+  layouts: [standard, two_column, table_heavy, minimal]     # 各 10 份
+  carriers: [text_pdf, scanned_pdf, docx]                   # 14 / 13 / 13，均为真实文件
+  per_case:
+    gold: "15 个字段的规范值（严格 15 个，多一个少一个 eval-lint 都判失败）"
+    critical_fields: [amount_total, amount_ex_tax, party_a_code, party_b_code,
+                      service_start, service_end]
+
+metrics:
+  field_accuracy:
+    desc: 字段级准确率（数值去单位与千分位后比较；日期统一 YYYY-MM-DD）
+    threshold: 0.90
+  flag_recall:
+    desc: 错字段标红召回 = 识别错误的字段中被标为 flagged 的比例
+    threshold: 0.95
+    denominator: "识别错误的字段数（不是全部字段数）"
+    empty_convention: "没有识别错误时记 1.0（显式约定，见 tests）"
+  critical_unflagged:
+    desc: 错而未标红的 critical 字段数
+    target: 0
+
+report_sections:
+  - 两项指标与门槛判定
+  - 标红统计（错误总数 / 未标红 / 错而未标红 critical / 误报）
+  - 按字段的准确率（15 个字段全列）
+  - 错而未标红明细（逐用例列出字段，供人工复核队列）
+  - 按版式 / 载体的准确率
+  - 判定
+screenshot: reports/doc_v1_unflagged_screenshot.png（由 reports/doc_v1.json 渲染，非手绘）
+
+runner:
+  script: "python -m doc_eval"
+  switches:
+    --break-flag: "关闭自检标红 -> critical 未标红 3 个、召回 0.90、rc=1（证明指标可证伪）"
+    --break-accuracy: "故意解析错日期 -> 准确率 0.975、召回 0.7625、9 个错而未标红 critical、rc=1"
+
+checks:
+  lint: "python tools/eval_lint.py"
+  pii: "python tools/eval_pii_scan.py"
+
+policy:
+  ai_output: 被测输出只进人工复核队列，不得直接对外发送
+  amount: AI 不计算金额（本集只评测字段识别，不做金额运算）
+  data: 全部合同虚构，不含真实企业或个人；统一社会信用代码第 3-8 位固定 999999（不存在的区划码）
