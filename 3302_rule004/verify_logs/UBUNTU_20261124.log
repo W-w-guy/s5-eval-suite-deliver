@@ -1,0 +1,60 @@
+# UBUNTU 实跑日志（全新目录 /tmp/fr3302，解压同一个 zip）
+
+OS=Ubuntu 24.04.5 LTS
+KERNEL=7.0.0-38-generic
+PY=Python 3.12.3
+PYTEST=pytest 7.4.4
+OPENPYXL=3.1.5
+WORKDIR=/tmp/fr3302
+
+工作目录：`/tmp/fr3302`
+
+================== gen  $ python3 tools/gen.py
+WROTE docs/discount_routing.xlsx 31574 bytes
+WROTE docs/boundary_rules.csv 836 bytes
+WROTE docs/discount_expected.csv 3898 bytes
+WROTE docs/coverage.csv 397 bytes
+WROTE docs/discount_routing.md 16457 bytes
+examples=12 categories=8
+
+================== verify  $ python3 tools/verify.py
+[PASS] V01 路由表 xlsx 存在且为 7 列 列 7：['路由编号', '触发条件', '审批节点序列', '每节点时限（小时）', '超时动作', '可否加签', '可否转交']
+[PASS] V02 路由表不少于 5 条（含表头共 N 行） 路由 6 条：['R01', 'R02', 'R03', 'R04', 'R05', 'R06']
+[PASS] V03 7 列表头与工单要求一致（路由编号/触发条件/节点序列/时限/超时动作/加签/转交） 表头 ['路由编号', '触发条件', '审批节点序列', '每节点时限（小时）', '超时动作', '可否加签', '可否转交']
+[PASS] V04 每条路由的超时动作都写明「不允许自动通过」 6/6 条写明
+[PASS] V05 示例数量为 12 CSV 12 行 / CASES 12 个
+[PASS] V06 8 类情形均至少对应 1 个示例 D1=1；D2=1；D3=5；D4=1；D5=1；D6=1；D7=1；D8=1
+[PASS] V07 8 类并集覆盖全部 12 个示例 并集 12 个 / 未归类 无
+[PASS] V08 场景与情形对照表为 8 行且每行示例非空 行 8；示例数 [1, 1, 5, 1, 1, 1, 1, 1]
+[PASS] V09 刚好等于上限（超出=0）场景：路由=无、结果=直接生效 P02 超出=0 路由=无 结果=直接生效
+[PASS] V10 未超权限（超出<0）场景：同样不需审批 P01 超出=-20 结果=直接生效
+[PASS] V11 每节结果行写明路由编号与期望审批链，且与 CSV 一致（12 行全比） 不一致 无
+[PASS] V12 引擎重算 12 行与 CSV 全 18 列一致 不一致 无
+[PASS] V13 左开右闭：超出 0.1→R01、恰好 5→R01、5.1→R02、恰好 10→R02、10.1→R03 0.1→R01；5→R01；5.1→R02；10→R02；10.1→R03
+[PASS] V14 超出 0 或负数返回 None（不需审批） 0→None；-2.0→None
+[PASS] V15 折扣与条款同时命中取更高一级：R01（主管）+ R04（总监）→ 运营总监 P08 折扣路由=R01 条款路由=R04 最终=R04 链=运营总监
+[PASS] V16 发起人即审批首节点时跳到上一级：招商主管发起 → 链首为运营总监 P09 发起人=招商主管 链=运营总监
+[PASS] V17 中途改价重新审批：改后口径的链覆盖原链，结果为重新审批 P10 原 5.1%→R01；改后 10.1%→运营总监；结果=重新审批
+[PASS] V18 节点超时上升一级：链末追加更高级节点，结果=超时上升一级 P11 链=招商主管 → 运营总监 时限=36
+[PASS] V19 驳回后重提：结果为驳回后重提，仍走同一路由 P12 路由=R05 结果=驳回后重提 rejected=true
+[PASS] V20 全部角色与产品标注虚构，且不含真实人名/手机号/邮箱 发起人取值 ['招商业务员', '招商主管']
+
+SUMMARY 20/20 PASS
+
+================== pytest  $ python3 -m pytest tests -q
+.............                                                            [100%]
+13 passed in 0.02s
+
+================== mutate  $ python3 tools/mutate.py
+[OK] 原件必须全绿 rc=0
+[ OK ] M1 折扣区间上界 5 改成 4 -> 被抓到 ['SUMMARY 18/20 PASS']
+[ OK ] M2 区间改成左闭右闭（<= 改成 <） -> 被抓到 ['SUMMARY 18/20 PASS']
+[ OK ] M3 超出 0 也走审批（<= 改成 <） -> 被抓到 ['SUMMARY 18/20 PASS']
+[ OK ] M4 同角色不跳过节点 -> 被抓到 ['SUMMARY 19/20 PASS']
+[ OK ] M5 超时不上升 -> 被抓到 ['SUMMARY 19/20 PASS']
+[ OK ] M6 同时命中取低层级（改成取先命中的折扣路由） -> 被抓到 ['SUMMARY 19/20 PASS']
+[ OK ] M7 中途改价不重新审批 -> 被抓到 ['SUMMARY 19/20 PASS']
+MUTATION PASS（7/7 被抓到）
+
+================== pii  $ python3 tools/pii_scan.py
+scanned=29 hits=0

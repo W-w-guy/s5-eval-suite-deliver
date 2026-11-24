@@ -1,0 +1,161 @@
+{
+ "pid": 3302,
+ "code": "S1-RULE-004",
+ "title": "折扣审批路由表与 12 个越权审批场景",
+ "engine_rel": "pkg/engine.py",
+ "render_rel": "pkg/render.py",
+ "extras": "extras",
+ "csv": "discount_expected.csv",
+ "coverage_csv": "coverage.csv",
+ "md": "discount_routing.md",
+ "id_col": "example_id",
+ "cols": [
+  "example_id",
+  "scene",
+  "initiator",
+  "cap_x10",
+  "product",
+  "months",
+  "disc_x10",
+  "clause",
+  "revised_x10",
+  "timeout",
+  "rejected",
+  "expected_excess_x10",
+  "expected_route",
+  "expected_chain",
+  "expected_chain_len",
+  "expected_hours",
+  "expected_result",
+  "expected_note"
+ ],
+ "scale": "12 个场景 / 8 类情形 / 路由表 6 条 7 列 / CSV 12 行 18 列",
+ "intro": "本包为「折扣审批路由表与越权审批场景」交付物：7 列路由表（Excel）+ 12 个虚构审批场景的逐步判定与期望审批链 + 情形覆盖对照表与边界判定说明。全部数据为**虚构**。",
+ "coverage_title": "8 类情形覆盖对照表",
+ "nondeterministic_note": "场景为手写固定常量，百分点以整数（×10）参与运算；同一脚本在任何机器重跑产出字节级一致（已在 Windows 与 Ubuntu 两侧核对 sha256）",
+ "fiction": "企业、产品、角色人员、折扣数值与时限均为虚构；不含真实人名、手机号、邮箱与客户名称。",
+ "rules": [
+  "角色折扣上限：招商业务员 5.0%；招商主管 10.0%；运营总监 15.0%；总经理 20.0%（虚构值）。",
+  "超出 = 折扣率 − 发起人上限；超出 = 0（恰好等于上限）不需审批。",
+  "折扣区间左开右闭：0<超出≤5 → R01 招商主管；5<超出≤10 → R02 运营总监；超出>10 → R03 总经理。",
+  "特殊条款：免押金 → R04 运营总监；延期付款 → R05 运营总监；免租期超过 30 天 → R06 总经理。",
+  "同时命中折扣与特殊条款：取层级更高的一条，不叠加串行。",
+  "审批首节点与发起人同角色：跳过该节点，从下一节点起。",
+  "节点超时：提醒并自动上升一级；任何情况下不允许自动通过。",
+  "审批中途修改报价：原审批作废，按新口径重新审批。",
+  "未命中任一条件 → 不需审批，直接生效。",
+  "百分点以「百分点×10」的整数参与运算，不使用浮点。"
+ ],
+ "deliverables": [
+  [
+   "docs/discount_routing.xlsx",
+   "审批路由表（7 列 6 条）+ 角色上限 + 边界判定说明 + 说明，共 4 页签"
+  ],
+  [
+   "docs/discount_routing.md",
+   "12 个场景示例（发起人与报价摘要、逐步判定、边界说明、期望审批链）"
+  ],
+  [
+   "docs/discount_expected.csv",
+   "CSV 期望值（输入列 + 期望输出列，12 行 18 列）"
+  ],
+  [
+   "docs/boundary_rules.csv",
+   "边界判定说明（11 条，含左开右闭与超时/改价口径）"
+  ],
+  [
+   "docs/coverage.csv",
+   "8 类情形覆盖对照表"
+  ]
+ ],
+ "mutations": [
+  [
+   "M1 折扣区间上界 5 改成 4",
+   "hi=50, lo=0",
+   "hi=40, lo=0"
+  ],
+  [
+   "M2 区间改成左闭右闭（<= 改成 <）",
+   "if r[\"hi\"] is None or excess_x10 <= r[\"hi\"]:",
+   "if r[\"hi\"] is None or excess_x10 < r[\"hi\"]:"
+  ],
+  [
+   "M3 超出 0 也走审批（<= 改成 <）",
+   "if excess_x10 <= 0:",
+   "if excess_x10 < 0:"
+  ],
+  [
+   "M4 同角色不跳过节点",
+   "if ch and ch[0] == initiator:",
+   "if False:"
+  ],
+  [
+   "M5 超时不上升",
+   "return tuple(chain) + (up[0],) if up else tuple(chain)",
+   "return tuple(chain)"
+  ],
+  [
+   "M6 同时命中取低层级（改成取先命中的折扣路由）",
+   "rid = top_level([by_d, by_c])",
+   "rid = by_d or by_c"
+  ],
+  [
+   "M7 中途改价不重新审批",
+   "if c.get(\"revised_x10\") is not None:",
+   "if False:"
+  ]
+ ],
+ "acs": [
+  [
+   "AC1",
+   "路由表含本单列出的 7 列，且不少于 5 条路由",
+   "读 xlsx 的「路由表」页：断言 max_column==7、max_row-1>=5；断言 7 列表头逐字匹配工单要求；再断言每条的超时动作都含「不允许自动通过」",
+   "python tools/verify.py   # 看 V01 / V02 / V03 / V04",
+   [
+    "[PASS] V01",
+    "[PASS] V02",
+    "[PASS] V03",
+    "[PASS] V04",
+    "[FAIL] V02"
+   ]
+  ],
+  [
+   "AC2",
+   "12 个场景覆盖本单列出的 8 类情形，并附场景与情形对照表",
+   "数 CSV 数据行须为 12；按 cats 统计 8 类各自示例数（须全非空）；8 类并集须等于全部 12 个；coverage.csv 须 8 行且每行非空",
+   "python tools/verify.py   # 看 V05 / V06 / V07 / V08",
+   [
+    "[PASS] V05",
+    "[PASS] V06",
+    "[PASS] V07",
+    "[PASS] V08",
+    "[FAIL] V06",
+    "[FAIL] V07",
+    "[FAIL] V08"
+   ]
+  ],
+  [
+   "AC3",
+   "「刚好等于上限」场景的期望结果为不需审批",
+   "取 P02：断言超出百分点=0、路由=无、结果=直接生效；并取 P01 作为「超出<0 同样不需审批」的对照，避免只有一例巧合",
+   "python tools/verify.py   # 看 V09 / V10 / V14",
+   [
+    "[PASS] V09",
+    "[PASS] V10",
+    "[PASS] V14",
+    "[FAIL] V09",
+    "[FAIL] V14"
+   ]
+  ],
+  [
+   "AC4",
+   "每个场景都写明命中的路由编号与期望审批链",
+   "正则抓每节末行「结果：路由 X / 审批链 Y / 时限 N 小时 / 期望结果 Z」，与 CSV 同行逐字段比；12 行全比（不是抽查）",
+   "python tools/verify.py   # 看 V11",
+   [
+    "[PASS] V11",
+    "[FAIL] V11"
+   ]
+  ]
+ ]
+}
