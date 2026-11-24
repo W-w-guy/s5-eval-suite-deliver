@@ -1,0 +1,65 @@
+# UBUNTU 实跑日志（全新目录 /tmp/fr3322，解压同一个 zip）
+
+OS=Ubuntu 24.04.5 LTS
+KERNEL=7.0.0-38-generic
+PY=Python 3.12.3
+PYTEST=pytest 7.4.4
+OPENPYXL=3.1.5
+WORKDIR=/tmp/fr3322
+
+工作目录：`/tmp/fr3322`
+
+================== gen  $ python3 tools/gen.py
+WROTE docs/transfer_flow.md 2125 bytes
+WROTE docs/knowledge_gap.md 1790 bytes
+WROTE docs/transfer_rules.csv 991 bytes
+WROTE docs/transfer_tables.xlsx 33964 bytes
+WROTE docs/cs_expected.csv 3368 bytes
+WROTE docs/coverage.csv 414 bytes
+WROTE docs/cs_transfer_sop.md 16903 bytes
+examples=8 categories=8
+
+================== verify  $ python3 tools/verify.py
+[PASS] V01 转接触发条件不少于 5 种（实测 6 种） 规则 6 条：['R01', 'R02', 'R03', 'R04', 'R05', 'R06']
+[PASS] V02 每条规则都有触发条件文字与接手岗位，且岗位取自已声明岗位表 岗位 ['值班主管', '客服值班', '招商主管', '招商顾问', '数据合规专员', '管家组客服']
+[PASS] V03 工单点名的 5 类触发场景全部覆盖（管家答不上来/主动要求/价格/合同/他人信息） 缺失 []
+[PASS] V04 转接规则表 xlsx 可读且列含触发条件与接手岗位 列 ['规则编号', '触发条件', '接手岗位', '档位', '档位时长（分钟）', '回写知识缺口', '备注']；行 6
+[PASS] V05 规则表 Markdown 正文与 xlsx 一致（6 条全部列出） 缺失 []
+[PASS] V06 文档分别写明工作时段与非工作时段的响应时限 「工作时间内」=True；「非工作时间」出现 18 次
+[PASS] V07 双时段表在位：普通 30 分钟、紧急 15 分钟，且给出两种起算点实例 双时段表述齐备=True
+[PASS] V08 工作时间普通档：周三 10:00 → 10:30（就地起算 30 分钟） P01=2026-05-06T10:30 时段=work
+[PASS] V09 工作时间紧急档：周三 11:00 → 11:15（15 分钟，不是 30 分钟） P03=2026-05-06T11:15 档位=urgent（若漏了紧急档会得 11:30）
+[PASS] V10 非工作时间（周三 19:00）→ 顺延到周四 09:30，不是当晚 19:30 P05=2026-05-07T09:30（若不顺延会得 2026-05-06T19:30）
+[PASS] V11 周末与非工作时间跨周末：周六 10:00 与周五 21:30 都顺延到周一 09:30 P06=2026-05-11T09:30 P07=2026-05-11T09:30
+[PASS] V12 双时段用同一口径实现：时长只在工作日 9–18 内消耗（用函数直接验四组边界） 8:50→05-06 09:30；17:40→05-07 09:10（当日 20 分钟 + 次日 10 分钟）；18:00→05-07 09:30；周日12:00→05-11 09:30
+[PASS] V13 文档有独立的「回写知识缺口」小节且写明必做 小节标题在=True；含『必做』=True
+[PASS] V14 知识缺口回写字段表含 7 个字段且单独成文 字段缺失 []
+[PASS] V15 哪些规则必须回写明确（R01/R05/R06 共 3 条），且示例 P08 回写为「是」 必回写规则 ['R01', 'R05', 'R06']；P08=是
+[PASS] V16 回写责任人与时限写明（接手岗位、处理完成后 1 个工作日内） 含『1 个工作日内』=True；knowledge_gap.md 含『接手岗位』=True
+[PASS] V17 回写内容要求脱敏（不含姓名/手机号/合同金额） 含脱敏声明=True
+[PASS] V18 处理流程图含待办生成、响应、两级升级、回写、关闭等节点且每边带条件 节点 11；flow 问题 无
+[PASS] V19 升级链结构：C7（值班主管）只从 C6（超时）进入，C8（客服负责人）只从 C7 进入 指向 C7 的边 ['C6']；指向 C8 的边 ['C7']
+[PASS] V20 待办生成节点存在且写明字段（会话 ID/规则编号/接手岗位/截止） 缺字段 []
+[PASS] V21 引擎重算 8 行与 CSV 全 14 列一致 不一致 无
+[PASS] V22 每节结果行与 CSV 一致（8 行全比） 不一致 无
+[PASS] V23 8 类情形均至少 1 例且并集覆盖全部 8 例 N1=2；N2=2；N3=1；N4=1；N5=1；N6=1；N7=1；N8=1
+
+SUMMARY 23/23 PASS
+
+================== pytest  $ python3 -m pytest tests -q
+.........                                                                [100%]
+9 passed in 0.02s
+
+================== mutate  $ python3 tools/mutate.py
+[OK] 原件必须全绿 rc=0
+[ OK ] M1 普通档 30 分钟改成 20 -> 被抓到 ['SUMMARY 21/23 PASS']
+[ OK ] M2 紧急档 15 分钟改成 30 -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M3 非工作时间不顺延（直接按自然时间加） -> 被抓到 ['SUMMARY 21/23 PASS']
+[ OK ] M4 周末算作工作时间 -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M5 R05 他人信息降到普通档 -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M6 R01 改为不需回写知识缺口 -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M7 二级升级可从超时直接进入（跳一级） -> 被抓到 ['SUMMARY 22/23 PASS']
+MUTATION PASS（7/7 被抓到）
+
+================== pii  $ python3 tools/pii_scan.py
+scanned=31 hits=0
