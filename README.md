@@ -71,7 +71,7 @@ python tools/provenance.py --selftest
 
 ## 六、关于 CI 配置（两处位置，用途不同）
 
-仓库里有两份 `intel-eval.yml`，**内容用途不同，别混用**：
+仓库里有两份 `intel-eval.yml`，**用途不同，别混用**：
 
 | 位置 | 用于 | 说明 |
 |---|---|---|
@@ -81,9 +81,35 @@ python tools/provenance.py --selftest
 **为什么要放根目录**：GitHub 只识别仓库根目录的 `.github/workflows/`。
 放在 `2264_intel034/files/.github/workflows/` 下，GitHub 不会执行，等于「配置存在但从不运行」。
 
+### 两份文件的差别（逐处列全，共 4 处）
+
+| # | 差异 | 根目录那份 | 包内那份（给买家） | 原因 |
+|---|---|---|---|---|
+| 1 | 文件头注释块 | 有（17 行，说明用途与差异） | 无 | 纯说明，不影响运行 |
+| 2 | `defaults.run.working-directory` | `2264_intel034/files` | 无 | 本仓交付件在子目录，必须指过去 |
+| 3 | 「上传报告」的 `path` | `2264_intel034/files/reports/` | `reports/` | 同 (2)，子目录前缀差异 |
+| 4 | 「上传报告」的 `continue-on-error` | 无 | `true` | 包内那份给买家：基础设施抖动不把回归判红；根目录那份用于自证，上传失败就该变红以暴露真实问题 |
+
+另有排版差异：根目录那份在 `name` 之后、`defaults` 区块之后各多一个空行，包内那份没有，不影响运行。
+
+**评测一步的提示词版本两份现在一致**，都是 `v2`（`intel_eval/extract.py` 的 `PROMPT_SETS` 中存在的键）。
+该处根目录那份曾误写为不存在的 `ci`，会使评测一步每次都因 `ValueError` 退出、与评测结果好坏无关；
+已于 #2264 第二轮返工（rework-r2）修正为 `v2`，与包内那份对齐。复核方式：
+
+```bash
+grep -n "prompt-set" .github/workflows/intel-eval.yml 2264_intel034/files/.github/workflows/intel-eval.yml
+# 两行都应是 --prompt-set v2
+grep -n '"ci"' 2264_intel034/files/intel_eval/extract.py   # 应无输出（PROMPT_SETS 里没有 ci 这个键）
+```
+
+### 根目录那份的实际跑通记录
+
+见 `CI_RUN_ROOT_WORKFLOW.md`（本地按该文件步骤逐条执行的完整输出，
+含「门槛达标 → 评测一步 rc=0」与 AC3 反例「人为让 robots 禁止路径被抓取 → rc=1」两段）。
+
 **如何迁到买家仓库**：把 `2264_intel034/files/` 下的内容铺到买家仓库根目录，
 `intel-eval.yml` 会自动落在 `.github/workflows/`，无需改动；再按需配置
 `APP_ENV=test`（CI 属测试环境）即可。数据不出网由 `INTEL_TEST_RESOLVER` fail-closed 保证，
 不依赖 GitHub 托管 runner 的位置。
 
-> 注：zip 与 `2264_intel034/` 目录仍逐字节一致；根目录这份 `.github/` 是追加物，不属于交付件本体。
+> 注：zip 与 `2264_intel034/` 目录仍逐字节一致；根目录这份 `.github/` 与 `CI_RUN_ROOT_WORKFLOW.md` 是追加物，不属于交付件本体。

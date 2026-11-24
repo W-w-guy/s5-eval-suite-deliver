@@ -1,7 +1,20 @@
-# 本文件仅用于「交付仓内可实跑」演示。
-# 与 2264_intel034/files/.github/workflows/intel-eval.yml 的差别只有一处：
-# 本仓把交付件放在子目录，故需 defaults.run.working-directory 指过去。
-# 买家在自己仓库使用时，直接用 2264_intel034/files/ 下那份（无需 working-directory）。
+# 本文件仅用于「交付仓内可实跑」自证（GitHub 只识别仓库根目录的 .github/workflows/）。
+# 买家在自己仓库使用时，请直接用 2264_intel034/files/.github/workflows/intel-eval.yml：
+# 把 2264_intel034/files/ 下的内容铺到买家仓库根目录，该文件会自动落到 .github/workflows/，无需改动。
+#
+# 两份文件的差别，逐处列全（共 4 处；另有两处空行排版差异，不影响运行）：
+#   1) 本文件开头这段注释块，包内那份没有 —— 纯说明，不影响运行。
+#   2) 本文件有 defaults.run.working-directory: 2264_intel034/files，
+#      包内那份没有 —— 买家把交付件铺到根目录后路径天然正确，不需要这一行。
+#   3) 「上传报告」一步的 path：本文件写 2264_intel034/files/reports/，
+#      包内那份写 reports/ —— 同为子目录前缀差异，原因同 (2)。
+#   4) 包内那份的「上传报告」一步带 continue-on-error: true（基础设施抖动不把回归判红）；
+#      本文件没有这一行 —— 本仓自证时上传失败会让本次运行变红，便于暴露真实问题。
+#   另：本文件在 name 之后、defaults 区块之后各有一个空行（包内那份没有），属排版，不影响运行。
+#
+# 评测一步的提示词版本两份一致，均为 v2（PROMPT_SETS 中存在的版本）。
+# 该处曾误写为不存在的 ci，会使本步每次都因 ValueError 退出、与评测结果好坏无关；
+# 已于 #2264 第二轮返工修正为 v2，与包内那份对齐。
 name: intel-eval
 
 on:
@@ -25,7 +38,7 @@ jobs:
       - name: 单元测试（含每指标 >=2 手算用例）
         run: python -m pytest tests -q
       - name: 评测（任一门槛不达标则本步失败，PR 被拦截）
-        run: python -m intel_eval run --prompt-set ci
+        run: python -m intel_eval run --prompt-set v2
       - name: 自检
         run: python verify_2264.py
       - name: 上传报告
