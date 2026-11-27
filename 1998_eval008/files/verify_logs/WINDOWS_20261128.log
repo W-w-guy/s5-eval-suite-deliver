@@ -1,0 +1,25 @@
+# WINDOWS side verification log
+# host: DESKTOP-6BLPI5P  os: Windows 11  platform: win32
+# python: 3.11.7  node: none (no node/npm on this host)
+# unpacked into a brand-new dir from s5_eval_1998_double_review.zip (sha256 31b9dfa9...dc206)
+# command: python verify.py --require-pg
+
+[INFO] 数据库来源：pgserver 内嵌
+[PASS] AC0 连的是真 PostgreSQL  server_version=16.2 | db=postgres
+[PASS] AC0.1 alembic upgrade head  INFO  [alembic.runtime.migration] Running upgrade 0000_baseline -> 0001_eval_case_review, 评测用例双人复核：e
+[PASS] AC0.2 alembic_version 已落库  0001_eval_case_review
+[PASS] AC1 双人复核（同一人重复 approve 不变 reviewed）  4 passed | ============================== 4 passed in 1.53s ==============================
+[PASS] AC2 用例 hash 变化后复核状态重置  2 passed | ============================== 2 passed in 1.39s ==============================
+[PASS] AC3 页面逐条要点的同意/需修改/删除  3 passed | ============================= 3 passed in 10.98s ==============================
+[PASS] AC4 无评审权限调用接口返回 403  4 passed | ============================== 4 passed in 1.46s ==============================
+[PASS] AC5 全量 pytest  17 passed
+[PASS] AC6.0 前端构建产物存在  frontend/dist/index.html
+[SKIP] AC6.1 Vitest 前端单测  缺 node/npm 或 node_modules，未真跑
+[PASS] AC0.3 alembic downgrade -1  INFO  [alembic.runtime.migration] Running downgrade 0001_eval_case_review -> 0000_baseline, 评测用例双人复核
+[PASS] AC0.4 回滚后评审表已删除  alembic_version|eval_case|eval_run|eval_suite
+
+SUMMARY 11/11 PASS | SKIP 1（未真跑，不计入通过）
+
+[stderr]
+
+[rc=0]

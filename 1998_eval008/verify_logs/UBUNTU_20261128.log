@@ -1,0 +1,30 @@
+# UBUNTU side verification log
+# host: a-VMware  os: Ubuntu 24.04.5 LTS
+# python: Python 3.12.3  node: v18.19.1  npm: 9.2.0
+# generated: 2026-11-28T00:47:26+08:00
+# unpacked into a brand-new dir from s5_eval_1998_double_review.zip (sha256 31b9dfa97e786419f6a5811d9edc86b15a2dc3932ab664f64d565a6a004dc206)
+
+$ npm ci && npm run build && npm test
+npm ci rc=0, build rc=0
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+
+$ python3 verify.py --require-pg --require-node
+/home/a/.local/lib/python3.12/site-packages/platformdirs/api.py:441: RuntimeDirWarning: XDG_RUNTIME_DIR is not set, falling back to /run/user/1000
+  return Path(self.user_runtime_dir)
+[INFO] 数据库来源：pgserver 内嵌
+[PASS] AC0 连的是真 PostgreSQL  server_version=16.2 | db=postgres
+[PASS] AC0.1 alembic upgrade head  INFO  [alembic.runtime.migration] Running upgrade 0000_baseline -> 0001_eval_case_review, 评测用例双人复核：e
+[PASS] AC0.2 alembic_version 已落库  0001_eval_case_review
+[PASS] AC1 双人复核（同一人重复 approve 不变 reviewed）  4 passed | ============================== 4 passed in 1.06s ===============================
+[PASS] AC2 用例 hash 变化后复核状态重置  2 passed | ============================== 2 passed in 0.88s ===============================
+[PASS] AC3 页面逐条要点的同意/需修改/删除  3 passed | ============================== 3 passed in 9.05s ===============================
+[PASS] AC4 无评审权限调用接口返回 403  4 passed | ============================== 4 passed in 0.90s ===============================
+[PASS] AC5 全量 pytest  17 passed
+[PASS] AC6.0 前端构建产物存在  frontend/dist/index.html
+[PASS] AC6.1 Vitest 前端单测  10 passed
+[PASS] AC0.3 alembic downgrade -1  INFO  [alembic.runtime.migration] Running downgrade 0001_eval_case_review -> 0000_baseline, 评测用例双人复核
+[PASS] AC0.4 回滚后评审表已删除  alembic_version|eval_case|eval_run|eval_suite
+
+SUMMARY 12/12 PASS | SKIP 0（未真跑，不计入通过）
+[rc=0]
