@@ -1,4 +1,13 @@
 === Ubuntu 3.12.3 / 全新解压目录 ===
+WROTE docs/welcome_scripts.csv 1053 bytes
+WROTE docs/materials.csv 1189 bytes
+WROTE docs/checklists.md 1745 bytes
+WROTE docs/card_questions.md 1841 bytes
+WROTE docs/join_tables.xlsx 45286 bytes
+WROTE docs/join_expected.csv 2397 bytes
+WROTE docs/coverage.csv 381 bytes
+WROTE docs/join_sop.md 13463 bytes
+examples=8 categories=8
 [PASS] V01 欢迎话术恰好 3 版，渠道为 企业微信 / 短信 / 邮件（各 1 版，不重复） 渠道 ['企业微信', '短信', '邮件']
 [PASS] V02 每版都使用变量占位（vars 非空且正文真的出现、无未声明变量） 各版变量数 [4, 3, 5]
 [PASS] V03 每版都不超过 150 字 —— 乐观口径（变量记 0 字）不过线即判失败 超限 无；实测 [('W01', 68), ('W02', 52), ('W03', 54)]
@@ -37,7 +46,7 @@ tests/test_examples.py::test_case_matches_csv[S06] PASSED                [ 77%]
 tests/test_examples.py::test_case_matches_csv[S07] PASSED                [ 88%]
 tests/test_examples.py::test_case_matches_csv[S08] PASSED                [100%]
 
-============================== 9 passed in 0.20s ===============================
+============================== 9 passed in 0.24s ===============================
 [OK] 原件必须全绿 rc=0
 [ OK ] M1 短信版正文加长到超 150 字（乐观口径也超） -> 被抓到 ['SUMMARY 20/23 PASS']
 [ OK ] M2 邮箱版删掉变量占位（改成硬编码） -> 被抓到 ['SUMMARY 21/23 PASS']
@@ -47,4 +56,7 @@ tests/test_examples.py::test_case_matches_csv[S08] PASSED                [100%]
 [ OK ] M6 能力卡问题删到 9 个 -> 被抓到 ['SUMMARY 22/23 PASS']
 [ OK ] M7 S08 改成 work 口径（30 天按工作小时算） -> 被抓到 ['SUMMARY 21/23 PASS']
 MUTATION PASS（7/7 被抓到）
-scanned=35 hits=0
+scanned=34 hits=0
+scanned=34 hits=0
+scanned=34 hits=0
+verify_rc=0 verify_lines=23 pii scanned=34 hits=0 (recheck 34/0)

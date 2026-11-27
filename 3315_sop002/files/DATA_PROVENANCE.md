@@ -11,7 +11,7 @@
 | 种子 | 不适用（无随机数生成器） |
 | 重跑命令 | `python tools/gen.py` |
 | 产出规模 | 8 个步骤 / 8 类情形 / 话术 3 版（≤150 字）/ 资料清单 8 项（4 必填+4 可选）/ 能力卡 10 问 / CSV 8 行 12 列 |
-| PII 扫描 | `python tools/pii_scan.py` → `scanned=35 hits=0`（手机号 / 邮箱 / 身份证 / 银行卡 四类正则） |
+| PII 扫描 | `python tools/pii_scan.py` → `scanned=34 hits=0`（手机号 / 邮箱 / 身份证 / 银行卡 四类正则） |
 
 ## 虚构声明
 
