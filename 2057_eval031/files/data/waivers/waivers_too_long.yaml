@@ -1,0 +1,5 @@
+waivers:
+  - case_key: GR-P2-007
+    reason: "有效期超过 14 天"
+    approver_role: "质量负责人"
+    expires_on: "2026-12-12"

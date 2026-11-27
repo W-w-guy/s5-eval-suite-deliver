@@ -1,0 +1,6 @@
+# 豁免清单（虚构示例）
+waivers:
+  - case_key: GR-P2-046
+    reason: "拒答话术模板待评审批次"
+    approver_role: "质量负责人"
+    expires_on: "2026-12-05"

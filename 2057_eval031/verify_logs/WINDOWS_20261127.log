@@ -1,0 +1,137 @@
+=== Windows 3.11.7 / 全新解压目录 ===
+[PASS] V01 6 个场景的判定结果与设计一致 不一致 []
+[PASS] V02 6 个场景中恰 2 个通过、4 个失败 实测通过 2 个 ['RUN_OK', 'RUN_P2_DROP2']
+[PASS] V03 该场景里 P0 失败恰好 1 条 实测 ['GR-P0-006']
+[PASS] V04 1 条 P0 失败即门禁失败且退出码为 1 passed=False exit_code=1
+[PASS] V05 eval-gate 命令实测退出码 1 且摘要标 FAIL rc=1
+[PASS] V06 全通过的运行退出码为 0（正向对照） rc=0
+[PASS] V07 豁免 P0 用例时策略校验报错且门禁失败 errors=['第 1 条豁免 试图豁免 P0 用例 GR-P0-003 —— P0 为零容忍级别，不允许豁免']
+[PASS] V08 该情形下命令退出码为 1 rc=1
+[PASS] V09 合规豁免把原本失败的运行救回通过（正向对照） 无豁免=False 有豁免=True
+[PASS] V10 过期豁免使门禁失败（在基准日 2026-11-27 判定） errors=['存在 1 条已过期豁免（今天 2026-11-27）：GR-P2-007 到期 2026-11-20']
+[PASS] V11 把判定日退回到到期日之前，同一份豁免生效（证明用过的是注入时钟而非系统时间） today=2026-11-19 passed=True
+[PASS] V12 到期日当天仍有效（次日才失效） today=2026-11-20 passed=True
+[PASS] V13 降 4 个百分点时降幅算得恰好 4 实测 4.0000
+[PASS] V14 降 4 个百分点时门禁失败 errors=['P2 通过率 90.0000% 比基线 94.0000% 下降 4 个百分点，超过允许的 3 个百分点']
+[PASS] V15 降 2 个百分点时降幅算得恰好 2 实测 2.0000
+[PASS] V16 降 2 个百分点时门禁通过 
+[PASS] V17 两个场景的 P2 通过率都不低于 90% 阈值（结论只由降幅决定） 4pp 场景 45/50，2pp 场景 46/50
+[PASS] V18 降幅 3.3750 个百分点按精确值参与判定（不是先四舍五入成 3） 实测 3.3750
+[PASS] V19 降 3.3750 个百分点（>3）时门禁失败 
+[PASS] V20 有效期 15 天被拒（上限 14 天） errors=['第 1 条豁免 有效期 15 天，超过上限 14 天']
+[PASS] V21 缺 approver_role 的豁免被拒 errors=["第 1 条豁免 缺必填字段 ['approver_role']"]
+[PASS] V22 策略文件三级齐全 级别 ['P0', 'P1', 'P2']
+[PASS] V23 P0 的 tolerance 为 zero（零容忍不可配置） 
+[PASS] V24 策略文件带变更日志且至少 2 条 条数 2
+[PASS] V25 每条变更记录含 at / by / note 
+[PASS] V26 P1 失败场景为 98/101 = 97.0297% 
+[PASS] V27 P1 低于 98% 时门禁失败 errors=['P1 通过率 97.0297% 低于阈值 98%']
+[PASS] V28 6 个场景的运行记录全部落盘 缺 无
+[PASS] V29 pytest 全绿且用例数不少于 30 PASSED=80 rc=0
+
+SUMMARY 29/29 PASS
+
+============================= test session starts =============================
+collecting ... collected 80 items
+
+tests/test_clock.py::test_ordinal_matches_datetime[1970-01-01] PASSED    [  1%]
+tests/test_clock.py::test_ordinal_matches_datetime[2024-02-29] PASSED    [  2%]
+tests/test_clock.py::test_ordinal_matches_datetime[2026-11-27] PASSED    [  3%]
+tests/test_clock.py::test_ordinal_matches_datetime[1999-12-31] PASSED    [  5%]
+tests/test_clock.py::test_ordinal_matches_datetime[2100-03-01] PASSED    [  6%]
+tests/test_clock.py::test_ordinal_matches_datetime[2000-01-01] PASSED    [  7%]
+tests/test_clock.py::test_add_days_matches_datetime[2026-11-27-14] PASSED [  8%]
+tests/test_clock.py::test_add_days_matches_datetime[2026-11-27--1] PASSED [ 10%]
+tests/test_clock.py::test_add_days_matches_datetime[2024-02-28-1] PASSED [ 11%]
+tests/test_clock.py::test_add_days_matches_datetime[2026-12-31-1] PASSED [ 12%]
+tests/test_clock.py::test_days_between_sign PASSED                       [ 13%]
+tests/test_clock.py::test_expired_same_day_is_not_expired PASSED         [ 15%]
+tests/test_clock.py::test_expired_next_day PASSED                        [ 16%]
+tests/test_clock.py::test_not_expired_before PASSED                      [ 17%]
+tests/test_clock.py::test_bad_date_rejected[2026/11/27] PASSED           [ 18%]
+tests/test_clock.py::test_bad_date_rejected[20261127_0] PASSED           [ 20%]
+tests/test_clock.py::test_bad_date_rejected[2026-13-01] PASSED           [ 21%]
+tests/test_clock.py::test_bad_date_rejected[] PASSED                     [ 22%]
+tests/test_clock.py::test_bad_date_rejected[None] PASSED                 [ 23%]
+tests/test_clock.py::test_bad_date_rejected[20261127_1] PASSED           [ 25%]
+tests/test_clock.py::test_base_today_is_fixed PASSED                     [ 26%]
+tests/test_clock.py::test_no_now_call_in_source PASSED                   [ 27%]
+tests/test_clock.py::test_imported_datetime_not_used_for_logic PASSED    [ 28%]
+tests/test_gate.py::test_ok_run_passes PASSED                            [ 30%]
+tests/test_gate.py::test_ok_run_all_levels_full PASSED                   [ 31%]
+tests/test_gate.py::test_ok_run_p2_above_baseline PASSED                 [ 32%]
+tests/test_gate.py::test_single_p0_failure_fails PASSED                  [ 33%]
+tests/test_gate.py::test_single_p0_failure_is_exactly_one PASSED         [ 35%]
+tests/test_gate.py::test_p0_failure_message_mentions_zero_tolerance PASSED [ 36%]
+tests/test_gate.py::test_other_levels_unaffected_by_p0_failure PASSED    [ 37%]
+tests/test_gate.py::test_p1_below_threshold_fails PASSED                 [ 38%]
+tests/test_gate.py::test_p1_rate_is_98_of_101 PASSED                     [ 40%]
+tests/test_gate.py::test_p1_exactly_at_threshold_passes PASSED           [ 41%]
+tests/test_gate.py::test_p2_drop_4_points_fails PASSED                   [ 42%]
+tests/test_gate.py::test_p2_drop_2_points_passes PASSED                  [ 43%]
+tests/test_gate.py::test_p2_drop_4_reason_is_drop_not_threshold PASSED   [ 45%]
+tests/test_gate.py::test_p2_drop_2_above_threshold PASSED                [ 46%]
+tests/test_gate.py::test_p2_rounding_probe_not_rounded PASSED            [ 47%]
+tests/test_gate.py::test_p2_exactly_3_points_passes PASSED               [ 48%]
+tests/test_gate.py::test_waiver_on_p0_rejected PASSED                    [ 50%]
+tests/test_gate.py::test_waiver_on_p0_rejected_even_if_case_passed PASSED [ 51%]
+tests/test_gate.py::test_expired_waiver_fails_gate PASSED                [ 52%]
+tests/test_gate.py::test_same_waiver_valid_before_expiry PASSED          [ 53%]
+tests/test_gate.py::test_waiver_expires_the_day_after PASSED             [ 55%]
+tests/test_gate.py::test_valid_waiver_rescues_failing_run PASSED         [ 56%]
+tests/test_gate.py::test_waiver_keeps_total_unchanged PASSED             [ 57%]
+tests/test_gate.py::test_waiver_too_long_rejected PASSED                 [ 58%]
+tests/test_gate.py::test_waiver_missing_field_rejected PASSED            [ 60%]
+tests/test_gate.py::test_waiver_on_unknown_case_rejected PASSED          [ 61%]
+tests/test_gate.py::test_markdown_contains_all_levels PASSED             [ 62%]
+tests/test_gate.py::test_markdown_shows_pass_or_fail PASSED              [ 63%]
+tests/test_gate.py::test_markdown_lists_failures PASSED                  [ 65%]
+tests/test_gate.py::test_markdown_lists_waived PASSED                    [ 66%]
+tests/test_gate.py::test_threshold_shown_as_percent PASSED               [ 67%]
+tests/test_policy.py::test_policy_has_three_levels PASSED                [ 68%]
+tests/test_policy.py::test_policy_p0_is_zero_tolerance PASSED            [ 70%]
+tests/test_policy.py::test_policy_thresholds PASSED                      [ 71%]
+tests/test_policy.py::test_policy_has_changelog PASSED                   [ 72%]
+tests/test_policy.py::test_load_missing_policy_raises PASSED             [ 73%]
+tests/test_policy.py::test_waiver_files_parse[waivers_ok.yaml] PASSED    [ 75%]
+tests/test_policy.py::test_waiver_files_parse[waivers_p0.yaml] PASSED    [ 76%]
+tests/test_policy.py::test_waiver_files_parse[waivers_expired.yaml] PASSED [ 77%]
+tests/test_policy.py::test_waiver_files_parse[waivers_too_long.yaml] PASSED [ 78%]
+tests/test_policy.py::test_waiver_files_parse[waivers_missing.yaml] PASSED [ 80%]
+tests/test_policy.py::test_missing_waiver_file_is_empty_list PASSED      [ 81%]
+tests/test_policy.py::test_valid_waiver_passes_validation PASSED         [ 82%]
+tests/test_policy.py::test_p0_waiver_rejected PASSED                     [ 83%]
+tests/test_policy.py::test_too_long_waiver_rejected PASSED               [ 85%]
+tests/test_policy.py::test_exactly_14_days_allowed PASSED                [ 86%]
+tests/test_policy.py::test_15_days_rejected PASSED                       [ 87%]
+tests/test_policy.py::test_each_required_field_enforced[case_key] PASSED [ 88%]
+tests/test_policy.py::test_each_required_field_enforced[reason] PASSED   [ 90%]
+tests/test_policy.py::test_each_required_field_enforced[approver_role] PASSED [ 91%]
+tests/test_policy.py::test_each_required_field_enforced[expires_on] PASSED [ 92%]
+tests/test_policy.py::test_duplicate_case_key_rejected PASSED            [ 93%]
+tests/test_policy.py::test_unknown_case_rejected PASSED                  [ 95%]
+tests/test_policy.py::test_bad_expiry_date_rejected PASSED               [ 96%]
+tests/test_policy.py::test_classify_split PASSED                         [ 97%]
+tests/test_policy.py::test_p0_waiver_switch_is_off PASSED                [ 98%]
+tests/test_policy.py::test_max_waiver_days_is_14 PASSED                  [100%]
+
+============================= 80 passed in 0.51s ==============================
+
+[OK] 原件必须全绿 rc=0
+[ OK ] M1 P0 零容忍被关掉（AC1：1 条 P0 失败必须拦） -> 被抓到 ["[FAIL] V01 6 个场景的判定结果与设计一致 不一致 [('RUN_P0_FAIL', False, True)]"]
+[ OK ] M2 P1 阈值 98% 被放宽到 90%（P1 失败场景会通过） -> 被抓到 ["[FAIL] V01 6 个场景的判定结果与设计一致 不一致 [('RUN_P1_FAIL', False, True)]"]
+[ OK ] M3 P2 允许降幅 3 → 5 个百分点（4pp 场景会通过，AC4 失效） -> 被抓到 ["[FAIL] V01 6 个场景的判定结果与设计一致 不一致 [('RUN_P2_DROP4', False, True), ('RUN_P2_ROUND', False, True)]"]
+[ OK ] M4 降幅四舍五入（3.3750 → 3，取整探针会假通过） -> 被抓到 ["[FAIL] V01 6 个场景的判定结果与设计一致 不一致 [('RUN_P2_ROUND', False, True)]"]
+[ OK ] M5 关掉基线比较（只剩阈值判定） -> 被抓到 ["[FAIL] V01 6 个场景的判定结果与设计一致 不一致 [('RUN_P2_DROP4', False, True), ('RUN_P2_ROUND', False, True)]"]
+[ OK ] M6 过期豁免不再导致失败（AC3 失效） -> 被抓到 ['[FAIL] V10 过期豁免使门禁失败（在基准日 2026-11-27 判定） errors=[]']
+[ OK ] M7 允许豁免 P0（AC2 失效） -> 被抓到 ['[FAIL] V07 豁免 P0 用例时策略校验报错且门禁失败 errors=[]']
+[ OK ] M8 豁免有效期上限 14 → 21 天（15 天不再被拒） -> 被抓到 ['[FAIL] V20 有效期 15 天被拒（上限 14 天） errors=[]']
+[ OK ] M9 到期日当天就算过期（应次日失效） -> 被抓到 ['[FAIL] V12 到期日当天仍有效（次日才失效） today=2026-11-20 passed=False']
+[ OK ] M10 豁免不计为通过（豁免语义退化成只是「不在失败列表里」） -> 被抓到 ['[FAIL] V09 合规豁免把原本失败的运行救回通过（正向对照） 无豁免=False 有豁免=False']
+[ OK ] M11 豁免必填字段少查一项（approver_role 可缺） -> 被抓到 ['[FAIL] V21 缺 approver_role 的豁免被拒 errors=[]']
+[OK] 还原后原件仍全绿 rc=0
+
+MUTATION CAUGHT 11 / MISSED 0 / INVALID 0
+
+scanned=31 hits=0
+

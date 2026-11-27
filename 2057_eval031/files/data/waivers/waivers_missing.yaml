@@ -1,0 +1,4 @@
+waivers:
+  - case_key: GR-P2-007
+    reason: "缺批准人角色"
+    expires_on: "2026-12-05"

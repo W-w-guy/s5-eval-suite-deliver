@@ -1,0 +1,5 @@
+waivers:
+  - case_key: GR-P0-003
+    reason: "试图豁免 P0"
+    approver_role: "质量负责人"
+    expires_on: "2026-12-05"
