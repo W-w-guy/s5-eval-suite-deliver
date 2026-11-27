@@ -1,0 +1,92 @@
+# WINDOWS side verification log
+# host: DESKTOP-6BLPI5P  os: Windows 11  platform: win32
+# python: 3.11.7  pytest: see below
+# generated: 2026-11-28T00:28:15
+# unpacked into a brand-new directory from match3318.zip
+
+$ E:\Python\python3.11\python.exe tools/gen.py
+WROTE docs/match_steps.json 7447 bytes
+WROTE docs/referral_flow.md 2058 bytes
+WROTE docs/pre_brief_template.md 2222 bytes
+WROTE docs/match_scripts.csv 2051 bytes
+WROTE docs/match_tables.xlsx 36993 bytes
+WROTE docs/match_expected.csv 2852 bytes
+WROTE docs/coverage.csv 477 bytes
+WROTE docs/match_sop.md 16342 bytes
+examples=10 categories=8
+[rc=0]
+
+$ E:\Python\python3.11\python.exe tools/verify.py
+[PASS] V01 步骤不少于 7 个（实测 10 个） 步骤 10
+[PASS] V02 每步岗位/时限/说明/输出/检查项齐全 缺字段 无；检查项问题 无
+[PASS] V03 每步岗位取自已声明岗位表 岗位 ['招商主管', '招商顾问']
+[PASS] V04 话术共 6 条、3 类各 2 版（实测 6 条） 条数 6；分类 {'向需求方介绍候选方': 2, '向供给方说明需求': 2, '洽谈邀约': 2}
+[PASS] V05 每条话术都使用变量占位（vars 非空且正文真的出现） 各条变量数 [4, 3, 4, 3, 4, 3]
+[PASS] V06 每类 2 版的版本名不重复（正式版/简短版） 版本 {'向需求方介绍候选方': ['正式版', '简短版'], '向供给方说明需求': ['正式版', '简短版'], '洽谈邀约': ['正式版', '简短版']}
+[PASS] V07 话术渲染后不残留变量占位 逐条渲染 6 条均无残留
+[PASS] V08 话术中不含任何联系方式类变量或硬编码号码 问题 无
+[PASS] V09 向供给方说明需求的两版都显式声明「同意前不提供对方联系方式」 两版声明：[True, True]
+[PASS] V10 正文写明铁律：双方同意前不透露联系方式（多处出现） 关键句出现 3 次
+[PASS] V11 S03 的必填输出写明「不含联系方式与企业全称」且检查项含对应反向校验 S03 输出：说明记录：只含需求画像与匹配点，**不含需求方联系方式与企业全称** / 供给方的初步意向（愿意/需再了解/拒绝）
+[PASS] V12 S09 口径为 workdays 且 3 个工作日从周三 10:00 推得 2026-05-08T10:00 S09 口径=workdays 截止=2026-05-08T10:00（若误按 work 24 小时会得到 2026-05-08T16:00）
+[PASS] V13 跨周末推算：周五 10:00 + 3 工作日 = 下周二 05-12 10:00（周末不计） 周五起算 3 工作日 → 2026-05-12 10:00
+[PASS] V14 超时升级链写明：一级招商主管 8 工作小时、二次升运营总监 S10 岗位=招商主管；正文含升级表=True
+[PASS] V15 S08 会后 24 小时为 natural 口径（自然时间，不是工作时段） S08 口径=natural 截止=2026-05-07T10:00
+[PASS] V16 流程图含引荐全链路 9 个节点且每条边标注条件 节点 9；flow 问题 无
+[PASS] V17 交换联系方式（N5）的唯一入口是「双方均同意」（N4） 指向 N5 的边来自 ['N4']；N4 的出边 ['N5']
+[PASS] V18 供给方拒绝时回到需求登记（存在 N3→N1 的拒绝环路） N3 出边 ['N4', 'N1']
+[PASS] V19 步骤 JSON 可解析且条目数=步骤数 条目 10
+[PASS] V20 会前简报模板含两版（需求方版/供给方版）且 7 个字段齐全 字段缺失 []
+[PASS] V21 引擎重算 10 行与 CSV 全 12 列一致 不一致 无
+[PASS] V22 每节结果行与 CSV 一致（10 行全比） 不一致 无
+[PASS] V23 8 类情形均至少 1 步且并集覆盖全部 10 步 M1=2；M2=2；M3=1；M4=1；M5=1；M6=1；M7=1；M8=1
+
+SUMMARY 23/23 PASS
+[rc=0]
+
+$ E:\Python\python3.11\python.exe -m pytest tests -v --no-header -p no:cacheprovider -o addopts=
+============================= test session starts =============================
+collecting ... collected 11 items
+
+tests\test_examples.py::test_row_count PASSED                            [  9%]
+tests\test_examples.py::test_case_matches_csv[S01] PASSED                [ 18%]
+tests\test_examples.py::test_case_matches_csv[S02] PASSED                [ 27%]
+tests\test_examples.py::test_case_matches_csv[S03] PASSED                [ 36%]
+tests\test_examples.py::test_case_matches_csv[S04] PASSED                [ 45%]
+tests\test_examples.py::test_case_matches_csv[S05] PASSED                [ 54%]
+tests\test_examples.py::test_case_matches_csv[S06] PASSED                [ 63%]
+tests\test_examples.py::test_case_matches_csv[S07] PASSED                [ 72%]
+tests\test_examples.py::test_case_matches_csv[S08] PASSED                [ 81%]
+tests\test_examples.py::test_case_matches_csv[S09] PASSED                [ 90%]
+tests\test_examples.py::test_case_matches_csv[S10] PASSED                [100%]
+
+============================= 11 passed in 0.53s ==============================
+[rc=0]
+
+$ E:\Python\python3.11\python.exe tools/mutate.py
+[OK] 原件必须全绿 rc=0
+[ OK ] M1 S09 改成 work 口径（按工作小时算） -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M2 3 个工作日改成 2 个 -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M3 wrapS08 改成工作时段口径 -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M4 向供给方话术里加入联系方式变量 -> 被抓到 ['SUMMARY 21/23 PASS']
+[ OK ] M5 交换联系方式的入口改成 N3（不经双方同意） -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M6 删掉拒绝环路 -> 被抓到 ['SUMMARY 22/23 PASS']
+[ OK ] M7 给「交换联系方式」加一条绕过双方同意的直达边 -> 被抓到 ['SUMMARY 22/23 PASS']
+MUTATION PASS（7/7 被抓到）
+[rc=0]
+
+$ E:\Python\python3.11\python.exe tools/pii_scan.py .
+scanned=34 hits=0
+[rc=0]
+
+=== checksums after running the whole suite (must be 0 mismatches) ===
+33 files checked, 0 mismatches
+
+=== artifact hashes (7 files, compared byte-for-byte with Ubuntu) ===
+cfb80c0a3b501e919b25eb378426277957e3e14b3cdd2f56bb6906b65237bde2  docs/match_sop.md
+a78c1793fa1d19c87566ce695807b48bc64bba1bb9efcee75c94138817820a3b  docs/match_steps.json
+02c0830699c5a523ab8ce37f5fd42a2b86409c25e7cb3f7c05c16430f6ec9745  docs/match_scripts.csv
+22a057f91af9e07267033251dbc933778dd45bef36faa542721033def3dd6476  docs/pre_brief_template.md
+2d1a6572d6f19f8c0b88c7403417f92345ea4712aa63333041e107aebc569c22  docs/referral_flow.md
+f3f65e5f11e4dbaf7c445428fd704187263384e88f67f84c11de0ce6d24ec88c  docs/coverage.csv
+4d535242d2832e06a8fba44ebe8cac32411fa5bd465b77d1330e90439018ce0a  docs/match_expected.csv
