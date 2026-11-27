@@ -1,0 +1,112 @@
+=== Ubuntu 3.12.3 / 全新解压目录 ===
+[PASS] V01 字段类型恰 8 种 类型 ['date', 'enum', 'list', 'money_fen', 'rate_bp', 'string', 'summary', 'uscc']
+[PASS] V02 8 种类型各自都有正例与反例用例 缺 []；明细 {'date': (31, 3), 'enum': (31, 3), 'list': (27, 6), 'money_fen': (30, 4), 'rate_bp': (30, 4), 'string': (30, 4), 'summary': (30, 4), 'uscc': (31, 3)}
+[PASS] V03 付款节点多 1 项 → extra=1 且 missing=0 实测 {'correct': 3, 'wrong': 0, 'missing': 0, 'extra': 1}
+[PASS] V04 付款节点少 1 项 → missing=1 且 extra=0 实测 {'correct': 2, 'wrong': 0, 'missing': 1, 'extra': 0}
+[PASS] V05 付款节点完全一致时 3 项全 correct 实测 {'correct': 3, 'wrong': 0, 'missing': 0, 'extra': 0}
+[PASS] V06 金额相差 1 分判 wrong（无容差） 实测 {'correct': 0, 'wrong': 1, 'missing': 0, 'extra': 0}
+[PASS] V07 金额完全相等判 correct 
+[PASS] V08 critical 字段出错时用例不通过 实测 {'C09': False, 'C10': False, 'C15': False, 'C28': False, 'C29': False}
+[PASS] V09 critical_hit 记录了出错的 critical 字段 实测 {'C09': ['total_amount'], 'C10': ['total_amount'], 'C15': ['buyer_uscc'], 'C28': ['total_amount'], 'C29': ['buyer_uscc']}
+[PASS] V10 非 critical 字段单错不触发 critical_hit 且仍通过（正向对照） 
+[PASS] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 []
+[PASS] V12 手算表内部自洽（分子分母与计数对得上） 异常 []
+[PASS] V13 用例数满足工单「30 个以上」（实测 34） cases=34
+[PASS] V14 用例 id 唯一 重复 无
+[PASS] V15 suite.yaml 的字段类型与 critical 标记和代码定义一致 critical=['buyer_uscc', 'total_amount']
+[PASS] V16 suite.yaml 里 8 个字段齐全 fields=8
+[PASS] V17 suite.yaml 自写解析器与 PyYAML 结论一致 PyYAML 6.0.1
+[PASS] V18 pytest 全绿且用例数不少于 30 PASSED=68 rc=0
+[PASS] V19 每条用例的通过/不通过与手算一致 不一致 []
+[PASS] V20 通过的用例恰 27 条、不通过 7 条（手算） 实测通过 27
+
+SUMMARY 20/20 PASS
+============================= test session starts ==============================
+collecting ... collected 68 items
+
+tests/test_normalize.py::test_string_fullwidth_equals_halfwidth PASSED   [  1%]
+tests/test_normalize.py::test_string_case_insensitive PASSED             [  2%]
+tests/test_normalize.py::test_string_collapses_inner_space PASSED        [  4%]
+tests/test_normalize.py::test_string_strips_zero_width PASSED            [  5%]
+tests/test_normalize.py::test_string_none_rejected PASSED                [  7%]
+tests/test_normalize.py::test_string_different_is_not_equal PASSED       [  8%]
+tests/test_normalize.py::test_date_formats_unify[2026-05-06] PASSED      [ 10%]
+tests/test_normalize.py::test_date_formats_unify[2026/5/6] PASSED        [ 11%]
+tests/test_normalize.py::test_date_formats_unify[2026\u5e745\u67086\u65e5] PASSED [ 13%]
+tests/test_normalize.py::test_date_formats_unify[20260506] PASSED        [ 14%]
+tests/test_normalize.py::test_date_formats_unify[2026.5.6] PASSED        [ 16%]
+tests/test_normalize.py::test_date_pads_single_digit PASSED              [ 17%]
+tests/test_normalize.py::test_date_bad_format_rejected PASSED            [ 19%]
+tests/test_normalize.py::test_date_out_of_range_rejected PASSED          [ 20%]
+tests/test_normalize.py::test_date_one_day_apart_differs PASSED          [ 22%]
+tests/test_normalize.py::test_money_int_accepted PASSED                  [ 23%]
+tests/test_normalize.py::test_money_one_fen_differs PASSED               [ 25%]
+tests/test_normalize.py::test_money_float_rejected PASSED                [ 26%]
+tests/test_normalize.py::test_money_bool_rejected PASSED                 [ 27%]
+tests/test_normalize.py::test_money_numeric_string_accepted PASSED       [ 29%]
+tests/test_normalize.py::test_rate_bp_int_accepted PASSED                [ 30%]
+tests/test_normalize.py::test_rate_bp_one_bp_differs PASSED              [ 32%]
+tests/test_normalize.py::test_rate_bp_float_rejected PASSED              [ 33%]
+tests/test_normalize.py::test_uscc_lowercase_upper PASSED                [ 35%]
+tests/test_normalize.py::test_uscc_strips_space PASSED                   [ 36%]
+tests/test_normalize.py::test_uscc_wrong_length_rejected PASSED          [ 38%]
+tests/test_normalize.py::test_uscc_one_char_differs PASSED               [ 39%]
+tests/test_normalize.py::test_enum_maps_to_canonical[\u6708\u7ed3-monthly] PASSED [ 41%]
+tests/test_normalize.py::test_enum_maps_to_canonical[\u6708\u7ed330\u5929-monthly] PASSED [ 42%]
+tests/test_normalize.py::test_enum_maps_to_canonical[\u5b63\u5ea6-quarterly] PASSED [ 44%]
+tests/test_normalize.py::test_enum_maps_to_canonical[monthly-monthly] PASSED [ 45%]
+tests/test_normalize.py::test_enum_unknown_keeps_casefolded PASSED       [ 47%]
+tests/test_normalize.py::test_enum_different_canonical_differs PASSED    [ 48%]
+tests/test_normalize.py::test_scalar_dispatch_all_six PASSED             [ 50%]
+tests/test_normalize.py::test_scalar_dispatch_rejects_container_type PASSED [ 51%]
+tests/test_normalize.py::test_all_types_is_eight PASSED                  [ 52%]
+tests/test_scorer.py::test_list_plus_one_counts_extra PASSED             [ 54%]
+tests/test_scorer.py::test_list_minus_one_counts_missing PASSED          [ 55%]
+tests/test_scorer.py::test_list_same_key_diff_value_is_wrong PASSED      [ 57%]
+tests/test_scorer.py::test_list_aligned_by_seq_not_by_position PASSED    [ 58%]
+tests/test_scorer.py::test_list_both_empty_no_counts PASSED              [ 60%]
+tests/test_scorer.py::test_list_expected_empty_actual_two_all_extra PASSED [ 61%]
+tests/test_scorer.py::test_money_one_fen_is_wrong PASSED                 [ 63%]
+tests/test_scorer.py::test_money_equal_is_correct PASSED                 [ 64%]
+tests/test_scorer.py::test_critical_error_fails_case[C09] PASSED         [ 66%]
+tests/test_scorer.py::test_critical_error_fails_case[C10] PASSED         [ 67%]
+tests/test_scorer.py::test_critical_error_fails_case[C15] PASSED         [ 69%]
+tests/test_scorer.py::test_critical_error_fails_case[C28] PASSED         [ 70%]
+tests/test_scorer.py::test_critical_error_fails_case[C29] PASSED         [ 72%]
+tests/test_scorer.py::test_critical_hit_recorded[C09] PASSED             [ 73%]
+tests/test_scorer.py::test_critical_hit_recorded[C10] PASSED             [ 75%]
+tests/test_scorer.py::test_critical_hit_recorded[C15] PASSED             [ 76%]
+tests/test_scorer.py::test_critical_hit_recorded[C28] PASSED             [ 77%]
+tests/test_scorer.py::test_critical_hit_recorded[C29] PASSED             [ 79%]
+tests/test_scorer.py::test_critical_missing_counts_missing PASSED        [ 80%]
+tests/test_scorer.py::test_noncritical_single_error_still_passes PASSED  [ 82%]
+tests/test_scorer.py::test_many_errors_fails_by_threshold PASSED         [ 83%]
+tests/test_scorer.py::test_summary_structured_all_hit PASSED             [ 85%]
+tests/test_scorer.py::test_summary_structured_missing_point PASSED       [ 86%]
+tests/test_scorer.py::test_summary_structured_extra_point PASSED         [ 88%]
+tests/test_scorer.py::test_summary_free_text_counts_recall_only PASSED   [ 89%]
+tests/test_scorer.py::test_summary_free_text_notes_precision_not_applicable PASSED [ 91%]
+tests/test_scorer.py::test_metrics_formula_hand_checked PASSED           [ 92%]
+tests/test_scorer.py::test_metrics_wrong_counts_in_both_denominators PASSED [ 94%]
+tests/test_scorer.py::test_metrics_all_correct_is_one PASSED             [ 95%]
+tests/test_scorer.py::test_metrics_empty_is_zero_not_error PASSED        [ 97%]
+tests/test_scorer.py::test_overall_equals_sum_of_fields PASSED           [ 98%]
+tests/test_scorer.py::test_unknown_field_type_notes_not_crash PASSED     [100%]
+
+============================== 68 passed in 0.28s ==============================
+[OK] 原件必须全绿 rc=0
+[ OK ] M1 金额容差 0 → 1 分（AC3：1 分必须判 wrong） -> 被抓到 ["[FAIL] V06 金额相差 1 分判 wrong（无容差） 实测 {'correct': 1, 'wrong': 0, 'missing': 0, 'extra': 0}"]
+[ OK ] M2 费率容差 0 → 1 基点 -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C12', 'tax_rate', 'precision', '1.000000000000', '0.000000000000'), ('C12', 'tax_rate', 'recall', '1.000000000000', '0.000000000000'), ('C12', 'tax_rate', 'f1', '1.000000000000', '0.000000000000'), ('C12', '__overall__', 'precision', '1.000000000000', '0.916666666667')]"]
+[ OK ] M3 critical 强制失效（AC3：critical 错必须不通过） -> 被抓到 ["[FAIL] V08 critical 字段出错时用例不通过 实测 {'C09': True, 'C10': True, 'C15': True, 'C28': True, 'C29': True}"]
+[ OK ] M4 wrong 不计入任何分母（改坏 P/R/F1 口径） -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C04', '__overall__', 'precision', '1.000000000000', '0.916666666667'), ('C04', '__overall__', 'recall', '1.000000000000', '0.916666666667'), ('C04', '__overall__', 'f1', '1.000000000000', '0.916666666667'), ('C07', '__overall__', 'precision', '1.000000000000', '0.916666666667')]"]
+[ OK ] M5 通过阈值 0.8 → 0.0（多错用例也会通过） -> 被抓到 ['[FAIL] V18 pytest 全绿且用例数不少于 30 PASSED=67 rc=1']
+[ OK ] M6 list 多出的项记成 missing（AC2：应记 extra） -> 被抓到 ["[FAIL] V03 付款节点多 1 项 → extra=1 且 missing=0 实测 {'correct': 3, 'wrong': 0, 'missing': 1, 'extra': 0}"]
+[ OK ] M7 list 同 key 但值不同也判 correct（逐项比对失效） -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C22', 'pay_nodes', 'precision', '1.000000000000', '0.666666666667'), ('C22', 'pay_nodes', 'recall', '1.000000000000', '0.666666666667'), ('C22', 'pay_nodes', 'f1', '1.000000000000', '0.666666666667'), ('C22', '__overall__', 'precision', '1.000000000000', '0.916666666667')]"]
+[ OK ] M8 uscc 不转大写（小写合法值被判错） -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C13', 'buyer_uscc', 'precision', '0.000000000000', '1.000000000000'), ('C13', 'buyer_uscc', 'recall', '0.000000000000', '1.000000000000'), ('C13', 'buyer_uscc', 'f1', '0.000000000000', '1.000000000000'), ('C13', '__overall__', 'precision', '0.916666666667', '1.000000000000')]"]
+[ OK ] M9 date 不做 ISO 归一（多写法被判错） -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C05', 'sign_date', 'precision', '0.000000000000', '1.000000000000'), ('C05', 'sign_date', 'recall', '0.000000000000', '1.000000000000'), ('C05', 'sign_date', 'f1', '0.000000000000', '1.000000000000'), ('C05', '__overall__', 'precision', '0.916666666667', '1.000000000000')]"]
+[ OK ] M10 string 不折叠大小写 -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C02', 'contract_no', 'precision', '0.000000000000', '1.000000000000'), ('C02', 'contract_no', 'recall', '0.000000000000', '1.000000000000'), ('C02', 'contract_no', 'f1', '0.000000000000', '1.000000000000'), ('C02', '__overall__', 'precision', '0.916666666667', '1.000000000000')]"]
+[ OK ] M11 金额允许浮点（精度防线失效） -> 被抓到 ['[FAIL] V18 pytest 全绿且用例数不少于 30 PASSED=66 rc=1']
+[OK] 还原后原件仍全绿 rc=0
+
+MUTATION CAUGHT 11 / MISSED 0 / INVALID 0
+scanned=55 hits=0

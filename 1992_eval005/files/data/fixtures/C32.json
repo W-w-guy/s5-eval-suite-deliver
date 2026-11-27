@@ -1,0 +1,104 @@
+{
+ "actual": {
+  "buyer_uscc": "91310000AAAAAAAAAA",
+  "contract_no": "Z",
+  "pay_cycle": "quarterly",
+  "pay_nodes": [
+   {
+    "due": "2030-01-01",
+    "ratio_bp": 1,
+    "seq": 9
+   }
+  ],
+  "sign_date": "2030-12-31",
+  "summary": [
+   "全不相干"
+  ],
+  "tax_rate": 1,
+  "total_amount": 1
+ },
+ "expected": {
+  "buyer_uscc": "91310000MA1FL2XY3K",
+  "contract_no": "HT-2026-0011",
+  "pay_cycle": "monthly",
+  "pay_nodes": [
+   {
+    "due": "2026-06-01",
+    "ratio_bp": 3000,
+    "seq": 1
+   },
+   {
+    "due": "2026-09-01",
+    "ratio_bp": 4000,
+    "seq": 2
+   },
+   {
+    "due": "2026-12-01",
+    "ratio_bp": 3000,
+    "seq": 3
+   }
+  ],
+  "sign_date": "2026-05-06",
+  "summary": [
+   "付款方式为分期",
+   "含税总价固定",
+   "逾期按日计息"
+  ],
+  "tax_rate": 600,
+  "total_amount": 1280000
+ },
+ "hand": {
+  "buyer_uscc": [
+   0,
+   1,
+   0,
+   0
+  ],
+  "contract_no": [
+   0,
+   1,
+   0,
+   0
+  ],
+  "pay_cycle": [
+   0,
+   1,
+   0,
+   0
+  ],
+  "pay_nodes": [
+   0,
+   0,
+   3,
+   1
+  ],
+  "sign_date": [
+   0,
+   1,
+   0,
+   0
+  ],
+  "summary": [
+   0,
+   0,
+   3,
+   1
+  ],
+  "tax_rate": [
+   0,
+   1,
+   0,
+   0
+  ],
+  "total_amount": [
+   0,
+   1,
+   0,
+   0
+  ]
+ },
+ "id": "C32",
+ "passed": false,
+ "title": "所有字段都不一致（全错对照）",
+ "why": "全错"
+}

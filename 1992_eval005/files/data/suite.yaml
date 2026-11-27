@@ -1,0 +1,33 @@
+# 结构化输出评分套件配置（虚构）
+suite:
+  id: s5-eval-005
+  version: v1
+  pass_f1_threshold: 0.8
+  money_tolerance_fen: 0
+  rate_tolerance_bp: 0
+fields:
+  contract_no:
+    type: string
+  sign_date:
+    type: date
+  total_amount:
+    type: money_fen
+    critical: true
+  tax_rate:
+    type: rate_bp
+  buyer_uscc:
+    type: uscc
+    critical: true
+  pay_cycle:
+    type: enum
+    mapping:
+      月结: monthly
+      月结30天: monthly
+      季度: quarterly
+      quarterly: quarterly
+      monthly: monthly
+  pay_nodes:
+    type: list
+    key: seq
+  summary:
+    type: summary

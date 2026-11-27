@@ -1,0 +1,36 @@
+{
+ "buyer_uscc": {
+  "critical": true,
+  "type": "uscc"
+ },
+ "contract_no": {
+  "type": "string"
+ },
+ "pay_cycle": {
+  "mapping": {
+   "monthly": "monthly",
+   "quarterly": "quarterly",
+   "季度": "quarterly",
+   "月结": "monthly",
+   "月结30天": "monthly"
+  },
+  "type": "enum"
+ },
+ "pay_nodes": {
+  "key": "seq",
+  "type": "list"
+ },
+ "sign_date": {
+  "type": "date"
+ },
+ "summary": {
+  "type": "summary"
+ },
+ "tax_rate": {
+  "type": "rate_bp"
+ },
+ "total_amount": {
+  "critical": true,
+  "type": "money_fen"
+ }
+}
