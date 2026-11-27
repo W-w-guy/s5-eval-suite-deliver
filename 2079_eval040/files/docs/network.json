@@ -1,0 +1,32 @@
+{
+ "bars_visible": 8,
+ "base": "http://127.0.0.1:55781/",
+ "drill_columns": [
+  "draft_id",
+  "scenario",
+  "reject_reason",
+  "rejected_at"
+ ],
+ "drill_rows": 56,
+ "external_hosts": [],
+ "forbidden_fields_in_table": [],
+ "hosts": [
+  "127.0.0.1"
+ ],
+ "low_sample_hints": 1,
+ "request_count": 6,
+ "requests": [
+  "http://127.0.0.1:55781/",
+  "http://127.0.0.1:55781/assets/index-CRPhGopa.js",
+  "http://127.0.0.1:55781/assets/index-D-pzvuCp.css",
+  "http://127.0.0.1:55781/mock.json",
+  "http://127.0.0.1:55781/mock.json",
+  "http://127.0.0.1:55781/mock.json"
+ ],
+ "shots": [
+  "01_board_day.png",
+  "02_board_week.png",
+  "03_drilldown.png"
+ ],
+ "week_label": "week"
+}

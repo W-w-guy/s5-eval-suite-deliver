@@ -1,0 +1,44 @@
+=== Ubuntu 3.12.3 / node 18.19.1 / 全新解压目录 ===
+[PASS] V01 mock 覆盖 7 个正常工具（工单要求至少 7 个） 实测 7 个
+[PASS] V02 mock 覆盖 1 个 low_sample 分组 contract_clause（样本 11）
+[PASS] V03 low_sample 标记与样本数一致（<20 才算 low） 正常最小 391 ／ low 最大 11
+[PASS] V04 4 个查询接口的 mock 数据齐全 ['prompt_compare', 'rejected', 'summary', 'tools', 'trend_day', 'trend_week']
+[PASS] V05 日视图 14 个点、周视图 6 个点（两种视图数据不同） day=14 week=6
+[PASS] V06 提示词版本对比：3 个工具 × 3 个版本 行数 9
+[PASS] V07 版本对比表带发布日期 {'v1': '2026-09-15', 'v2': '2026-10-20', 'v3': '2026-11-18'}
+[PASS] V08 下钻接口返回的字段里没有正文（只有 draft_id/场景/原因/时间） 字段 ['draft_id', 'reject_reason', 'rejected_at', 'scenario', 'tool_key']
+[PASS] V09 下钻字段集合与设计一致 ['draft_id', 'reject_reason', 'rejected_at', 'scenario', 'tool_key']
+[PASS] V10 接口响应里写明「不返回正文、查看正文需跳转并按权限校验」 本接口不返回草稿正文；查看正文请跳转复核队列并按权限校验
+[PASS] V11 前端用 React + TDesign（不是静态 HTML 桩） ['react', 'react-dom', 'react-router-dom', 'tdesign-icons-react', 'tdesign-react']
+[PASS] V12 装了 Vitest 
+[PASS] V13 未引入图表库依赖（图表为内联 SVG 自绘，天然不依赖 CDN） 
+[PASS] V14 源码文件齐全（TypeScript 组件与页面） 8 个
+[PASS] V15 两个真路由页面：看板 + 下钻 ['QualityBoard.tsx', 'RejectedList.tsx']
+[PASS] V16 环境有 node 与 npm（真构建与真跑测试的前提） node=/usr/bin/node
+[PASS] V17 node_modules 已存在（clean 环境应能 npm ci 重建） 
+[PASS] V18 vite build 成功产出 dist rc=0
+[PASS] V19 dist/index.html 存在 
+[PASS] V20 dist/index.html 里没有外部链接（不引用 CDN） 
+[PASS] V21 Vitest 全绿 rc=0
+[PASS] V22 Vitest 用例数不少于 12 passed=17
+[PASS] V23 真 Chromium 抓图成功（缺 playwright 即判失败，不跳过） 
+[PASS] V24 日视图 / 周视图 / 下钻页三张截图齐全 ['01_board_day.png', '02_board_week.png', '03_drilldown.png']
+[PASS] V25 点击「按周」后界面切到 week label=week
+[PASS] V26 页面加载时**没有任何外部域名请求**（AC4 核心） 主机 ['127.0.0.1']；请求 6 个
+[PASS] V27 条形图中可见的工具条数 ≥7 实测 8 条
+[PASS] V28 low_sample 分组显示提示文案（DOM 里读到 1 处） 实测 1 处
+[PASS] V29 下钻页表格恰好 4 列，无正文字段 ['draft_id', 'scenario', 'reject_reason', 'rejected_at']
+[PASS] V30 下钻页列键里没有正文字段 
+[PASS] V31 三张截图都非空白（>8KB） 字节数 {'01_board_day.png': 130312, '02_board_week.png': 129288, '03_drilldown.png': 338448}
+[PASS] V32 三张截图内容不同（不是同一张复制三次） [129288, 130312, 338448]
+
+SUMMARY 32/32 PASS
+--- npm test ---
+ ✓ src/__tests__/board.test.tsx (14 tests) 1596ms
+   ✓ AC1 七个工具都在条形图中可见 > 恰好 7 个非 low_sample 工具，且每个都有独立条形 456ms
+
+ Test Files  2 passed (2)
+      Tests  17 passed (17)
+   Start at  16:22:37
+   Duration  11.54s (transform 3.81s, setup 299ms, collect 8.62s, tests 1.60s, environment 1.37s, prepare 280ms)
+

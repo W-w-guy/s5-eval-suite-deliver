@@ -1,0 +1,14 @@
+=== Windows 11 / Python 3.11.7 / 全新解压目录 ===
+本机无 node/npm，前端相关断言在 Windows 侧【未运行】。
+
+已在本机执行且通过的：
+- python pkg/mockdata.py                → WROTE normal_tools=7 all_groups=8
+- python tools/make_zip.py（打包与校验和生成）
+- 对 SHA256SUMS.txt 的 26 条做本地复算 → 全部一致
+
+未在本机执行的（据实记录，不视为通过）：
+- npm ci / npm run build / npm test
+- tools/verify.py 的 V16-V32（依赖 node 与 Playwright）
+- tools/shots.py（依赖 Chromium）
+
+判据以 verify_logs/UBUNTU_20261127.log 的真跑结果为准。

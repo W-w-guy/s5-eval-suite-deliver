@@ -1,0 +1,789 @@
+{
+ "prompt_compare": {
+  "rows": [
+   {
+    "adopt_rate": 0.752,
+    "modify_p50_chars": 162,
+    "released_on": "2026-09-15",
+    "tool_key": "meeting_minutes",
+    "tool_name": "会议纪要生成",
+    "version": "v1"
+   },
+   {
+    "adopt_rate": 0.782,
+    "modify_p50_chars": 140,
+    "released_on": "2026-10-20",
+    "tool_key": "meeting_minutes",
+    "tool_name": "会议纪要生成",
+    "version": "v2"
+   },
+   {
+    "adopt_rate": 0.812,
+    "modify_p50_chars": 118,
+    "released_on": "2026-11-18",
+    "tool_key": "meeting_minutes",
+    "tool_name": "会议纪要生成",
+    "version": "v3"
+   },
+   {
+    "adopt_rate": 0.684,
+    "modify_p50_chars": 162,
+    "released_on": "2026-09-15",
+    "tool_key": "weekly_report",
+    "tool_name": "周报草稿",
+    "version": "v1"
+   },
+   {
+    "adopt_rate": 0.714,
+    "modify_p50_chars": 140,
+    "released_on": "2026-10-20",
+    "tool_key": "weekly_report",
+    "tool_name": "周报草稿",
+    "version": "v2"
+   },
+   {
+    "adopt_rate": 0.744,
+    "modify_p50_chars": 118,
+    "released_on": "2026-11-18",
+    "tool_key": "weekly_report",
+    "tool_name": "周报草稿",
+    "version": "v3"
+   },
+   {
+    "adopt_rate": 0.857,
+    "modify_p50_chars": 162,
+    "released_on": "2026-09-15",
+    "tool_key": "intent_classify",
+    "tool_name": "问询意图分类",
+    "version": "v1"
+   },
+   {
+    "adopt_rate": 0.887,
+    "modify_p50_chars": 140,
+    "released_on": "2026-10-20",
+    "tool_key": "intent_classify",
+    "tool_name": "问询意图分类",
+    "version": "v2"
+   },
+   {
+    "adopt_rate": 0.917,
+    "modify_p50_chars": 118,
+    "released_on": "2026-11-18",
+    "tool_key": "intent_classify",
+    "tool_name": "问询意图分类",
+    "version": "v3"
+   }
+  ]
+ },
+ "rejected": {
+  "note": "本接口不返回草稿正文；查看正文请跳转复核队列并按权限校验",
+  "rows": [
+   {
+    "draft_id": "DR-MEETIN-001",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-20T09:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-MEETIN-002",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-21T10:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-MEETIN-003",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-22T11:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-MEETIN-004",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-23T12:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-MEETIN-005",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-24T13:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-MEETIN-006",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-25T14:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-MEETIN-007",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-26T15:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-MEETIN-008",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-20T16:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "meeting_minutes"
+   },
+   {
+    "draft_id": "DR-WEEKLY-001",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-20T09:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-WEEKLY-002",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-21T10:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-WEEKLY-003",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-22T11:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-WEEKLY-004",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-23T12:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-WEEKLY-005",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-24T13:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-WEEKLY-006",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-25T14:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-WEEKLY-007",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-26T15:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-WEEKLY-008",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-20T16:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "weekly_report"
+   },
+   {
+    "draft_id": "DR-INTENT-001",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-20T09:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-INTENT-002",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-21T10:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-INTENT-003",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-22T11:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-INTENT-004",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-23T12:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-INTENT-005",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-24T13:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-INTENT-006",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-25T14:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-INTENT-007",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-26T15:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-INTENT-008",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-20T16:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "intent_classify"
+   },
+   {
+    "draft_id": "DR-LEAD_P-001",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-20T09:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-LEAD_P-002",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-21T10:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-LEAD_P-003",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-22T11:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-LEAD_P-004",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-23T12:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-LEAD_P-005",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-24T13:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-LEAD_P-006",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-25T14:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-LEAD_P-007",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-26T15:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-LEAD_P-008",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-20T16:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "lead_profile"
+   },
+   {
+    "draft_id": "DR-KB_ANS-001",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-20T09:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-KB_ANS-002",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-21T10:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-KB_ANS-003",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-22T11:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-KB_ANS-004",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-23T12:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-KB_ANS-005",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-24T13:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-KB_ANS-006",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-25T14:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-KB_ANS-007",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-26T15:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-KB_ANS-008",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-20T16:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "kb_answer"
+   },
+   {
+    "draft_id": "DR-COPY_D-001",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-20T09:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-COPY_D-002",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-21T10:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-COPY_D-003",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-22T11:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-COPY_D-004",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-23T12:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-COPY_D-005",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-24T13:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-COPY_D-006",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-25T14:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-COPY_D-007",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-26T15:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-COPY_D-008",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-20T16:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "copy_draft"
+   },
+   {
+    "draft_id": "DR-INTEL_-001",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-20T09:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "intel_brief"
+   },
+   {
+    "draft_id": "DR-INTEL_-002",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-21T10:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "intel_brief"
+   },
+   {
+    "draft_id": "DR-INTEL_-003",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-22T11:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "intel_brief"
+   },
+   {
+    "draft_id": "DR-INTEL_-004",
+    "reject_reason": "合规风险",
+    "rejected_at": "2026-11-23T12:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "intel_brief"
+   },
+   {
+    "draft_id": "DR-INTEL_-005",
+    "reject_reason": "事实错误",
+    "rejected_at": "2026-11-24T13:15:00Z",
+    "scenario": "入会引导",
+    "tool_key": "intel_brief"
+   },
+   {
+    "draft_id": "DR-INTEL_-006",
+    "reject_reason": "字段缺失",
+    "rejected_at": "2026-11-25T14:15:00Z",
+    "scenario": "续约沟通",
+    "tool_key": "intel_brief"
+   },
+   {
+    "draft_id": "DR-INTEL_-007",
+    "reject_reason": "口径不符",
+    "rejected_at": "2026-11-26T15:15:00Z",
+    "scenario": "线索回访",
+    "tool_key": "intel_brief"
+   },
+   {
+    "draft_id": "DR-INTEL_-008",
+    "reject_reason": "篇幅过长",
+    "rejected_at": "2026-11-20T16:15:00Z",
+    "scenario": "政策解读",
+    "tool_key": "intel_brief"
+   }
+  ]
+ },
+ "summary": {
+  "by_tool": [
+   {
+    "adopt_rate": 0.812,
+    "exact_adopt_rate": 0.604,
+    "low_sample": false,
+    "modify_p50_chars": 118,
+    "reject_rate": 0.093,
+    "samples": 1284,
+    "tool_key": "meeting_minutes",
+    "tool_name": "会议纪要生成"
+   },
+   {
+    "adopt_rate": 0.744,
+    "exact_adopt_rate": 0.512,
+    "low_sample": false,
+    "modify_p50_chars": 156,
+    "reject_rate": 0.121,
+    "samples": 862,
+    "tool_key": "weekly_report",
+    "tool_name": "周报草稿"
+   },
+   {
+    "adopt_rate": 0.917,
+    "exact_adopt_rate": 0.865,
+    "low_sample": false,
+    "modify_p50_chars": 42,
+    "reject_rate": 0.041,
+    "samples": 2140,
+    "tool_key": "intent_classify",
+    "tool_name": "问询意图分类"
+   },
+   {
+    "adopt_rate": 0.688,
+    "exact_adopt_rate": 0.437,
+    "low_sample": false,
+    "modify_p50_chars": 231,
+    "reject_rate": 0.158,
+    "samples": 615,
+    "tool_key": "lead_profile",
+    "tool_name": "线索画像提炼"
+   },
+   {
+    "adopt_rate": 0.856,
+    "exact_adopt_rate": 0.712,
+    "low_sample": false,
+    "modify_p50_chars": 77,
+    "reject_rate": 0.068,
+    "samples": 1733,
+    "tool_key": "kb_answer",
+    "tool_name": "知识问答"
+   },
+   {
+    "adopt_rate": 0.731,
+    "exact_adopt_rate": 0.548,
+    "low_sample": false,
+    "modify_p50_chars": 168,
+    "reject_rate": 0.112,
+    "samples": 508,
+    "tool_key": "copy_draft",
+    "tool_name": "文案改写"
+   },
+   {
+    "adopt_rate": 0.795,
+    "exact_adopt_rate": 0.622,
+    "low_sample": false,
+    "modify_p50_chars": 134,
+    "reject_rate": 0.084,
+    "samples": 391,
+    "tool_key": "intel_brief",
+    "tool_name": "情报简报摘要"
+   },
+   {
+    "adopt_rate": 0.545,
+    "exact_adopt_rate": 0.273,
+    "low_sample": true,
+    "modify_p50_chars": 342,
+    "reject_rate": 0.273,
+    "samples": 11,
+    "tool_key": "contract_clause",
+    "tool_name": "合同条款摘要"
+   }
+  ],
+  "cards": {
+   "adopt_rate": 0.8273,
+   "exact_adopt_rate": 0.6754,
+   "modify_p50_chars": 118,
+   "pending_backlog": 47,
+   "reject_rate": 0.0821
+  },
+  "low_sample_threshold": 20,
+  "reject_reasons": [
+   {
+    "count": 128,
+    "key": "fact_error",
+    "name": "事实错误"
+   },
+   {
+    "count": 96,
+    "key": "missing_field",
+    "name": "字段缺失"
+   },
+   {
+    "count": 74,
+    "key": "style_mismatch",
+    "name": "口径不符"
+   },
+   {
+    "count": 51,
+    "key": "too_verbose",
+    "name": "篇幅过长"
+   },
+   {
+    "count": 12,
+    "key": "unsafe",
+    "name": "合规风险"
+   }
+  ]
+ },
+ "tools": {
+  "low_sample_threshold": 20,
+  "rows": [
+   {
+    "adopt_rate": 0.812,
+    "exact_adopt_rate": 0.604,
+    "low_sample": false,
+    "modify_p50_chars": 118,
+    "reject_rate": 0.093,
+    "samples": 1284,
+    "tool_key": "meeting_minutes",
+    "tool_name": "会议纪要生成"
+   },
+   {
+    "adopt_rate": 0.744,
+    "exact_adopt_rate": 0.512,
+    "low_sample": false,
+    "modify_p50_chars": 156,
+    "reject_rate": 0.121,
+    "samples": 862,
+    "tool_key": "weekly_report",
+    "tool_name": "周报草稿"
+   },
+   {
+    "adopt_rate": 0.917,
+    "exact_adopt_rate": 0.865,
+    "low_sample": false,
+    "modify_p50_chars": 42,
+    "reject_rate": 0.041,
+    "samples": 2140,
+    "tool_key": "intent_classify",
+    "tool_name": "问询意图分类"
+   },
+   {
+    "adopt_rate": 0.688,
+    "exact_adopt_rate": 0.437,
+    "low_sample": false,
+    "modify_p50_chars": 231,
+    "reject_rate": 0.158,
+    "samples": 615,
+    "tool_key": "lead_profile",
+    "tool_name": "线索画像提炼"
+   },
+   {
+    "adopt_rate": 0.856,
+    "exact_adopt_rate": 0.712,
+    "low_sample": false,
+    "modify_p50_chars": 77,
+    "reject_rate": 0.068,
+    "samples": 1733,
+    "tool_key": "kb_answer",
+    "tool_name": "知识问答"
+   },
+   {
+    "adopt_rate": 0.731,
+    "exact_adopt_rate": 0.548,
+    "low_sample": false,
+    "modify_p50_chars": 168,
+    "reject_rate": 0.112,
+    "samples": 508,
+    "tool_key": "copy_draft",
+    "tool_name": "文案改写"
+   },
+   {
+    "adopt_rate": 0.795,
+    "exact_adopt_rate": 0.622,
+    "low_sample": false,
+    "modify_p50_chars": 134,
+    "reject_rate": 0.084,
+    "samples": 391,
+    "tool_key": "intel_brief",
+    "tool_name": "情报简报摘要"
+   },
+   {
+    "adopt_rate": 0.545,
+    "exact_adopt_rate": 0.273,
+    "low_sample": true,
+    "modify_p50_chars": 342,
+    "reject_rate": 0.273,
+    "samples": 11,
+    "tool_key": "contract_clause",
+    "tool_name": "合同条款摘要"
+   }
+  ]
+ },
+ "trend_day": {
+  "granularity": "day",
+  "points": [
+   {
+    "adopt_rate": 0.76,
+    "label": "2026-11-14",
+    "reject_rate": 0.098
+   },
+   {
+    "adopt_rate": 0.762,
+    "label": "2026-11-15",
+    "reject_rate": 0.095
+   },
+   {
+    "adopt_rate": 0.764,
+    "label": "2026-11-16",
+    "reject_rate": 0.092
+   },
+   {
+    "adopt_rate": 0.772,
+    "label": "2026-11-17",
+    "reject_rate": 0.089
+   },
+   {
+    "adopt_rate": 0.774,
+    "label": "2026-11-18",
+    "reject_rate": 0.098
+   },
+   {
+    "adopt_rate": 0.756,
+    "label": "2026-11-19",
+    "reject_rate": 0.095
+   },
+   {
+    "adopt_rate": 0.764,
+    "label": "2026-11-20",
+    "reject_rate": 0.092
+   },
+   {
+    "adopt_rate": 0.766,
+    "label": "2026-11-21",
+    "reject_rate": 0.089
+   },
+   {
+    "adopt_rate": 0.768,
+    "label": "2026-11-22",
+    "reject_rate": 0.098
+   },
+   {
+    "adopt_rate": 0.776,
+    "label": "2026-11-23",
+    "reject_rate": 0.095
+   },
+   {
+    "adopt_rate": 0.758,
+    "label": "2026-11-24",
+    "reject_rate": 0.092
+   },
+   {
+    "adopt_rate": 0.76,
+    "label": "2026-11-25",
+    "reject_rate": 0.089
+   },
+   {
+    "adopt_rate": 0.768,
+    "label": "2026-11-26",
+    "reject_rate": 0.098
+   },
+   {
+    "adopt_rate": 0.77,
+    "label": "2026-11-27",
+    "reject_rate": 0.095
+   }
+  ]
+ },
+ "trend_week": {
+  "granularity": "week",
+  "points": [
+   {
+    "adopt_rate": 0.752,
+    "label": "W43",
+    "reject_rate": 0.104
+   },
+   {
+    "adopt_rate": 0.764,
+    "label": "W44",
+    "reject_rate": 0.098
+   },
+   {
+    "adopt_rate": 0.776,
+    "label": "W45",
+    "reject_rate": 0.092
+   },
+   {
+    "adopt_rate": 0.752,
+    "label": "W46",
+    "reject_rate": 0.104
+   },
+   {
+    "adopt_rate": 0.764,
+    "label": "W47",
+    "reject_rate": 0.098
+   },
+   {
+    "adopt_rate": 0.776,
+    "label": "W48",
+    "reject_rate": 0.092
+   }
+  ]
+ }
+}
