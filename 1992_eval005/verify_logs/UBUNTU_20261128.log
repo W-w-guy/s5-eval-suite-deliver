@@ -1,7 +1,14 @@
-=== Windows 3.11.7 / 全新解压目录 ===
-WROTE cases=34 fields=8 handcalc_rows=306
+# UBUNTU side verification log
+# host: a-VMware  os: Ubuntu 24.04.5 LTS
+# python: Python 3.12.3  kernel: 7.0.0-38-generic
+# generated: 2026-11-28T00:39:00+08:00
+# unpacked into a brand-new dir from s1992.zip (sha256 f709ddc4c22b5b43cc369d3765429e595f40f80eb098a4300b238f6006fb2fcc)
 
-### rc=0 tools/gen.py
+$ python3 tools/gen.py
+WROTE cases=34 fields=8 handcalc_rows=306
+[rc=0]
+
+$ python3 tools/verify.py
 [PASS] V01 字段类型恰 8 种 类型 ['date', 'enum', 'list', 'money_fen', 'rate_bp', 'string', 'summary', 'uscc']
 [PASS] V02 8 种类型各自都有正例与反例用例 缺 []；明细 {'date': (31, 3), 'enum': (31, 3), 'list': (27, 6), 'money_fen': (30, 4), 'rate_bp': (30, 4), 'string': (30, 4), 'summary': (30, 4), 'uscc': (31, 3)}
 [PASS] V03 付款节点多 1 项 → extra=1 且 missing=0 实测 {'correct': 3, 'wrong': 0, 'missing': 0, 'extra': 1}
@@ -18,15 +25,16 @@ WROTE cases=34 fields=8 handcalc_rows=306
 [PASS] V14 用例 id 唯一 重复 无
 [PASS] V15 suite.yaml 的字段类型与 critical 标记和代码定义一致 critical=['buyer_uscc', 'total_amount']
 [PASS] V16 suite.yaml 里 8 个字段齐全 fields=8
-[PASS] V17 suite.yaml 自写解析器与 PyYAML 结论一致 PyYAML 6.0.3
+[PASS] V17 suite.yaml 自写解析器与 PyYAML 结论一致 PyYAML 6.0.1
 [PASS] V18 pytest 全绿且用例数不少于 30 PASSED=68 rc=0
 [PASS] V19 每条用例的通过/不通过与手算一致 不一致 []
 [PASS] V20 通过的用例恰 27 条、不通过 7 条（手算） 实测通过 27
 
 SUMMARY 20/20 PASS
+[rc=0]
 
-### rc=0 tools/verify.py
-============================= test session starts =============================
+$ python3 -m pytest tests -v --no-header -p no:cacheprovider -o addopts=
+============================= test session starts ==============================
 collecting ... collected 68 items
 
 tests/test_normalize.py::test_string_fullwidth_equals_halfwidth PASSED   [  1%]
@@ -98,9 +106,10 @@ tests/test_scorer.py::test_metrics_empty_is_zero_not_error PASSED        [ 97%]
 tests/test_scorer.py::test_overall_equals_sum_of_fields PASSED           [ 98%]
 tests/test_scorer.py::test_unknown_field_type_notes_not_crash PASSED     [100%]
 
-============================= 68 passed in 0.46s ==============================
+============================== 68 passed in 0.34s ==============================
+[rc=0]
 
-### rc=0 -m pytest tests -v --no-header -p no:cacheprovider -o addopts=
+$ python3 tools/mutate.py
 [OK] 原件必须全绿 rc=0
 [ OK ] M1 金额容差 0 → 1 分（AC3：1 分必须判 wrong） -> 被抓到 ["[FAIL] V06 金额相差 1 分判 wrong（无容差） 实测 {'correct': 1, 'wrong': 0, 'missing': 0, 'extra': 0}"]
 [ OK ] M2 费率容差 0 → 1 基点 -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C12', 'tax_rate', 'precision', '1.000000000000', '0.000000000000'), ('C12', 'tax_rate', 'recall', '1.000000000000', '0.000000000000'), ('C12', 'tax_rate', 'f1', '1.000000000000', '0.000000000000'), ('C12', '__overall__', 'precision', '1.000000000000', '0.916666666667')]"]
@@ -116,11 +125,9 @@ tests/test_scorer.py::test_unknown_field_type_notes_not_crash PASSED     [100%]
 [OK] 还原后原件仍全绿 rc=0
 
 MUTATION CAUGHT 11 / MISSED 0 / INVALID 0
+[rc=0]
 
-### rc=0 tools/mutate.py
+$ python3 tools/pii_scan.py .
 scanned=55 hits=0
+[rc=0]
 
-### rc=0 tools/pii_scan.py
-verify_rc=0 verify_lines=20 pii scanned=55 hits=0 (recheck 55/0)
-
-### rc=0 tools/build_docs.py

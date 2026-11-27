@@ -1,4 +1,13 @@
-=== Ubuntu 3.12.3 / 全新解压目录 ===
+# WINDOWS side verification log
+# host: DESKTOP-6BLPI5P  os: Windows 11  platform: win32
+# python: 3.11.7
+# generated: 2026-11-28T00:38:20
+
+$ tools/gen.py
+WROTE cases=34 fields=8 handcalc_rows=306
+[rc=0]
+
+$ tools/verify.py
 [PASS] V01 字段类型恰 8 种 类型 ['date', 'enum', 'list', 'money_fen', 'rate_bp', 'string', 'summary', 'uscc']
 [PASS] V02 8 种类型各自都有正例与反例用例 缺 []；明细 {'date': (31, 3), 'enum': (31, 3), 'list': (27, 6), 'money_fen': (30, 4), 'rate_bp': (30, 4), 'string': (30, 4), 'summary': (30, 4), 'uscc': (31, 3)}
 [PASS] V03 付款节点多 1 项 → extra=1 且 missing=0 实测 {'correct': 3, 'wrong': 0, 'missing': 0, 'extra': 1}
@@ -15,13 +24,16 @@
 [PASS] V14 用例 id 唯一 重复 无
 [PASS] V15 suite.yaml 的字段类型与 critical 标记和代码定义一致 critical=['buyer_uscc', 'total_amount']
 [PASS] V16 suite.yaml 里 8 个字段齐全 fields=8
-[PASS] V17 suite.yaml 自写解析器与 PyYAML 结论一致 PyYAML 6.0.1
+[PASS] V17 suite.yaml 自写解析器与 PyYAML 结论一致 PyYAML 6.0.3
 [PASS] V18 pytest 全绿且用例数不少于 30 PASSED=68 rc=0
 [PASS] V19 每条用例的通过/不通过与手算一致 不一致 []
 [PASS] V20 通过的用例恰 27 条、不通过 7 条（手算） 实测通过 27
 
 SUMMARY 20/20 PASS
-============================= test session starts ==============================
+[rc=0]
+
+$ -m pytest tests -v --no-header -p no:cacheprovider -o addopts=
+============================= test session starts =============================
 collecting ... collected 68 items
 
 tests/test_normalize.py::test_string_fullwidth_equals_halfwidth PASSED   [  1%]
@@ -93,7 +105,10 @@ tests/test_scorer.py::test_metrics_empty_is_zero_not_error PASSED        [ 97%]
 tests/test_scorer.py::test_overall_equals_sum_of_fields PASSED           [ 98%]
 tests/test_scorer.py::test_unknown_field_type_notes_not_crash PASSED     [100%]
 
-============================== 68 passed in 0.28s ==============================
+============================= 68 passed in 0.47s ==============================
+[rc=0]
+
+$ tools/mutate.py
 [OK] 原件必须全绿 rc=0
 [ OK ] M1 金额容差 0 → 1 分（AC3：1 分必须判 wrong） -> 被抓到 ["[FAIL] V06 金额相差 1 分判 wrong（无容差） 实测 {'correct': 1, 'wrong': 0, 'missing': 0, 'extra': 0}"]
 [ OK ] M2 费率容差 0 → 1 基点 -> 被抓到 ["[FAIL] V11 全部用例的 precision/recall/F1 与手算表逐字符一致 不一致 [('C12', 'tax_rate', 'precision', '1.000000000000', '0.000000000000'), ('C12', 'tax_rate', 'recall', '1.000000000000', '0.000000000000'), ('C12', 'tax_rate', 'f1', '1.000000000000', '0.000000000000'), ('C12', '__overall__', 'precision', '1.000000000000', '0.916666666667')]"]
@@ -109,4 +124,16 @@ tests/test_scorer.py::test_unknown_field_type_notes_not_crash PASSED     [100%]
 [OK] 还原后原件仍全绿 rc=0
 
 MUTATION CAUGHT 11 / MISSED 0 / INVALID 0
-scanned=55 hits=0
+[rc=0]
+
+$ tools/pii_scan.py .
+scanned=56 hits=0
+[rc=0]
+
+=== checksums after running the whole suite ===
+55 files checked, 0 mismatches
+
+=== artifact hashes ===
+28d16b1cf236dba8f61a662134623da2e4b8d0b8cf2f2b8abac196d6333e103c  data/cases.jsonl
+ae57a2d2b4908a487211e478e5e17bc5df57718ed4051ab2ad2c5a525c84d8e8  data/field_schema.json
+942d335e1fb89cc90185f101410d3844f3c3badaee315b183df67ebc6ae49279  data/handcalc.csv
