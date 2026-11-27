@@ -66,17 +66,17 @@ def find_bank_card(text):
 
 
 def find_uscc(text):
-    """校验位通过、且第 3~8 位不是 999999 占位段，才视为疑似真实。"""
+    """校验位通过、且第 3~8 位不是 999999 样例填充段，才视为疑似真实。"""
     out = []
-    lo, hi = R.USCC_PLACEHOLDER_RANGE[1], R.USCC_PLACEHOLDER_RANGE[2]
-    placeholder = R.USCC_PLACEHOLDER_RANGE[0]
+    lo, hi = R.USCC_DUMMY_RANGE[1], R.USCC_DUMMY_RANGE[2]
+    dummy_marker = R.USCC_DUMMY_RANGE[0]
     for m in RE_USCC.finditer(text):
         s = m.group(0).upper()
         if not checksum.uscc_ok(s):
             continue
-        if s[lo:hi] == placeholder:
+        if s[lo:hi] == dummy_marker:
             continue
-        out.append(_mk("uscc", s, m.span(), "校验位通过且非占位号段"))
+        out.append(_mk("uscc", s, m.span(), "校验位通过且非样例填充号段"))
     return out
 
 

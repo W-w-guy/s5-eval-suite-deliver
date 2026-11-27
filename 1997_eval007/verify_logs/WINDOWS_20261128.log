@@ -1,4 +1,9 @@
-=== Windows 3.11.7 / 全新解压目录 ===
+# WINDOWS side verification log
+# host: DESKTOP-6BLPI5P  os: Windows 11  platform: win32
+# python: 3.11.7
+# generated: 2026-11-28T01:01:02
+
+$ tools/verify.py
 [PASS] V01 检测项恰好 8 类（工单点名） 类别 ['mobile', 'landline', 'email', 'id_card', 'bank_card', 'uscc', 'address', 'plate']
 [PASS] V02 8 类检测项的正反例结果全部符合预期 不符 无
 [PASS] V03 8 类各自都有 ≥1 条命中夹具与 ≥1 条不命中夹具 缺 无
@@ -6,8 +11,8 @@
 [PASS] V05 3 条干净样例零命中（不误报） 误报 0 条
 [PASS] V06 身份证正反例只差校验位，命中判定确实来自 ISO 7064 校验 尾位 2 vs 0
 [PASS] V07 银行卡正反例只差 Luhn 校验位 
-[PASS] V08 信用代码：校验位合法但第 3~8 位为 999999 占位的视为虚构、不报 占位号段 91999999MA1FL2XY3N
-[PASS] V08b 占位号段满足「校验位合法 + 第 3~8 位为 999999」两个条件（保证占位判断是活代码） ok=True 第3~8位=999999
+[PASS] V08 信用代码：校验位合法但第 3~8 位为 999999 样例填充的视为虚构、不报 样例填充号段 91999999MA1FL2XY3N
+[PASS] V08b 样例填充号段满足「校验位合法 + 第 3~8 位为 999999」两个条件（保证样例填充判断是活代码） ok=True 第3~8位=999999
 [PASS] V09 含 error 级命中时退出码为 1 rc=1
 [PASS] V10 输出标明 BLOCK 
 [PASS] V11 只有 warn 级命中时退出码为 0 rc=0
@@ -32,7 +37,9 @@
 [PASS] V30 pytest 全绿且用例数不少于 40 PASSED=60 rc=0
 
 SUMMARY 31/31 PASS
+[rc=0]
 
+$ -m pytest tests -v --no-header -p no:cacheprovider -o addopts=
 ============================= test session starts =============================
 collecting ... collected 60 items
 
@@ -85,7 +92,7 @@ tests/test_detect.py::test_clean_texts_have_no_findings[\u4f1a\u8bae\u7ed3\u8bba
 tests/test_detect.py::test_clean_texts_have_no_findings[\u7edf\u8ba1\u53e3\u5f84\uff1a\u91c7\u7eb3\u7387 92.5%%\uff0c\u5e73\u5747\u4fee\u6539\u5e45\u5ea6 0.08\u3002] PASSED [ 78%]
 tests/test_detect.py::test_id_card_differs_only_by_check_digit PASSED    [ 80%]
 tests/test_detect.py::test_bank_card_differs_only_by_check_digit PASSED  [ 81%]
-tests/test_detect.py::test_uscc_placeholder_excluded_even_if_checksum_ok PASSED [ 83%]
+tests/test_detect.py::test_uscc_dummy_marker_excluded_even_if_checksum_ok PASSED [ 83%]
 tests/test_detect.py::test_mobile_requires_second_digit_3_to_9 PASSED    [ 85%]
 tests/test_detect.py::test_address_needs_region_plus_road_number PASSED  [ 86%]
 tests/test_detect.py::test_levels_match_spec[mobile-error] PASSED        [ 88%]
@@ -97,12 +104,14 @@ tests/test_detect.py::test_levels_match_spec[email-warn] PASSED          [ 96%]
 tests/test_detect.py::test_levels_match_spec[address-warn] PASSED        [ 98%]
 tests/test_detect.py::test_levels_match_spec[plate-warn] PASSED          [100%]
 
-============================= 60 passed in 2.52s ==============================
+============================= 60 passed in 2.57s ==============================
+[rc=0]
 
+$ tools/mutate.py
 [OK] 原件必须全绿 rc=0
 [ OK ] M1 身份证不做校验位（反例会误报，AC1 失效） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'id_card': ['校验位不通过']}"]
 [ OK ] M2 银行卡不做 Luhn（反例会误报） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'bank_card': ['Luhn 不通过']}"]
-[ OK ] M3 信用代码不排除 999999 占位号段（占位会被报成疑似真实） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'uscc': ['第 3~8 位为 999999 占位']}"]
+[ OK ] M3 信用代码不排除 999999 样例填充号段（样例填充会被报成疑似真实） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'uscc': ['第 3~8 位为 999999 的样例填充号']}"]
 [ OK ] M4 手机号不校验第二位 3~9（反例 12x 会误报） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'mobile': ['第 2 位是 2，不是手机号']}"]
 [ OK ] M5 身份证级别从 error 降为 warn（AC2 失效：该阻断的不阻断） -> 被抓到 ["[FAIL] V14 error 级恰为工单点名的四类 ['bank_card', 'mobile', 'uscc']"]
 [ OK ] M6 银行卡级别从 error 降为 warn -> 被抓到 ["[FAIL] V14 error 级恰为工单点名的四类 ['id_card', 'mobile', 'uscc']"]
@@ -117,4 +126,25 @@ tests/test_detect.py::test_levels_match_spec[plate-warn] PASSED          [100%]
 [OK] 还原后原件仍全绿 rc=0
 
 MUTATION CAUGHT 14 / MISSED 0 / INVALID 0
+[rc=0]
 
+$ tools/build_docs.py
+verify_rc=0 verify_lines=31 fixtures error=8 warn=13 (recheck 8/13)
+[rc=0]
+
+=== perf.json generated on WINDOWS (1000 cases, worst case with 20 error hits) ===
+{
+ "budget_ms": 10000.0,
+ "cases": 1000,
+ "cold_ms": 73.0,
+ "in_memory_best_ms": 55.5,
+ "per_case_ms": 0.0614,
+ "warm_best_ms": 61.4
+}
+
+=== checksums after running the whole suite ===
+50 files checked, 0 mismatches
+
+=== determinism: README.md/ACCEPTANCE.md regenerated on this host vs the copy shipped in the zip ===
+b1c728793c32d83f310e493b279d981cda244c2fd9b34a812513a36d5eee1101  README.md
+e993b2658d5899fdafc559cf62b85575c49131e4810b5418e832f2af258dadec  ACCEPTANCE.md

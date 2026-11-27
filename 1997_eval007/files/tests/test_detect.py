@@ -77,12 +77,12 @@ def test_bank_card_differs_only_by_check_digit():
     assert not detect.find_bank_card("卡号 " + engine.BANK_BAD)
 
 
-def test_uscc_placeholder_excluded_even_if_checksum_ok():
-    """占位号段的校验位是合法的，但它不该被报成「疑似真实」。"""
+def test_uscc_dummy_marker_excluded_even_if_checksum_ok():
+    """样例填充号段的校验位是合法的，但它不该被报成「疑似真实」。"""
     import checksum
     assert checksum.uscc_ok(engine.USCC_OK)
     assert detect.find_uscc("主体 " + engine.USCC_OK)
-    assert not detect.find_uscc("主体 " + engine.USCC_PLACEHOLDER)
+    assert not detect.find_uscc("主体 " + engine.USCC_DUMMY)
 
 
 def test_mobile_requires_second_digit_3_to_9():

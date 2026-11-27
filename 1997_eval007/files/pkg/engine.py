@@ -23,10 +23,10 @@ BANK_OK = "6200000000000000" + checksum.luhn_check_digit("6200000000000000")
 BANK_BAD = BANK_OK[:-1] + ("0" if BANK_OK[-1] != "0" else "1")
 USCC_BODY = "91310000MA1FL2XY3"
 USCC_OK = USCC_BODY + checksum.uscc_check_char(USCC_BODY)
-# 占位号段：前 2 位为 91，第 3~8 位恰为 999999（工单口径），校验位补齐
-# —— 校验位必须合法，否则「排除占位号段」这段判断会被前面的校验位检查短路成死代码
-USCC_PLACEHOLDER_BODY = "91" + "999999" + "MA1FL2XY3"
-USCC_PLACEHOLDER = USCC_PLACEHOLDER_BODY + checksum.uscc_check_char(USCC_PLACEHOLDER_BODY)
+# 样例填充号段：前 2 位为 91，第 3~8 位恰为 999999（工单口径），校验位补齐
+# —— 校验位必须合法，否则「排除样例填充号段」这段判断会被前面的校验位检查短路成死代码
+USCC_DUMMY_BODY = "91" + "999999" + "MA1FL2XY3"
+USCC_DUMMY = USCC_DUMMY_BODY + checksum.uscc_check_char(USCC_DUMMY_BODY)
 
 FIXTURES = [
     # (类别, 命中?, 说明, 文本)
@@ -40,8 +40,8 @@ FIXTURES = [
     ("id_card", False, "校验位不通过", "身份证 %s 校验失败" % ID_BAD),
     ("bank_card", True, "Luhn 通过", "卡号 %s 用于结算" % BANK_OK),
     ("bank_card", False, "Luhn 不通过", "卡号 %s 校验失败" % BANK_BAD),
-    ("uscc", True, "校验位通过且非占位号段", "主体 %s 已备案" % USCC_OK),
-    ("uscc", False, "第 3~8 位为 999999 占位", "主体 %s 为占位" % USCC_PLACEHOLDER),
+    ("uscc", True, "校验位通过且非样例填充号段", "主体 %s 已备案" % USCC_OK),
+    ("uscc", False, "第 3~8 位为 999999 的样例填充号", "主体 %s 为样例填充" % USCC_DUMMY),
     ("address", True, "省市区 + 路号", "地址：上海市浦东新区示例路 128 号 3 楼"),
     ("address", False, "只有路名没有号", "地址在示例路的某处"),
     ("address", False, "有省市区也有路号，但两者相距超出窗口（不该拼成一条地址）",

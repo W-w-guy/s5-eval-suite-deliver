@@ -94,17 +94,17 @@ def main():
           "银行卡正反例只差 Luhn 校验位", "")
     import checksum
     check("V08", detect.find_uscc("主体 " + engine.USCC_OK)
-          and not detect.find_uscc("主体 " + engine.USCC_PLACEHOLDER),
-          "信用代码：校验位合法但第 3~8 位为 999999 占位的视为虚构、不报",
-          "占位号段 %s" % engine.USCC_PLACEHOLDER)
-    # 防死代码：占位号段的校验位必须合法、且第 3~8 位确实是 999999。
-    # 否则「排除占位号段」那段会被前面的校验位检查短路，变成一句永远走不到的分支
-    # （第一版就是这样：占位号段校验位不合法，导致对应变异 M3 抓不到）。
-    check("V08b", checksum.uscc_ok(engine.USCC_PLACEHOLDER)
-          and engine.USCC_PLACEHOLDER[2:8] == "999999",
-          "占位号段满足「校验位合法 + 第 3~8 位为 999999」两个条件（保证占位判断是活代码）",
-          "ok=%s 第3~8位=%s" % (checksum.uscc_ok(engine.USCC_PLACEHOLDER),
-                                engine.USCC_PLACEHOLDER[2:8]))
+          and not detect.find_uscc("主体 " + engine.USCC_DUMMY),
+          "信用代码：校验位合法但第 3~8 位为 999999 样例填充的视为虚构、不报",
+          "样例填充号段 %s" % engine.USCC_DUMMY)
+    # 防死代码：样例填充号段的校验位必须合法、且第 3~8 位确实是 999999。
+    # 否则「排除样例填充号段」那段会被前面的校验位检查短路，变成一句永远走不到的分支
+    # （第一版就是这样：样例填充号段校验位不合法，导致对应变异 M3 抓不到）。
+    check("V08b", checksum.uscc_ok(engine.USCC_DUMMY)
+          and engine.USCC_DUMMY[2:8] == "999999",
+          "样例填充号段满足「校验位合法 + 第 3~8 位为 999999」两个条件（保证样例填充判断是活代码）",
+          "ok=%s 第3~8位=%s" % (checksum.uscc_ok(engine.USCC_DUMMY),
+                                engine.USCC_DUMMY[2:8]))
 
     # ---------- AC2：error 非 0 / 只有 warn 为 0 ----------
     p_err = tmpfile("联系电话 %s" % engine.MOBILE_OK)

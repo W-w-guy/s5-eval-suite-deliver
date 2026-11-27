@@ -5,10 +5,10 @@
 | 项 | 值 |
 | --- | --- |
 | 生成脚本 | `pkg/engine.py`（虚构夹具与 1000 条性能用例）+ `python pkg/engine.py` |
-| 生成脚本 sha256 | `78dab88255e2fb963b374452a0b42bb09ec9e989f98d814b1fbc7d3e816f2939` |
-| 检测逻辑 sha256 | `f6e8ae7a56287e2932fd5ddfc9c97ba515511d09c594f8deb8931e07c5f92f9a` |
+| 生成脚本 sha256 | `d214b1da057595f28a50097e1c618b369f5ad9daf1a03abd1f69ee3daa621160` |
+| 检测逻辑 sha256 | `09ed19609496fb7e8621685c3b8aeeed821463d94b5ecfcf1e8a09191849aab0` |
 | 校验位算法 sha256 | `ce63a497198998f7e9e0641fd97a5f631a3c9f2fbd294cb83682b16243982f9d` |
-| 规则配置 sha256 | `aa94a362afca69c55034490ebaca701bd0672386b459afd0c5a3379ebdacc984` |
+| 规则配置 sha256 | `402974843b4f2bcb40502f0358c23a981f0b8c8ec7e966399f65f3b4a56056c6` |
 | 随机性 | **无随机**。所有夹具文本为手写常量，号码由校验位算法从自选号段补出；1000 条性能用例按序号确定性生成，重跑字节级一致 |
 | 种子 | 不适用（无随机数生成器） |
 | 重跑命令 | `python pkg/engine.py` |

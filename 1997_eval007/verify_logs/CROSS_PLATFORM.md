@@ -1,61 +1,66 @@
-# CROSS_PLATFORM — 双平台实跑与产物一致性
+# CROSS_PLATFORM — 双平台实跑对照
 
-同一份交付包在两个平台的**全新解压目录**里各跑一遍，记录原始输出，并逐文件比对产物哈希。
+两个平台都是**从 s1997.zip 解压到全新空目录**后跑同一套命令。
 
-## 环境
+## 1. 环境
 
-| 平台 | 版本 | 依赖 |
+| 项 | Windows | Ubuntu |
 | --- | --- | --- |
-| Windows 11 | Python 3.11.7 / pytest 9.1.1 | 仅标准库 |
-| Ubuntu 24.04（Linux 7.0.0-38-generic） | Python 3.12.3 / pytest 7.4.4 | 仅标准库 |
+| 主机 | DESKTOP-6BLPI5P | a-VMware |
+| 系统 | Windows 11 (win32) | Ubuntu 24.04.5 LTS |
+| Python | 3.11.7 | 3.12.3 |
+| 内核 | — | 7.0.0-38-generic |
 
-## 三个入口的结果（两侧全部 rc=0）
+纯 Python 交付（标准库 + pytest），无第三方运行时依赖，无 node 依赖。
 
-| 入口 | Windows | Ubuntu |
+## 2. 结果对照
+
+| 检查项 | Windows | Ubuntu |
 | --- | --- | --- |
-| `python tools/verify.py` | SUMMARY 31/31 PASS | SUMMARY 31/31 PASS |
-| `python -m pytest tests -v` | 60 passed | 60 passed |
-| `python tools/mutate.py` | CAUGHT 14 / MISSED 0 / INVALID 0 | 同左 |
+| 解压后 `sha256sum -c SHA256SUMS.txt` | 0 mismatches | 0 mismatches |
+| `tools/verify.py` | **SUMMARY 31/31 PASS** | **SUMMARY 31/31 PASS** |
+| `pytest tests` | **60 passed** | **60 passed** |
+| `tools/mutate.py` | **CAUGHT 14 / MISSED 0 / INVALID 0** | **CAUGHT 14 / MISSED 0 / INVALID 0** |
+| 跑完整套后 `sha256sum -c` | **52 files, 0 mismatches** | **0 mismatches** |
 
-## 校验和
+## 3. 性能（AC4）双平台实测
 
-- 解压后 `sha256sum -c SHA256SUMS.txt`：**50 条全 OK、0 条 FAILED**；
-- 按 README 顺序跑完 verify / pytest / mutate / build_docs 之后再校验：**0 条不一致**；
-- 再重复跑一次 `build_docs.py`：**仍 0 条不一致**（幂等）；
-- `verify_logs/` 与 `docs/perf.json` 是运行产物，**不纳入 SHA256SUMS**。
+性能夹具 1000 条 JSONL 用例，其中每 97 条插 1 条含手机号+身份证的命中样例（共 20 条 error 命中），测的是最坏情况而非快速跳过路径。预算 10000ms。
 
-## 产物逐字节比对
-
-| 文件 | Windows sha256 前 16 位 | Ubuntu 前 16 位 | 一致 |
-| --- | --- | --- | --- |
-| `pkg/detect.py` | `f6e8ae7a56287e29` | `f6e8ae7a56287e29` | 是 |
-| `pkg/checksum.py` | `ce63a497198998f7` | `ce63a497198998f7` | 是 |
-| `pkg/rules.py` | `aa94a362afca69c5` | `aa94a362afca69c5` | 是 |
-| `pkg/scanner.py` | `d75f90402ad4638c` | `d75f90402ad4638c` | 是 |
-| `pkg/cmd.py` | `6f4873dc23d04f06` | `6f4873dc23d04f06` | 是 |
-| `pkg/engine.py` | `78dab88255e2fb96` | `78dab88255e2fb96` | 是 |
-| `data/fixtures/cases.json` | `508ed0251e6e5614` | `508ed0251e6e5614` | 是 |
-| `data/perf1000/cases_1000.jsonl` | `c68f922a8dfdf756` | `c68f922a8dfdf756` | 是 |
-| `README.md` | `1f2db6558b9c0168` | `1f2db6558b9c0168` | 是 |
-| `ACCEPTANCE.md` | `0de3aa86a263acff` | `0de3aa86a263acff` | 是 |
-| `DATA_PROVENANCE.md` | `8b2b66398f7b852f` | `8b2b66398f7b852f` | 是 |
-
-这 11 个文件两侧**逐字节相同**。原因：文本一律以 `newline="\n"` 写出；全部夹具为手写常量，号码由校验位算法从自选号段补出；1000 条性能用例按序号确定性生成；不读系统时间、不依赖 tzdata。
-
-## 本轮踩到的一个真缺陷（已修）
-
-首版把性能耗时写进了 `verify.py` 的断言输出（`冷启动 56.8 ms` 这类），而 `ACCEPTANCE.md` 是由 verify 输出生成的 —— 于是每次 `build_docs.py` 产出的字节都不同，买家跑完全套再 `sha256sum -c` 必然报 `ACCEPTANCE.md` 不一致（Ubuntu 侧首次实测就撞上）。
-修法：**耗时数值不进断言输出**，只断言「未超预算」；具体毫秒数落到 `docs/perf.json`，那是不进校验和的运行产物。判据：凡是每次运行都变的数值，都不能流进被校验和覆盖的文件。
-
-## 原始日志（本目录内）
-
-| 文件 | 字节 | sha256 |
+| 指标 | Windows | Ubuntu |
 | --- | --- | --- |
-| `WINDOWS_20261127.log` | 10,542 | `5a89b8fbd5f71f91c2992fc3678ee6b1e6d8f4077fa063820dbf00691d068567` |
-| `UBUNTU_20261127.log` | 10,540 | `215c759fa901a7628e42396a11f7fcdadfdd92e4c92571cd266cfe80a4c87bff` |
+| scanned | 1000 | 1000 |
+| cold_ms（冷启动） | 73.0 | 59.1 |
+| warm_best_ms（预热 2 轮后取 3 次最小值） | **61.4** | **52.1** |
+| per_case_ms（单条平均） | 0.0614 | 0.0521 |
+| 占预算比例 | 0.61% | 0.52% |
 
-## 复核方式
+两平台稳态耗时都只有预算的 0.6% 左右，低两个数量级。
 
-1. 两份日志首行是环境标记，**首行之后全部内容为该平台 `tools/*.py` 与 `pytest` 的原始 stdout/stderr，未经修改**。
-2. 逐行比对结果：除环境标记行与 pytest 的 `test session starts` / `passed in X s` 装饰行外，两侧完全一致。
-3. 判据不依赖日志本身：两侧全新目录跑完全部入口后**再**执行 `sha256sum -c SHA256SUMS.txt`，均为 0 条不一致。
+`docs/perf.json` 是**运行产物**，每次运行数值略有不同，因此**不进 SHA256SUMS**；上面的数值是两平台各自最后一次 build_docs 的实测结果，可在各自日志里逐字核对。
+
+## 4. 生成物确定性（比日志相同更强的证据）
+
+`README.md` 与 `ACCEPTANCE.md` 由 `tools/build_docs.py` 从实跑结果生成。两个平台**各自独立重新生成**后，sha256 完全相同：
+
+| 文件 | Windows | Ubuntu |
+| --- | --- | --- |
+| README.md | b1c728793c32d83f310e493b279d981cda244c2fd9b34a812513a36d5eee1101 | 同 |
+| ACCEPTANCE.md | e993b2658d5899fdafc559cf62b85575c49131e4810b5418e832f2af258dadec | 同 |
+
+说明这两份文档的内容完全由代码与固定夹具决定，不含运行时刻、随机数或平台相关的换行差异。
+
+## 5. 为什么 docs/perf.json 不进校验和
+
+它每次运行都会变（上面 Windows 73.0 / 上一轮 76.6，同一台机器两次就不一样）。若把它列进 SHA256SUMS，买家跑一遍测试再校验就会报 mismatch，看起来像文件被篡改。所以 `make_zip.py` 的 `SKIP_SUMS_PREFIX` 显式排除 `docs/perf.json` 与 `verify_logs/`，而「跑完整套后 0 mismatches」这条断言就是这个设计的验证。
+
+## 6. 复跑命令
+
+```
+unzip s1997.zip -d fresh && cd fresh
+sha256sum -c SHA256SUMS.txt
+python tools/verify.py
+python -m pytest tests -q
+python tools/mutate.py
+python tools/build_docs.py
+```
