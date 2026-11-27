@@ -1,0 +1,16 @@
+=== Windows 11 / Python 3.11.7 / 本机无 PostgreSQL ===
+本机没有可用的 PostgreSQL 实例，因此需要真库的断言在 Windows 侧【未运行】。
+
+已在本机执行且通过：
+- python pkg/engine.py                → WROTE seeds=7 scenarios=3
+- python -m pytest tests/test_workdays.py   → 19 passed（纯时间算法，无需库）
+- python -m pytest tests/test_rules.py      → 34 passed（纯规则，无需库）
+- python -m compileall pkg migrations       → 语法全通过
+
+未在本机执行的（据实记录，不视为通过）：
+- tools/verify.py 的全部断言（V02-V33 需要真 PostgreSQL）
+- tests/test_api.py（24 项，需要真 PostgreSQL）
+- tools/mutate.py（15 处变异，每轮都要重建库）
+
+判据以 verify_logs/UBUNTU_20261127.log 的真跑结果为准：
+PostgreSQL 16.2 / Python 3.12.3 / verify SUMMARY 33/33 PASS。

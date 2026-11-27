@@ -1,0 +1,41 @@
+=== Ubuntu 3.12.3 / PostgreSQL 16.2 / 全新解压目录 ===
+/home/a/.local/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 0001, redteam_finding 与月度归档表
+[PASS] V01 DATABASE_URL 已设置（真 PostgreSQL） /postgres?host=/tmp/pg2059
+[PASS] V02 两张表由 Alembic 迁移建出（不是 create_all） ['alembic_version', 'redteam_finding', 'redteam_monthly_archive']
+[PASS] V03 alembic_version 已推进到 0001 version=0001
+[PASS] V04 连的是真 PostgreSQL 16 server_version=16.2
+[PASS] V05 统一约定的审计字段与业务字段齐全 缺 无
+[PASS] V06 confirmed 周三 11-25 + 2 个工作日 = 周五 11-27 2026-11-27
+[PASS] V07 confirmed 周五 11-27 + 2 个工作日 跨周末 = 周二 12-01 2026-12-01
+[PASS] V08 截止日当天不算 overdue confirmed=2026-11-25 today=2026-11-27
+[PASS] V09 截止日次日起标记 overdue today=2026-11-28
+[PASS] V10 已关联回归用例的一律不算 overdue case=KB-INJ-0007
+[PASS] V11 冻结时间生效：换 today 结论随之变化（不是读系统时钟） 11-27 False ／ 12-02 True
+[PASS] V12 定时任务扫描出 overdue 清单 count=1
+[PASS] V13 RT-2026-001 是 P0 且已 confirmed severity=P0 status=confirmed
+[PASS] V14 P0 改 wont_fix 返回 422 status_code=422
+[PASS] V15 422 的原因点明 P0 不允许 P0 发现不允许标记 wont_fix（严重度零容忍）
+[PASS] V16 P2 + 安全负责人 + 理由 → 允许 wont_fix（正向对照） status_code=200
+[PASS] V17 缺审批权限或非安全负责人角色时被拒 status_code=422
+[PASS] V18 金丝雀在库里已被掩码（查库不查响应） 库里：金丝雀 3ZZP-****-Y3SZ 电话 135****0001 邮箱 q***@exam
+[PASS] V19 手机号在库里已按前3后4掩码 
+[PASS] V20 掩码后不再残留完整金丝雀 
+[PASS] V21 反向对照：未掩码的原文会被判为泄露（证明检测本身有效） 
+[PASS] V22 月度导出接口返回新增 / 已修复 / 未关闭三组 counts={'created': 8, 'fixed': 3, 'open': 5}
+[PASS] V23 「新增」按 found_at 落在当月（RT-2026-004 found_at 2026-11-20） created=8 条
+[PASS] V24 「已修复」按 fixed_at 落在当月（含一条 found_at 在 10 月的跨月样本） fixed=3 条 ['RT-2026-003', 'RT-2026-005', 'RT-2026-007']
+[PASS] V25 「未关闭」排除 verified 与 wont_fix open=5 条
+[PASS] V26 三组计数与清单长度一致 
+[PASS] V27 OpenAPI 描述了 POST/GET/PATCH 与 monthly 四个路径 4 个路径
+[PASS] V28 按严重度筛选生效 P0=2 条
+[PASS] V29 按工具筛选生效 kb_answer=3 条
+[PASS] V30 按状态筛选生效 fixed=2 条
+[PASS] V31 无 eval.redteam.write 时登记被拒 403 status_code=403
+[PASS] V32 pytest 全绿且用例数不少于 60 PASSED=77 SKIPPED=0 rc=0
+[PASS] V33 pytest 没有任何 SKIP（跳过不算通过） SKIPPED=0
+
+SUMMARY 33/33 PASS
