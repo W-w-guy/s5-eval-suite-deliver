@@ -1,0 +1,13 @@
+# 能力类回归套件配置（虚构；护栏类判定由 EVAL-031 负责）
+suite:
+  name: kb_qa
+  version: v1
+  note: "知识问答能力回归，三档 tag：extraction / reasoning / format"
+baseline_rules:
+  max_pass_rate_drop_pp: 3
+  max_must_flips: 3
+  score_drop_warn: 0.05
+  flaky_reruns: 2
+suggest_update:
+  consecutive_better_runs: 3
+  auto_update: false

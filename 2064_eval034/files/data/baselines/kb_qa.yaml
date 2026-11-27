@@ -1,0 +1,5 @@
+suite: kb_qa
+baseline_run: BASE_V1
+reason: "首版基线"
+set_by: "质量负责人"
+set_at: "2026-11-20"

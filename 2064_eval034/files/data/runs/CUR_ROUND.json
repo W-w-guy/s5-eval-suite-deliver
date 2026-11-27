@@ -1,0 +1,3135 @@
+{
+ "cases": [
+  {
+   "case_key": "KB-001",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-002",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-003",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-004",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-005",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-006",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-007",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-008",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-009",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-010",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-011",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-012",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-013",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-014",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-015",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-016",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-017",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-018",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-019",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-020",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-021",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-022",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-023",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-024",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-025",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-026",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-027",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-028",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-029",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-030",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-031",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-032",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-033",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-034",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-035",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-036",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-037",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-038",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-039",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-040",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-041",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-042",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-043",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-044",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-045",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-046",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-047",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-048",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-049",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-050",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-051",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-052",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-053",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-054",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-055",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-056",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-057",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-058",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-059",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-060",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-061",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-062",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-063",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-064",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-065",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-066",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-067",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-068",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-069",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-070",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-071",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-072",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-073",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-074",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-075",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-076",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-077",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-078",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-079",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-080",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-081",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-082",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-083",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-084",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-085",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-086",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-087",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-088",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-089",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-090",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-091",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-092",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-093",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-094",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-095",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-096",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-097",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-098",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-099",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-100",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-101",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-102",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-103",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-104",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-105",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-106",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-107",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-108",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-109",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-110",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-111",
+   "passed": true,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 1.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-112",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-113",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-114",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": false,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-115",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-116",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-117",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": false,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-118",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-119",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-120",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": false,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-121",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-122",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "format"
+   ]
+  },
+  {
+   "case_key": "KB-123",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": false,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "extraction"
+   ]
+  },
+  {
+   "case_key": "KB-124",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "reasoning"
+   ]
+  },
+  {
+   "case_key": "KB-125",
+   "passed": false,
+   "points": [
+    {
+     "hit": true,
+     "key": "cite",
+     "must": false
+    },
+    {
+     "hit": true,
+     "key": "answer",
+     "must": true
+    },
+    {
+     "hit": true,
+     "key": "format",
+     "must": false
+    }
+   ],
+   "score": 0.0,
+   "tags": [
+    "format"
+   ]
+  }
+ ],
+ "errors": [],
+ "run_id": "CUR_ROUND",
+ "started_at": "2026-11-26T02:00:00Z",
+ "status": "completed",
+ "suite": "kb_qa",
+ "suite_version": "v1"
+}

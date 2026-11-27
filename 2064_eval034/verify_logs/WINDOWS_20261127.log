@@ -1,0 +1,123 @@
+=== Windows 3.11.7 / 全新解压目录 ===
+[PASS] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 []
+[PASS] V02 降 4 个百分点时降幅算得恰好 4 实测 4
+[PASS] V03 降 4 个百分点时判定失败 verdict=fail
+[PASS] V04 降 2pp 场景的降幅是 1.6（125 分母下的精确值） 实测 1.6
+[PASS] V05 降幅低于阈值时判定通过 verdict=pass
+[PASS] V06 两场景的 must 翻转都未达 3 条（结论只由通过率降幅决定） 4pp 场景 2 条 / 2pp 场景 1 条
+[PASS] V07 取整探针：降幅 3.2000 个百分点按精确值参与判定 实测 3.2
+[PASS] V08 降 3.2 个百分点（>3）时判定失败（若四舍五入成 3 会假通过） verdict=fail
+[PASS] V09 compare 命令实测退出码 1 且摘要标 FAIL rc=1
+[PASS] V10 通过场景的退出码为 0（正向对照） rc=0
+[PASS] V11 flaky 场景里翻转用例共 3 条 实测 3 条 ['KB-113', 'KB-114', 'KB-115']
+[PASS] V12 其中 2 条被标为 flaky（重跑 2 次里各通过过 1 次） flaky=['KB-113', 'KB-114']
+[PASS] V13 只有两次都失败的 KB-115 留在 regression 清单 regressions=['KB-115']
+[PASS] V14 flaky 剔除后 must 翻转只剩 1 条（未达阈值 3） must_flips=['KB-115']
+[PASS] V15 3 条翻转全部含 must 要点，但剔除 flaky 后不判退化 verdict=pass（若不剔除会是 3 条 -> fail）
+[PASS] V16 反向对照：若把 flaky 计入，must 翻转 3 条即判失败（证明剔除真的起了作用） must=3 verdict=fail
+[PASS] V17 flaky 条目带重跑明细可供复核 [('KB-113', [False, True]), ('KB-114', [True, False])]
+[PASS] V18 flaky 场景命令退出码为 0 rc=0
+[PASS] V19 识别出版本不同（基线 v1 / 本次 v2） same=False
+[PASS] V20 只比较共有的 113 条用例 compared=113
+[PASS] V21 基线独有 12 条、本次独有 10 条被排除在比较之外 only_base=12 only_cur=10
+[PASS] V22 结果里写明比较范围 note=suite_version 不同（基线 v1 / 本次 v2），只比较共有的 113 条用例；基线独有 12 条、本次独
+[PASS] V23 版本相同时比较全部 125 条（对照） compared=125
+[PASS] V24 不做共有用例限制时分母是 123（含新增 10 条），与实际比较的 113 条不同 naive 分母=123 drop=0.9431 ｜ 实际分母=113 drop=0.8850
+[PASS] V25 新增的 10 条全失败，但不计入本次比较（不出现在 regression 清单里） 新增 10 条，regression=['KB-113']
+[PASS] V26 版本差异场景命令退出码为 0 rc=0
+[PASS] V27 set 拒绝 status=failed 的运行（命令报错而非判定失败） rc=2
+[PASS] V28 set 输出明确的拒绝原因（status=failed） [eval-baseline] 拒绝设置基线：运行 status='failed'，只有 completed 的运行可作基线
+[PASS] V29 set 拒绝 errors 非空的运行 rc=2
+[PASS] V30 set 输出明确的拒绝原因（errors 非空） [eval-baseline] 拒绝设置基线：运行存在执行错误 ['3 条用例执行异常']，不能作为基线
+[PASS] V31 合规运行可以被设为基线（正向对照） rc=0
+[PASS] V32 不填理由时 set 报错 rc=2
+[PASS] V33 缺少 eval.baseline.set 权限时 set 报错 rc=2
+[PASS] V34 compare 遇到有执行错误的基线同样报错 
+[PASS] V35 判定规则与工单默认值一致（3pp / 3 条 / 0.05） {'max_pass_rate_drop_pp': 3, 'max_must_flips': 3, 'score_drop_warn': 0.05}
+[PASS] V43 suite.yaml 里的默认规则与代码 DEFAULT_RULES 完全一致（两处定义不得漂移） 不一致项 无 ｜ yaml=3 代码=3
+[PASS] V36 suite.yaml 覆盖阈值后按新规则判定（阈值放宽到 5pp，4pp 场景转为通过） 默认 fail ／ 覆盖后 pass
+[PASS] V37 must 判据可独立触发：通过率不降但 must 翻转 3 条即判失败（CUR_MUSTFLIP） drop=0 must=3 verdict=fail
+[PASS] V38 4pp 场景的 must 翻转只有 2 条（<3），失败只能归因于通过率降幅 must=2
+[PASS] V39 连续 3 次优于基线时建议更新但不自动更新 {'consecutive_better': 3, 'suggested': True, 'auto_update': False}
+[PASS] V40 只连续 2 次时不给建议 
+[PASS] V41 9 个场景的运行记录全部落盘 
+[PASS] V42 pytest 全绿且用例数不少于 30 PASSED=50 rc=0
+
+SUMMARY 43/43 PASS
+
+============================= test session starts =============================
+collecting ... collected 50 items
+
+tests/test_cmd.py::test_show_ok PASSED                                   [  2%]
+tests/test_cmd.py::test_compare_fail_rc1 PASSED                          [  4%]
+tests/test_cmd.py::test_compare_pass_rc0 PASSED                          [  6%]
+tests/test_cmd.py::test_compare_flaky_rc0 PASSED                         [  8%]
+tests/test_cmd.py::test_compare_version_diff_rc0 PASSED                  [ 10%]
+tests/test_cmd.py::test_compare_missing_run_rc2 PASSED                   [ 12%]
+tests/test_cmd.py::test_set_failed_run_rc2 PASSED                        [ 14%]
+tests/test_cmd.py::test_set_errors_run_rc2 PASSED                        [ 16%]
+tests/test_cmd.py::test_set_valid_rc0 PASSED                             [ 18%]
+tests/test_cmd.py::test_set_no_reason_rc2 PASSED                         [ 20%]
+tests/test_cmd.py::test_set_no_permission_rc2 PASSED                     [ 22%]
+tests/test_cmd.py::test_compare_json_output PASSED                       [ 24%]
+tests/test_cmd.py::test_compare_bad_today_rc2 PASSED                     [ 26%]
+tests/test_compare.py::test_drop4_is_exactly_4 PASSED                    [ 28%]
+tests/test_compare.py::test_drop4_fails PASSED                           [ 30%]
+tests/test_compare.py::test_drop2_is_1_6 PASSED                          [ 32%]
+tests/test_compare.py::test_drop2_passes PASSED                          [ 34%]
+tests/test_compare.py::test_rounding_probe_3_2_fails PASSED              [ 36%]
+tests/test_compare.py::test_better_run_passes PASSED                     [ 38%]
+tests/test_compare.py::test_drop_reason_names_both_rates PASSED          [ 40%]
+tests/test_compare.py::test_flaky_three_flips_total PASSED               [ 42%]
+tests/test_compare.py::test_flaky_two_marked PASSED                      [ 44%]
+tests/test_compare.py::test_flaky_only_double_fail_stays PASSED          [ 46%]
+tests/test_compare.py::test_flaky_not_counted_in_must_flips PASSED       [ 48%]
+tests/test_compare.py::test_flaky_scenario_passes PASSED                 [ 50%]
+tests/test_compare.py::test_if_flaky_counted_it_would_fail PASSED        [ 52%]
+tests/test_compare.py::test_flaky_reruns_recorded PASSED                 [ 54%]
+tests/test_compare.py::test_version_diff_detected PASSED                 [ 56%]
+tests/test_compare.py::test_version_diff_compares_113 PASSED             [ 58%]
+tests/test_compare.py::test_version_diff_counts PASSED                   [ 60%]
+tests/test_compare.py::test_version_diff_note_written PASSED             [ 62%]
+tests/test_compare.py::test_same_version_compares_all PASSED             [ 64%]
+tests/test_compare.py::test_naive_version_diff_uses_wrong_denominator PASSED [ 66%]
+tests/test_compare.py::test_new_cases_not_in_comparison PASSED           [ 68%]
+tests/test_compare.py::test_failed_status_rejected PASSED                [ 70%]
+tests/test_compare.py::test_errors_rejected PASSED                       [ 72%]
+tests/test_compare.py::test_settable_rejects_failed PASSED               [ 74%]
+tests/test_compare.py::test_settable_rejects_errors PASSED               [ 76%]
+tests/test_compare.py::test_settable_requires_permission PASSED          [ 78%]
+tests/test_compare.py::test_settable_requires_reason PASSED              [ 80%]
+tests/test_compare.py::test_settable_accepts_valid PASSED                [ 82%]
+tests/test_compare.py::test_settable_rejects_version_mismatch PASSED     [ 84%]
+tests/test_compare.py::test_rules_default PASSED                         [ 86%]
+tests/test_compare.py::test_rule_override_takes_effect PASSED            [ 88%]
+tests/test_compare.py::test_suggest_after_three PASSED                   [ 90%]
+tests/test_compare.py::test_no_suggest_after_two PASSED                  [ 92%]
+tests/test_compare.py::test_suggest_needs_consecutive PASSED             [ 94%]
+tests/test_compare.py::test_markdown_has_levels PASSED                   [ 96%]
+tests/test_compare.py::test_markdown_lists_flaky PASSED                  [ 98%]
+tests/test_compare.py::test_markdown_writes_scope PASSED                 [100%]
+
+============================= 50 passed in 2.03s ==============================
+
+[OK] 原件必须全绿 rc=0
+[ OK ] M1 关掉通过率降幅判定（AC1 失效） -> 被抓到 ["[FAIL] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 [('CUR_DROP4', 'fail', 'pass'), ('CUR_ROUND', 'fail', 'pass')]"]
+[ OK ] M2 降幅阈值 3 → 5 个百分点（4pp 不再失败） -> 被抓到 ["[FAIL] V43 suite.yaml 里的默认规则与代码 DEFAULT_RULES 完全一致（两处定义不得漂移） 不一致项 ['max_pass_rate_drop_pp'] ｜ yaml=3 代码=5"]
+[ OK ] M2b 改 engine 里的 SUITE_YAML 阈值 3 → 5（配置文件侧） -> 被抓到 ["[FAIL] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 [('CUR_DROP4', 'fail', 'pass'), ('CUR_ROUND', 'fail', 'pass')]"]
+[ OK ] M3 降幅四舍五入后再比较（3.2 → 3 假通过） -> 被抓到 ["[FAIL] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 [('CUR_ROUND', 'fail', 'pass')]"]
+[ OK ] M4 关掉 flaky 剔除（AC2 失效） -> 被抓到 ["[FAIL] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 [('CUR_FLAKY', 'pass', 'fail')]"]
+[ OK ] M5 flaky 判定改成「两次都通过才算」（任一次通过不再算 flaky） -> 被抓到 ["[FAIL] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 [('CUR_FLAKY', 'pass', 'fail')]"]
+[ OK ] M6 关掉版本交集（AC3 失效，比全部用例） -> 被抓到 ['[FAIL] V20 只比较共有的 113 条用例 compared=135']
+[ OK ] M7 关掉基线合法性校验（AC4 失效） -> 被抓到 ["[FAIL] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 [('BASE_FAILED', 'error', 'no-error'), ('BASE_WITH_ERRORS', 'error', 'no-error')]"]
+[ OK ] M8 must 翻转阈值 >= 改成 >（3 条不再触发） -> 被抓到 ["[FAIL] V01 9 个场景的判定结果与设计一致 场景 9 个；不一致 [('CUR_MUSTFLIP', 'fail', 'pass')]"]
+[ OK ] M9 set 不校验 status（failed 运行也能设基线） -> 被抓到 ['[FAIL] V27 set 拒绝 status=failed 的运行（命令报错而非判定失败） rc=0']
+[ OK ] M10 set 不校验执行错误（errors 非空也能设基线） -> 被抓到 ['[FAIL] V29 set 拒绝 errors 非空的运行 rc=0']
+[ OK ] M11 set 不校验理由 -> 被抓到 ['[FAIL] V32 不填理由时 set 报错 rc=0']
+[ OK ] M12 set 不校验权限 -> 被抓到 ['[FAIL] V33 缺少 eval.baseline.set 权限时 set 报错 rc=0']
+[OK] 还原后原件仍全绿 rc=0
+
+MUTATION CAUGHT 13 / MISSED 0 / INVALID 0
+
+scanned=28 hits=0
+
