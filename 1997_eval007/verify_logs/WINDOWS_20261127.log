@@ -1,0 +1,120 @@
+=== Windows 3.11.7 / 全新解压目录 ===
+[PASS] V01 检测项恰好 8 类（工单点名） 类别 ['mobile', 'landline', 'email', 'id_card', 'bank_card', 'uscc', 'address', 'plate']
+[PASS] V02 8 类检测项的正反例结果全部符合预期 不符 无
+[PASS] V03 8 类各自都有 ≥1 条命中夹具与 ≥1 条不命中夹具 缺 无
+[PASS] V04 企业名与人名两类告警的正反例也符合预期 不符 无
+[PASS] V05 3 条干净样例零命中（不误报） 误报 0 条
+[PASS] V06 身份证正反例只差校验位，命中判定确实来自 ISO 7064 校验 尾位 2 vs 0
+[PASS] V07 银行卡正反例只差 Luhn 校验位 
+[PASS] V08 信用代码：校验位合法但第 3~8 位为 999999 占位的视为虚构、不报 占位号段 91999999MA1FL2XY3N
+[PASS] V08b 占位号段满足「校验位合法 + 第 3~8 位为 999999」两个条件（保证占位判断是活代码） ok=True 第3~8位=999999
+[PASS] V09 含 error 级命中时退出码为 1 rc=1
+[PASS] V10 输出标明 BLOCK 
+[PASS] V11 只有 warn 级命中时退出码为 0 rc=0
+[PASS] V12 同一份报告里仍列出 warn 项（0 退出码不等于不报） 
+[PASS] V13 无任何命中时退出码为 0 rc=0
+[PASS] V14 error 级恰为工单点名的四类 ['bank_card', 'id_card', 'mobile', 'uscc']
+[PASS] V15 路径不存在时退出码为 2（用法错误，不是阻断） rc=2
+[PASS] V16 合规 allowlist 可加载 条目 1
+[PASS] V17 缺确认人/日期的 allowlist 被拒绝 ["第 1 条 缺必填字段 ['confirmed_by', 'confirmed_on']"]
+[PASS] V18 加入 allowlist 的条目不再被阻断 阻断 1 -> 0
+[PASS] V19 白名单只放行指定条目，不会连带放行同类其他命中 残留阻断 1（身份证仍在）
+[PASS] V20 allowlist 不合规时命令报错退出码 2 rc=2
+[PASS] V21 带白名单扫 fixtures 仍阻断（身份证/银行卡/信用代码未被放行） rc=1
+[PASS] V22 性能夹具确实是 1000 条用例 scanned=1000
+[PASS] V23 扫描 1000 条用例耗时（预热后稳态）不超过 10 秒 未超预算（详细毫秒数见 docs/perf.json）
+[PASS] V24 单条平均耗时小于 10 毫秒 未超预算
+[PASS] V25 JSONL 按行计用例数（1 个文件 1000 条），不是按文件计 files=1 scanned=1000
+[PASS] V26 性能夹具含 error 命中（测的是最坏情况，不是快速跳过路径） blocking=20
+[PASS] V27 冷启动耗时已测量并单独落盘到 docs/perf.json（不写进断言输出） 已记录
+[PASS] V28 夹具文件齐全 
+[PASS] V29 逐条单文件夹具齐全（18 正反例 + 4 附加 + 3 干净） txt=25
+[PASS] V30 pytest 全绿且用例数不少于 40 PASSED=60 rc=0
+
+SUMMARY 31/31 PASS
+
+============================= test session starts =============================
+collecting ... collected 60 items
+
+tests/test_cli.py::test_error_hit_returns_nonzero PASSED                 [  1%]
+tests/test_cli.py::test_only_warn_returns_zero PASSED                    [  3%]
+tests/test_cli.py::test_clean_returns_zero PASSED                        [  5%]
+tests/test_cli.py::test_missing_path_returns_two PASSED                  [  6%]
+tests/test_cli.py::test_fixtures_dir_blocks PASSED                       [  8%]
+tests/test_cli.py::test_allowlist_load_requires_confirmer_and_date PASSED [ 10%]
+tests/test_cli.py::test_allowlist_valid_entries_load PASSED              [ 11%]
+tests/test_cli.py::test_allowlist_removes_entry_from_findings PASSED     [ 13%]
+tests/test_cli.py::test_allowlist_cannot_hide_other_kinds PASSED         [ 15%]
+tests/test_cli.py::test_allowlist_bad_file_returns_two PASSED            [ 16%]
+tests/test_cli.py::test_allowlist_warn_entry_also_filtered PASSED        [ 18%]
+tests/test_cli.py::test_perf_1000_cases_under_budget PASSED              [ 20%]
+tests/test_cli.py::test_perf_cold_start_also_recorded PASSED             [ 21%]
+tests/test_cli.py::test_perf_jsonl_counts_by_line_not_file PASSED        [ 23%]
+tests/test_cli.py::test_perf_fixture_covers_hit_branch PASSED            [ 25%]
+tests/test_detect.py::test_exactly_eight_check_kinds PASSED              [ 26%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[mobile] PASSED [ 28%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[landline] PASSED [ 30%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[email] PASSED [ 31%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[id_card] PASSED [ 33%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[bank_card] PASSED [ 35%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[uscc] PASSED [ 36%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[address] PASSED [ 38%]
+tests/test_detect.py::test_each_kind_has_positive_and_negative[plate] PASSED [ 40%]
+tests/test_detect.py::test_positive_fixture_hits[mobile] PASSED          [ 41%]
+tests/test_detect.py::test_positive_fixture_hits[landline] PASSED        [ 43%]
+tests/test_detect.py::test_positive_fixture_hits[email] PASSED           [ 45%]
+tests/test_detect.py::test_positive_fixture_hits[id_card] PASSED         [ 46%]
+tests/test_detect.py::test_positive_fixture_hits[bank_card] PASSED       [ 48%]
+tests/test_detect.py::test_positive_fixture_hits[uscc] PASSED            [ 50%]
+tests/test_detect.py::test_positive_fixture_hits[address] PASSED         [ 51%]
+tests/test_detect.py::test_positive_fixture_hits[plate] PASSED           [ 53%]
+tests/test_detect.py::test_negative_fixture_misses[mobile] PASSED        [ 55%]
+tests/test_detect.py::test_negative_fixture_misses[landline] PASSED      [ 56%]
+tests/test_detect.py::test_negative_fixture_misses[email] PASSED         [ 58%]
+tests/test_detect.py::test_negative_fixture_misses[id_card] PASSED       [ 60%]
+tests/test_detect.py::test_negative_fixture_misses[bank_card] PASSED     [ 61%]
+tests/test_detect.py::test_negative_fixture_misses[uscc] PASSED          [ 63%]
+tests/test_detect.py::test_negative_fixture_misses[address] PASSED       [ 65%]
+tests/test_detect.py::test_negative_fixture_misses[plate] PASSED         [ 66%]
+tests/test_detect.py::test_extra_positive_hits[org_name] PASSED          [ 68%]
+tests/test_detect.py::test_extra_positive_hits[person_name] PASSED       [ 70%]
+tests/test_detect.py::test_extra_negative_misses[org_name] PASSED        [ 71%]
+tests/test_detect.py::test_extra_negative_misses[person_name] PASSED     [ 73%]
+tests/test_detect.py::test_clean_texts_have_no_findings[\u672c\u6761\u6587\u672c\u53ea\u6709\u7f16\u53f7 KH-2026-0011 \u4e0e\u91d1\u989d 12800 \u5206\uff0c\u4e0d\u542b\u4efb\u4f55\u654f\u611f\u4fe1\u606f\u3002] PASSED [ 75%]
+tests/test_detect.py::test_clean_texts_have_no_findings[\u4f1a\u8bae\u7ed3\u8bba\uff1a\u4e09\u6761\u5f85\u529e\u5df2\u786e\u8ba4\uff0c\u8d23\u4efb\u89d2\u8272\u4e3a\u62db\u5546\u4e3b\u7ba1\u3002] PASSED [ 76%]
+tests/test_detect.py::test_clean_texts_have_no_findings[\u7edf\u8ba1\u53e3\u5f84\uff1a\u91c7\u7eb3\u7387 92.5%%\uff0c\u5e73\u5747\u4fee\u6539\u5e45\u5ea6 0.08\u3002] PASSED [ 78%]
+tests/test_detect.py::test_id_card_differs_only_by_check_digit PASSED    [ 80%]
+tests/test_detect.py::test_bank_card_differs_only_by_check_digit PASSED  [ 81%]
+tests/test_detect.py::test_uscc_placeholder_excluded_even_if_checksum_ok PASSED [ 83%]
+tests/test_detect.py::test_mobile_requires_second_digit_3_to_9 PASSED    [ 85%]
+tests/test_detect.py::test_address_needs_region_plus_road_number PASSED  [ 86%]
+tests/test_detect.py::test_levels_match_spec[mobile-error] PASSED        [ 88%]
+tests/test_detect.py::test_levels_match_spec[id_card-error] PASSED       [ 90%]
+tests/test_detect.py::test_levels_match_spec[bank_card-error] PASSED     [ 91%]
+tests/test_detect.py::test_levels_match_spec[uscc-error] PASSED          [ 93%]
+tests/test_detect.py::test_levels_match_spec[landline-warn] PASSED       [ 95%]
+tests/test_detect.py::test_levels_match_spec[email-warn] PASSED          [ 96%]
+tests/test_detect.py::test_levels_match_spec[address-warn] PASSED        [ 98%]
+tests/test_detect.py::test_levels_match_spec[plate-warn] PASSED          [100%]
+
+============================= 60 passed in 2.52s ==============================
+
+[OK] 原件必须全绿 rc=0
+[ OK ] M1 身份证不做校验位（反例会误报，AC1 失效） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'id_card': ['校验位不通过']}"]
+[ OK ] M2 银行卡不做 Luhn（反例会误报） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'bank_card': ['Luhn 不通过']}"]
+[ OK ] M3 信用代码不排除 999999 占位号段（占位会被报成疑似真实） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'uscc': ['第 3~8 位为 999999 占位']}"]
+[ OK ] M4 手机号不校验第二位 3~9（反例 12x 会误报） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'mobile': ['第 2 位是 2，不是手机号']}"]
+[ OK ] M5 身份证级别从 error 降为 warn（AC2 失效：该阻断的不阻断） -> 被抓到 ["[FAIL] V14 error 级恰为工单点名的四类 ['bank_card', 'mobile', 'uscc']"]
+[ OK ] M6 银行卡级别从 error 降为 warn -> 被抓到 ["[FAIL] V14 error 级恰为工单点名的四类 ['id_card', 'mobile', 'uscc']"]
+[ OK ] M7 信用代码级别从 error 降为 warn -> 被抓到 ["[FAIL] V14 error 级恰为工单点名的四类 ['bank_card', 'id_card', 'mobile']"]
+[ OK ] M8 退出码恒为 0（AC2 失效） -> 被抓到 ['[FAIL] V09 含 error 级命中时退出码为 1 rc=0']
+[ OK ] M9 allowlist 不再生效（AC3 失效） -> 被抓到 ['[FAIL] V18 加入 allowlist 的条目不再被阻断 阻断 1 -> 1']
+[ OK ] M10 allowlist 不校验确认人（缺字段也能放行） -> 被抓到 []
+[ OK ] M11 阻断集不再排除已放行条目（白名单失效） -> 被抓到 ['[FAIL] V18 加入 allowlist 的条目不再被阻断 阻断 1 -> 1']
+[ OK ] M12 地址只要出现路号就算命中（不要求省市区，反例会误报） -> 被抓到 ["[FAIL] V02 8 类检测项的正反例结果全部符合预期 不符 {'address': ['有省市区也有路号，但两者相距超出窗口（不该拼成一条地址）']}"]
+[ OK ] M13 人名不再检查（虚构）后缀（反例会误报） -> 被抓到 ["[FAIL] V04 企业名与人名两类告警的正反例也符合预期 不符 ['person_name']"]
+[ OK ] M14 企业名不再检查虚构标记（反例会误报） -> 被抓到 ["[FAIL] V04 企业名与人名两类告警的正反例也符合预期 不符 ['org_name']"]
+[OK] 还原后原件仍全绿 rc=0
+
+MUTATION CAUGHT 14 / MISSED 0 / INVALID 0
+

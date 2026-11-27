@@ -1,0 +1,4 @@
+# 反例：缺 confirmed_by 与 confirmed_on，应被拒绝
+allowlist:
+  - value: "13500000001"
+    reason: "想直接放行但没走确认流程"

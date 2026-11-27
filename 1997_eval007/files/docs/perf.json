@@ -1,0 +1,8 @@
+{
+ "budget_ms": 10000.0,
+ "cases": 1000,
+ "cold_ms": 71.7,
+ "in_memory_best_ms": 55.0,
+ "per_case_ms": 0.0613,
+ "warm_best_ms": 61.3
+}

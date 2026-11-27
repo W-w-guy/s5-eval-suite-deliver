@@ -1,0 +1,9 @@
+# allowlist —— 已确认为虚构的条目
+# 每条必须写：value（原文片段）、confirmed_by（确认人）、confirmed_on（确认日期）
+# kind 可选：限定只放行某一类检测项；reason 可选：写清为什么确认它是虚构的
+allowlist:
+  - value: "13500000001"
+    kind: mobile
+    reason: "手工构造的号段，无对应用户"
+    confirmed_by: "质量负责人"
+    confirmed_on: "2026-11-27"
