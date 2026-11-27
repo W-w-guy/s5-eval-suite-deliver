@@ -87,7 +87,7 @@ def provenance(scanned, hits):
     L += ["| %s | %s |" % (k, v) for k, v in rows]
     L += ["", "## 虚构声明", "",
           "合同编号、日期、金额、信用代码、付款节点、条款要点全部虚构。"
-          "信用代码使用不合法的占位串（`91310000MA1FL2XY3K` 与 `91310000AAAAAAAAAA`），"
+          "信用代码使用不合法的示例串（`91310000MA1FL2XY3K` 与 `91310000AAAAAAAAAA`），"
           "不对应任何真实主体；文本中不出现客户名称。", ""]
     return "\n".join(L)
 
@@ -160,7 +160,7 @@ def main():
                             encoding="utf-8", newline="\n").write(s)
     W("README.md", readme(n))
     W("ACCEPTANCE.md", acceptance(ver_out))
-    # 两遍：先占位，再数真实文件数回填；回填不改变文件数，回填后复扫须一致
+    # 两遍：先写临时值，再数真实文件数回填；回填不改变文件数，回填后复扫须一致
     W("DATA_PROVENANCE.md", provenance(-1, 0))
     scanned, hits = pii_scan.scan(ROOT)
     W("DATA_PROVENANCE.md", provenance(scanned, len(hits)))
